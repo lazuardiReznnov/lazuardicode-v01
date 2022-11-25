@@ -30,7 +30,7 @@ Route::get('/home', [
 Route::middleware('auth')->group(function () {
     Route::resource('/dashboard/permission/role', RoleController::class);
     Route::resource(
-        'dasboard/permission/permission',
+        'dashboard/permission/permission',
         PermissionController::class
     );
 });

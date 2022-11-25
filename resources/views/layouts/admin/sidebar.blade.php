@@ -23,7 +23,9 @@
             </x-collapselink>
             <x-collapselink titlecols="Role-Management">
                 <x-navlink link="/dashboard/permission/role">Role</x-navlink>
-                <x-navlink link="#">Permission</x-navlink>
+                <x-navlink link="/dashboard/permission/permission"
+                    >Permission</x-navlink
+                >
             </x-collapselink>
 
             <x-collapselink titlecols="Menu">

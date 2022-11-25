@@ -15,7 +15,7 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        return view('dashboard.permission.permision.index', [
+        return view('dashboard.permission.permission.index', [
             'title' => 'Permission Management',
             'datas' => Permission::latest()
                 ->paginate(10)
@@ -30,7 +30,9 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.permission.permission.create',[
+            'title'=> 'Add New Permission'
+        ]);
     }
 
     /**
@@ -41,7 +43,15 @@ class PermissionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required',
+        ]);
+
+        Permission::create($validatedData);
+        return redirect('/dashboard/permission/permission')->with(
+            'success',
+            'New Data Has Been aded.'
+        );
     }
 
     /**
