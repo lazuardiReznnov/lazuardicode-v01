@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\RolePermission\PermissionController;
 use App\Http\Controllers\RolePermission\RoleController;
 use Illuminate\Support\Facades\Route;
+use Spatie\Permission\Contracts\Permission;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,4 +27,10 @@ Route::get('/home', [
     'index',
 ])->name('home');
 
-Route::resource('/dashboard/permission/role', RoleController::class);
+Route::middleware('auth')->group(function () {
+    Route::resource('/dashboard/permission/role', RoleController::class);
+    Route::resource(
+        'dasboard/permission/permission',
+        PermissionController::class
+    );
+});
