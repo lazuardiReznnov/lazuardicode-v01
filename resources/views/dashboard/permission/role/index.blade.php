@@ -48,7 +48,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-10">
             <x-card header="Role List">
                 <div class="row my-2">
                     <div class="col-md">
@@ -59,7 +59,7 @@
                         >
                     </div>
                 </div>
-                <table class="table">
+                <table class="table table-striped">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
@@ -76,7 +76,33 @@
                             </th>
                             <td>{{ $data->name }}</td>
                             <td>{{ $data->guard_name }}</td>
-                            <td>edit|delete</td>
+                            <td>
+                                <a
+                                    href="/dashboard/permission/role/{{ $data->id }}/edit"
+                                    class="badge bg-warning"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-placement="top"
+                                    title="Edit Unit"
+                                    ><i class="far fa-edit"></i
+                                ></a>
+
+                                <form
+                                    action="/dashboard/permission/role/{{ $data->id }}"
+                                    method="post"
+                                    class="d-inline"
+                                >
+                                    @method('delete') @csrf
+                                    <button
+                                        class="badge bg-danger border-0"
+                                        data-bs-toggle="tooltip"
+                                        data-bs-placement="top"
+                                        title="Delete Unit"
+                                        onclick="return confirm('are You sure ??')"
+                                    >
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
                         @endforeach @else
                         <tr>

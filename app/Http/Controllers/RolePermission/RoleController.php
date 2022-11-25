@@ -30,7 +30,9 @@ class RoleController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.permission.role.create', [
+            'title' => 'Add Role',
+        ]);
     }
 
     /**
@@ -41,7 +43,15 @@ class RoleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required',
+        ]);
+
+        role::create($validatedData);
+        return redirect('/dashboard/permission/role')->with(
+            'success',
+            'New Data Has Been aded.'
+        );
     }
 
     /**
@@ -63,7 +73,10 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        //
+        return view('dashboard.permission.role.edit', [
+            'data' => $role,
+            'title' => 'Edit Role',
+        ]);
     }
 
     /**
@@ -75,7 +88,16 @@ class RoleController extends Controller
      */
     public function update(Request $request, Role $role)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required',
+        ]);
+
+        Role::Where('id', $role->id)->update($validatedData);
+
+        return redirect('/dashboard/permission/role')->with(
+            'success',
+            'New Data Has Been Updated.'
+        );
     }
 
     /**
@@ -86,6 +108,11 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        //
+        Role::destroy($role->id);
+
+        return redirect('/dashboard/permission/role')->with(
+            'success',
+            'New Data Has Been Deleted.'
+        );
     }
 }

@@ -9,12 +9,8 @@
         />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>{{ $title ?? config("app.name") }}</title>
+        <title>{{ $title }} | {{ config("app.name") }}</title>
         <link href="/asset/css/styles.css" rel="stylesheet" />
-        <script
-            src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"
-            crossorigin="anonymous"
-        ></script>
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     </head>
     <body>
