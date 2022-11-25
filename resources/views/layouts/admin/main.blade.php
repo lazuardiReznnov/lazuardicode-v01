@@ -25,13 +25,13 @@
             <div id="layoutSidenav_nav">@include('layouts.admin.sidebar')</div>
             @endauth
             <div id="layoutSidenav_content">
-                <main class="mt-4">
-                    {{ $slot }}
+                <main>
+                    <div class="container-fluid px-4">{{ $slot }}</div>
                 </main>
                 @include('layouts.admin.footer')
             </div>
         </div>
 
-        <script src="asset/js/scripts.js"></script>
+        <script src="/asset/js/scripts.js"></script>
     </body>
 </html>

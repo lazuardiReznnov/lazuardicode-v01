@@ -10,11 +10,20 @@
                 Dashboard
             </x-navlink>
 
-            <x-headsidenav title="Interface"></x-headsidenav>
+            <x-headsidenav title="Administrator">
+                <x-iconlink>
+                    <i class="fas fa-tachometer-alt"></i>
+                </x-iconlink>
+            </x-headsidenav>
 
             <x-collapselink titlecols="User">
-                <x-navlink link="#">Component</x-navlink>
-                <x-navlink link="#">Component</x-navlink>
+                <x-navlink link="/dashboard/user">List User</x-navlink>
+                <x-navlink link="#">Profil</x-navlink>
+                <x-navlink link="#">Role Management</x-navlink>
+            </x-collapselink>
+            <x-collapselink titlecols="Role-Management">
+                <x-navlink link="/dashboard/permission/role">Role</x-navlink>
+                <x-navlink link="#">Permission</x-navlink>
             </x-collapselink>
 
             <x-collapselink titlecols="Menu">
@@ -24,6 +33,6 @@
     </div>
     <div class="sb-sidenav-footer">
         <div class="small">Logged in as:</div>
-        Start Bootstrap
+        <i class="fas fa-user fa-fw"></i> {{ Auth::user()->name }}
     </div>
 </nav>
