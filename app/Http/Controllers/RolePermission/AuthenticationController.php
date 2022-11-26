@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\RolePermission;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Spatie\Permission\Contracts\Permission;
 use Spatie\Permission\Models\Role;
@@ -32,7 +33,9 @@ class AuthenticationController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.authentication.create', [
+            'title' => 'Add Role Permission',
+        ]);
     }
 
     /**
