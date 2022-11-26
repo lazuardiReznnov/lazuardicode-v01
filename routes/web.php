@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RolePermission\AuthenticationController;
 use App\Http\Controllers\RolePermission\PermissionController;
 use App\Http\Controllers\RolePermission\RoleController;
 use Illuminate\Support\Facades\Route;
@@ -32,5 +33,9 @@ Route::middleware('auth')->group(function () {
     Route::resource(
         'dashboard/authentication/permission',
         PermissionController::class
+    );
+    Route::resource(
+        'dashboard/authentication',
+        AuthenticationController::class
     );
 });

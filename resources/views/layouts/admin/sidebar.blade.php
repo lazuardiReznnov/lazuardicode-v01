@@ -22,6 +22,9 @@
                 <x-navlink link="#">Role Management</x-navlink>
             </x-collapselink>
             <x-collapselink titlecols="Authentication">
+                <x-navlink link="/dashboard/authentication"
+                    >Authentication</x-navlink
+                >
                 <x-navlink link="/dashboard/authentication/role"
                     >Role</x-navlink
                 >
