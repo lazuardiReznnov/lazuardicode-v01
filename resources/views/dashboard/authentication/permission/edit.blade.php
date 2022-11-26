@@ -15,10 +15,10 @@
         <div class="col-md-6">
             <x-card header="Form Add Permission">
                 <form
-                    action="/dashboard/authentication/permission"
+                    action="/dashboard/authentication/permission/{{ $data->id }}"
                     method="post"
                 >
-                    @csrf
+                    @csrf @method('put')
                     <div class="mb-3">
                         <label for="name" class="form-label">Permission</label>
                         <input
@@ -27,7 +27,7 @@
                             id="name"
                             placeholder="Name Role"
                             name="name"
-                            value="{{ old('name') }}"
+                            value="{{ old('name', $data->name) }}"
                         />
                         @error('name')
                         <div class="invalid-feedback">

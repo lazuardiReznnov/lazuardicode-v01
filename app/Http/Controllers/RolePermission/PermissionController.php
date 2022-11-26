@@ -73,7 +73,10 @@ class PermissionController extends Controller
      */
     public function edit(Permission $permission)
     {
-        //
+        return view('dashboard.authentication.permission.edit', [
+            'title' => 'edit Permission',
+            'data' => $permission,
+        ]);
     }
 
     /**
@@ -85,7 +88,15 @@ class PermissionController extends Controller
      */
     public function update(Request $request, Permission $permission)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required',
+        ]);
+
+        Permission::where('id', $permission->id)->update($validatedData);
+        return redirect('/dashboard/authentication/permission')->with(
+            'success',
+            'New Data Has Been aded.'
+        );
     }
 
     /**
@@ -96,6 +107,11 @@ class PermissionController extends Controller
      */
     public function destroy(Permission $permission)
     {
-        //
+        Permission::destroy($permission->id);
+
+        return redirect('/dashboard/authentication/permission')->with(
+            'success',
+            'New Data Has Been Deleted.'
+        );
     }
 }
