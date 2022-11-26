@@ -15,7 +15,7 @@ class PermissionController extends Controller
      */
     public function index()
     {
-        return view('dashboard.permission.permission.index', [
+        return view('dashboard.authentication.permission.index', [
             'title' => 'Permission Management',
             'datas' => Permission::latest()
                 ->paginate(10)
@@ -30,8 +30,8 @@ class PermissionController extends Controller
      */
     public function create()
     {
-        return view('dashboard.permission.permission.create',[
-            'title'=> 'Add New Permission'
+        return view('dashboard.authentication.permission.create', [
+            'title' => 'Add New Permission',
         ]);
     }
 
@@ -48,7 +48,7 @@ class PermissionController extends Controller
         ]);
 
         Permission::create($validatedData);
-        return redirect('/dashboard/permission/permission')->with(
+        return redirect('/dashboard/authentication/permission')->with(
             'success',
             'New Data Has Been aded.'
         );

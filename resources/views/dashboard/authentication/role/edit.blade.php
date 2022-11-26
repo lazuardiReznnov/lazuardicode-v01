@@ -9,7 +9,7 @@
         <div class="col-md-6">
             <x-card header="Form Edit Role">
                 <form
-                    action="/dashboard/permission/role/{{ $data->id }}"
+                    action="/dashboard/Authentication/role/{{ $data->id }}"
                     method="post"
                 >
                     @csrf @method('put')

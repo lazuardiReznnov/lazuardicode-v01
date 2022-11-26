@@ -2,19 +2,19 @@
     <x-HeadTitle title="Role"> </x-HeadTitle>
     <x-breadcrumb>
         <x-breadcrumb-link link="/home"> Dashboard </x-breadcrumb-link>
-        <x-breadcrumb-link link="/home/dashboard/permission/permission">
-            Permission
+        <x-breadcrumb-link link="/home/dashboard/authentication/role">
+            Role
         </x-breadcrumb-link>
         <x-breadcrumb-link-active> {{ $title }} </x-breadcrumb-link-active>
     </x-breadcrumb>
 
     <div class="row">
         <div class="col-md-6">
-            <x-card header="Form Add Permission">
-                <form action="/dashboard/permission/permission" method="post">
+            <x-card header="Form Add Role">
+                <form action="/dashboard/authentication/role" method="post">
                     @csrf
                     <div class="mb-3">
-                        <label for="name" class="form-label">Permission</label>
+                        <label for="name" class="form-label">Role</label>
                         <input
                             type="text"
                             class="form-control @error('name') is-invalid @enderror"

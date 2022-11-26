@@ -1,10 +1,12 @@
 <x-admin-layout title="{{ $title }}">
-    <x-HeadTitle title="Role"> </x-HeadTitle>
+    <x-HeadTitle title="Permission"> </x-HeadTitle>
     <x-breadcrumb>
         <x-breadcrumb-link link="/home"> Dashboard </x-breadcrumb-link>
-        <x-breadcrumb-link-active> Role </x-breadcrumb-link-active>
+        <x-breadcrumb-link link="/home/authentication">
+            Authentication
+        </x-breadcrumb-link>
+        <x-breadcrumb-link-active> Permission </x-breadcrumb-link-active>
     </x-breadcrumb>
-
     <div class="row">
         <div class="col-md-8">
             @if(session()->has('loginError'))
@@ -53,9 +55,9 @@
                 <div class="row my-2">
                     <div class="col-md">
                         <a
-                            href="/dashboard/permission/role/create"
+                            href="/dashboard/authentication/permission/create"
                             class="btn btn-primary btn-sm"
-                            >Add Role</a
+                            >Add Permission</a
                         >
                     </div>
                 </div>
@@ -63,7 +65,7 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Role Name</th>
+                            <th scope="col">Permission</th>
                             <th scope="col">Guarded</th>
                             <th scope="col">Action</th>
                         </tr>
@@ -78,7 +80,7 @@
                             <td>{{ $data->guard_name }}</td>
                             <td>
                                 <a
-                                    href="/dashboard/permission/role/{{ $data->id }}/edit"
+                                    href="/dashboard/authentication/permission/{{ $data->id }}/edit"
                                     class="badge bg-warning"
                                     data-bs-toggle="tooltip"
                                     data-bs-placement="top"
@@ -87,7 +89,7 @@
                                 ></a>
 
                                 <form
-                                    action="/dashboard/permission/role/{{ $data->id }}"
+                                    action="/dashboard/authentication/permission/{{ $data->id }}"
                                     method="post"
                                     class="d-inline"
                                 >

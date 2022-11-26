@@ -21,9 +21,11 @@
                 <x-navlink link="#">Profil</x-navlink>
                 <x-navlink link="#">Role Management</x-navlink>
             </x-collapselink>
-            <x-collapselink titlecols="Role-Management">
-                <x-navlink link="/dashboard/permission/role">Role</x-navlink>
-                <x-navlink link="/dashboard/permission/permission"
+            <x-collapselink titlecols="Authentication">
+                <x-navlink link="/dashboard/authentication/role"
+                    >Role</x-navlink
+                >
+                <x-navlink link="/dashboard/authentication/permission"
                     >Permission</x-navlink
                 >
             </x-collapselink>

@@ -15,7 +15,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        return view('dashboard.permission.role.index', [
+        return view('dashboard.authentication.role.index', [
             'title' => 'Role Manegement',
             'datas' => Role::latest()
                 ->paginate(10)
@@ -30,7 +30,7 @@ class RoleController extends Controller
      */
     public function create()
     {
-        return view('dashboard.permission.role.create', [
+        return view('dashboard.authentication.role.create', [
             'title' => 'Add Role',
         ]);
     }
@@ -48,7 +48,7 @@ class RoleController extends Controller
         ]);
 
         role::create($validatedData);
-        return redirect('/dashboard/permission/role')->with(
+        return redirect('/dashboard/authentication/role')->with(
             'success',
             'New Data Has Been aded.'
         );
@@ -73,7 +73,7 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        return view('dashboard.permission.role.edit', [
+        return view('dashboard.authentication.role.edit', [
             'data' => $role,
             'title' => 'Edit Role',
         ]);
@@ -94,7 +94,7 @@ class RoleController extends Controller
 
         Role::Where('id', $role->id)->update($validatedData);
 
-        return redirect('/dashboard/permission/role')->with(
+        return redirect('/dashboard/authentication/role')->with(
             'success',
             'New Data Has Been Updated.'
         );
@@ -110,7 +110,7 @@ class RoleController extends Controller
     {
         Role::destroy($role->id);
 
-        return redirect('/dashboard/permission/role')->with(
+        return redirect('/dashboard/authentication/role')->with(
             'success',
             'New Data Has Been Deleted.'
         );

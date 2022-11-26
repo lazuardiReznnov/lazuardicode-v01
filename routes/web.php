@@ -28,9 +28,9 @@ Route::get('/home', [
 ])->name('home');
 
 Route::middleware('auth')->group(function () {
-    Route::resource('/dashboard/permission/role', RoleController::class);
+    Route::resource('/dashboard/authentication/role', RoleController::class);
     Route::resource(
-        'dashboard/permission/permission',
+        'dashboard/authentication/permission',
         PermissionController::class
     );
 });
