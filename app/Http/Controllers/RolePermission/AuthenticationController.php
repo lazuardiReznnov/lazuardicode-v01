@@ -5,8 +5,9 @@ namespace App\Http\Controllers\RolePermission;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
-use Spatie\Permission\Contracts\Permission;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\PermissionRegistrar;
 
 class AuthenticationController extends Controller
 {
@@ -33,9 +34,7 @@ class AuthenticationController extends Controller
      */
     public function create()
     {
-        return view('dashboard.authentication.create', [
-            'title' => 'Add Role Permission',
-        ]);
+       
     }
 
     /**
@@ -46,7 +45,18 @@ class AuthenticationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'permission'=>'required'
+        ]);
+
+        $role = Role::where('id', $request->role)->first();
+        $role->givePermissionTo($request->permission);
+
+        return redirect('/dashboard/authentication')->with(
+            'success',
+            'New Data Has Been Registered.'
+        );
+
     }
 
     /**
@@ -92,5 +102,13 @@ class AuthenticationController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function regper($id){
+        return view('dashboard.authentication.create', [
+            'title' => 'Add Role Permission',
+            'role' => $id,
+            'datas' => Permission::latest()->get()
+        ]);
     }
 }

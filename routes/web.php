@@ -34,6 +34,8 @@ Route::middleware('auth')->group(function () {
         'dashboard/authentication/permission',
         PermissionController::class
     );
+
+    Route::get('dashboard/authentication/regper/{id}', [AuthenticationController::class,'regper']);
     Route::resource(
         'dashboard/authentication',
         AuthenticationController::class

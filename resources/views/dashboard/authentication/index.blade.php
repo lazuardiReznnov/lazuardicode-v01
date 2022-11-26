@@ -79,7 +79,7 @@
                             </td>
                             <td>
                                 <a
-                                    href="/dashboard/authentication/create"
+                                    href="/dashboard/authentication/regper/{{ $data->id }}"
                                     class="badge bg-primary btn-sm"
                                     data-bs-toggle="tooltip"
                                     data-bs-placement="top"

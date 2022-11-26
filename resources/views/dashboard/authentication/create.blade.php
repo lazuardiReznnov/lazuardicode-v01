@@ -11,47 +11,25 @@
     <div class="row">
         <div class="col-md-6">
             <x-card header="Form Add Role">
-                <form action="/dashboard/authentication/role" method="post">
+                <form action="/dashboard/authentication" method="post">
                     @csrf
                     <div class="mb-3">
-                        <label for="name" class="form-label">Role</label>
-                        <!-- <input
-                            type="text"
-                            class="form-control @error('name') is-invalid @enderror"
-                            id="name"
-                            placeholder="Name Role"
-                            name="name"
-                        /> -->
+                        <input type="hidden" name="role" value="{{ $role }}" />
+                        <label for="name" class="form-label">Permission</label>
+
                         <select
                             class="form-select"
-                            id="multiple-select-field"
-                            data-placeholder="Choose anything"
-                            multiple
+                            aria-label="Default select example"
+                            name="permission"
                         >
-                            <option>Christmas Island</option>
-                            <option>South Sudan</option>
-                            <option>Jamaica</option>
-                            <option>Kenya</option>
-                            <option>French Guiana</option>
-                            <option>Mayotta</option>
-                            <option>Liechtenstein</option>
-                            <option>Denmark</option>
-                            <option>Eritrea</option>
-                            <option>Gibraltar</option>
-                            <option>
-                                Saint Helena, Ascension and Tristan da Cunha
+                            <option selected>Cholce The Permission</option>
+                            @foreach($datas as $data)
+
+                            <option value="{{ $data->name }}">
+                                {{ $data->name }}
                             </option>
-                            <option>Haiti</option>
-                            <option>Namibia</option>
-                            <option>
-                                South Georgia and the South Sandwich Islands
-                            </option>
-                            <option>Vietnam</option>
-                            <option>Yemen</option>
-                            <option>Philippines</option>
-                            <option>Benin</option>
-                            <option>Czech Republic</option>
-                            <option>Russia</option>
+
+                            @endforeach
                         </select>
                         @error('name')
                         <div class="invalid-feedback">
@@ -68,16 +46,4 @@
             </x-card>
         </div>
     </div>
-    <script>
-        $("#multiple-select-field").select2({
-            theme: "bootstrap-5",
-            width: $(this).data("width")
-                ? $(this).data("width")
-                : $(this).hasClass("w-100")
-                ? "100%"
-                : "style",
-            placeholder: $(this).data("placeholder"),
-            closeOnSelect: false,
-        });
-    </script>
 </x-admin-layout>
