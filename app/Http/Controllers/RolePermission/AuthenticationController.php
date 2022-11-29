@@ -34,7 +34,6 @@ class AuthenticationController extends Controller
      */
     public function create()
     {
-       
     }
 
     /**
@@ -46,7 +45,7 @@ class AuthenticationController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'permission'=>'required'
+            'permission' => 'required',
         ]);
 
         $role = Role::where('id', $request->role)->first();
@@ -56,7 +55,6 @@ class AuthenticationController extends Controller
             'success',
             'New Data Has Been Registered.'
         );
-
     }
 
     /**
@@ -78,7 +76,6 @@ class AuthenticationController extends Controller
      */
     public function edit($id)
     {
-        //
     }
 
     /**
@@ -101,14 +98,26 @@ class AuthenticationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $role = Role::with('permissions')
+            ->where('id', $id)
+            ->first();
+
+        foreach ($role->permissions as $permission):
+            $role->revokePermissionTo($permission->name);
+        endforeach;
+
+        return redirect('/dashboard/authentication')->with(
+            'success',
+            'Data Has Been Unregistered.'
+        );
     }
 
-    public function regper($id){
+    public function regper($id)
+    {
         return view('dashboard.authentication.create', [
             'title' => 'Add Role Permission',
             'role' => $id,
-            'datas' => Permission::latest()->get()
+            'datas' => Permission::latest()->get(),
         ]);
     }
 }

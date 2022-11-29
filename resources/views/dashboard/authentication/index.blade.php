@@ -73,7 +73,7 @@
                             <td>
                                 <ul>
                                     @foreach($data->permissions as $permission)
-                                    <li>{{ $permission->name }}</li>
+                                    <li>{{ $permission->name }} -</li>
                                     @endforeach
                                 </ul>
                             </td>
@@ -94,7 +94,7 @@
                                     title="Edit Permission"
                                     ><i class="far fa-edit"></i
                                 ></a>
-
+                                |
                                 <form
                                     action="/dashboard/authentication/{{ $data->id }}"
                                     method="post"
