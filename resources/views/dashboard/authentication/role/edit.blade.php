@@ -1,7 +1,7 @@
 <x-admin-layout title="{{ $title }}">
     <x-HeadTitle title="Role"> </x-HeadTitle>
     <x-breadcrumb>
-        <x-breadcrumb-link link="/home"> Dashboard </x-breadcrumb-link>
+        <x-breadcrumb-link link="/dashboard"> Dashboard </x-breadcrumb-link>
         <x-breadcrumb-link-active> Role </x-breadcrumb-link-active>
     </x-breadcrumb>
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\RolePermission\AuthenticationController;
 use App\Http\Controllers\RolePermission\PermissionController;
 use App\Http\Controllers\RolePermission\RoleController;
@@ -23,7 +24,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [
+Route::get('/dashboard', [
     App\Http\Controllers\HomeController::class,
     'index',
 ])->name('home');
@@ -35,9 +36,14 @@ Route::middleware('auth')->group(function () {
         PermissionController::class
     );
 
-    Route::get('dashboard/authentication/regper/{id}', [AuthenticationController::class,'regper']);
+    Route::get('dashboard/authentication/regper/{id}', [
+        AuthenticationController::class,
+        'regper',
+    ]);
     Route::resource(
         'dashboard/authentication',
         AuthenticationController::class
     );
+
+    Route::resource('dashboard/user', UserController::class);
 });

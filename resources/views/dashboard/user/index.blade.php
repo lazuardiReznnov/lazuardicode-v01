@@ -3,7 +3,7 @@
     <x-breadcrumb>
         <x-breadcrumb-link link="/dashboard"> Dashboard </x-breadcrumb-link>
 
-        <x-breadcrumb-link-active>Authentication </x-breadcrumb-link-active>
+        <x-breadcrumb-link-active>{{ $title }} </x-breadcrumb-link-active>
     </x-breadcrumb>
     <div class="row">
         <div class="col-md-8">
@@ -49,7 +49,7 @@
 
     <div class="row">
         <div class="col-md-10">
-            <x-card header="Role & Permission">
+            <x-card header="User Management">
                 <div class="row my-2">
                     <div class="col-md"></div>
                 </div>
@@ -57,9 +57,9 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
+                            <th scope="col">User</th>
+                            <th scope="col">Email</th>
                             <th scope="col">Role</th>
-                            <th scope="col">Permission</th>
-
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -70,24 +70,24 @@
                                 {{ ($datas->currentpage()-1) * $datas->perpage() + $loop->index + 1 }}
                             </th>
                             <td>{{ $data->name }}</td>
+                            <td>{{ $data->email }}</td>
                             <td>
-                                <ul>
-                                    @foreach($data->permissions as $permission)
-                                    <li>{{ $permission->name }} -</li>
-                                    @endforeach
-                                </ul>
+                                @if(!empty($data->getRoleNames()))
+                                @foreach($data->getRoleNames() as $v)
+                                {{ $v }}
+                                @endforeach @endif
                             </td>
                             <td>
                                 <a
-                                    href="/dashboard/authentication/regper/{{ $data->id }}"
+                                    href="/dashboard/user/addrole/{{ $data->username }}"
                                     class="badge bg-primary btn-sm"
                                     data-bs-toggle="tooltip"
                                     data-bs-placement="top"
-                                    title="add Permission"
+                                    title="add role"
                                     ><i class="fas fa-plus-circle"></i
                                 ></a>
                                 <a
-                                    href="/dashboard/authentication/{{ $data->id }}/edit"
+                                    href="/dashboard/user/{{ $data->username }}/edit"
                                     class="badge bg-warning"
                                     data-bs-toggle="tooltip"
                                     data-bs-placement="top"
@@ -96,7 +96,7 @@
                                 ></a>
                                 |
                                 <form
-                                    action="/dashboard/authentication/{{ $data->id }}"
+                                    action="/dashboard/user/{{ $data->username }}"
                                     method="post"
                                     class="d-inline"
                                 >

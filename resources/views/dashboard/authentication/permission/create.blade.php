@@ -1,11 +1,11 @@
 <x-admin-layout title="{{ $title }}">
     <x-HeadTitle title="Permission"> </x-HeadTitle>
     <x-breadcrumb>
-        <x-breadcrumb-link link="/home"> Dashboard </x-breadcrumb-link>
-        <x-breadcrumb-link link="/home/dashboard/authentication">
+        <x-breadcrumb-link link="/dashboard"> Dashboard </x-breadcrumb-link>
+        <x-breadcrumb-link link="/dashboard/authentication">
             Authentication
         </x-breadcrumb-link>
-        <x-breadcrumb-link link="/home/dashboard/authentication/permission">
+        <x-breadcrumb-link link="/dashboard/authentication/permission">
             Permission
         </x-breadcrumb-link>
         <x-breadcrumb-link-active> {{ $title }} </x-breadcrumb-link-active>
