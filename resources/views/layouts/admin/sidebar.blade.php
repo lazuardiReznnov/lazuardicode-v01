@@ -17,10 +17,14 @@
             </x-headsidenav>
 
             <x-collapselink titlecols="User">
+                @can('view user')
                 <x-navlink link="/dashboard/user">List User</x-navlink>
+                @endcan @can('show')
                 <x-navlink link="#">Profil</x-navlink>
+                @endcan
                 <x-navlink link="#">Role Management</x-navlink>
             </x-collapselink>
+            @can('view role')
             <x-collapselink titlecols="Authentication">
                 <x-navlink link="/dashboard/authentication"
                     >Authentication</x-navlink
@@ -32,6 +36,7 @@
                     >Permission</x-navlink
                 >
             </x-collapselink>
+            @endcan
 
             <x-collapselink titlecols="Menu">
                 <x-navlink link="#">Component</x-navlink>

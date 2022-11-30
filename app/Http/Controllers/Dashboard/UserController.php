@@ -14,6 +14,20 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('permission:view user', [
+            'only' => ['index', 'show'],
+        ]);
+        $this->middleware('permission:create user', [
+            'only' => ['create', 'store'],
+        ]);
+        $this->middleware('permission:edit user', [
+            'only' => ['edit', 'update'],
+        ]);
+        $this->middleware('permission:delete user', ['only' => ['destroy']]);
+    }
     public function index()
     {
         return view('dashboard.user.index', [

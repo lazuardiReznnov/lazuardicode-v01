@@ -16,6 +16,17 @@ class AuthenticationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('permission:view role', ['only' => ['index']]);
+        $this->middleware('permission:create role', [
+            'only' => ['regper', 'store'],
+        ]);
+        $this->middleware('permission:edit role', [
+            'only' => ['edit', 'update'],
+        ]);
+        $this->middleware('permission:delete role', ['only' => ['destroy']]);
+    }
     public function index()
     {
         return view('dashboard.authentication.index', [
