@@ -18,31 +18,31 @@
     <x-HeadTitle title="{{ $title }}"> </x-HeadTitle>
     <x-breadcrumb>
         <x-breadcrumb-link link="/dashboard"> Dashboard </x-breadcrumb-link>
-        <x-breadcrumb-link link="/dashboard/authentication"
-            >Authentication
-        </x-breadcrumb-link>
+        <x-breadcrumb-link link="/dashboard/User">User </x-breadcrumb-link>
         <x-breadcrumb-link-active>{{ $title }} </x-breadcrumb-link-active>
     </x-breadcrumb>
 
     <div class="row">
         <div class="col-md-6">
             <x-card header="Form Add Role">
-                <form action="/dashboard/authentication" method="post">
+                <form
+                    action="/dashboard/user/storerole/{{ $data->username }}"
+                    method="post"
+                >
                     @csrf
                     <div class="mb-3">
-                        <input type="hidden" name="role" value="{{ $role }}" />
                         <label for="name" class="form-label">Permission</label>
 
                         <select
                             class="js-example-basic-multiple form-select"
                             aria-label="Default select example"
-                            name="permission[]"
+                            name="role[]"
                             multiple="multiple"
                         >
-                            @foreach($datas as $data)
+                            @foreach($roles as $role)
 
-                            <option value="{{ $data->name }}">
-                                {{ $data->name }}
+                            <option value="{{ $role->name }}">
+                                {{ $role->name }}
                             </option>
 
                             @endforeach
@@ -65,7 +65,7 @@
     <script>
         $(document).ready(function () {
             $(".js-example-basic-multiple").select2({
-                placeholder: "permission",
+                placeholder: "role",
             });
         });
     </script>

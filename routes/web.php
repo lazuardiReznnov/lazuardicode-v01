@@ -45,5 +45,13 @@ Route::middleware('auth')->group(function () {
         AuthenticationController::class
     );
 
+    route::get('dashboard/user/addrole/{user}', [
+        usercontroller::class,
+        'addrole',
+    ]);
+    route::post('dashboard/user/storerole/{user}', [
+        usercontroller::class,
+        'storerole',
+    ]);
     Route::resource('dashboard/user', UserController::class);
 });

@@ -21,10 +21,13 @@ class UserController extends Controller
             'only' => ['index', 'show'],
         ]);
         $this->middleware('permission:create user', [
-            'only' => ['create', 'store'],
+            'only' => ['create', 'store', 'addrole', 'storerole'],
         ]);
         $this->middleware('permission:edit user', [
             'only' => ['edit', 'update'],
+        ]);
+        $this->middleware('permission:show user', [
+            'only' => ['show'],
         ]);
         $this->middleware('permission:delete user', ['only' => ['destroy']]);
     }
@@ -102,5 +105,28 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         //
+    }
+
+    public function addrole(User $user)
+    {
+        return view('dashboard.user.addrole', [
+            'title' => 'Add User Role',
+            'data' => $user,
+            'roles' => Role::latest()->get(),
+        ]);
+    }
+
+    public function storerole(Request $request, User $user)
+    {
+        $validatedData = $request->validate([
+            'role' => 'required',
+        ]);
+
+        $user->assignRole($validatedData);
+
+        return redirect('/dashboard/user')->with(
+            'success',
+            'New User Role Has Been Registered.'
+        );
     }
 }
