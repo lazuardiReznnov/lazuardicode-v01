@@ -11,8 +11,8 @@
         <meta name="author" content="" />
         <title>{{ $title }} | {{ config("app.name") }}</title>
         <link href="/asset/css/styles.css" rel="stylesheet" />
-
-        @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+        @stack('css') @stack('script') @vite(['resources/sass/app.scss',
+        'resources/js/app.js'])
     </head>
     <body>
         <x-navbar> </x-navbar>

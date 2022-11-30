@@ -44,13 +44,12 @@ class AuthenticationController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $datas = $request->validate([
             'permission' => 'required',
         ]);
 
         $role = Role::where('id', $request->role)->first();
-        $role->givePermissionTo($request->permission);
-
+        $role->syncPermissions($datas);
         return redirect('/dashboard/authentication')->with(
             'success',
             'New Data Has Been Registered.'

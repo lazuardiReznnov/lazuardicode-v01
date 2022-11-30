@@ -1,4 +1,20 @@
 <x-admin-layout title="{{ $title }}">
+    @push('css')
+    <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css"
+        rel="stylesheet"
+    />
+    @endpush @push('script')
+
+    <script
+        src="https://code.jquery.com/jquery-3.6.1.slim.js"
+        integrity="sha256-tXm+sa1uzsbFnbXt8GJqsgi2Tw+m4BLGDof6eUPjbtk="
+        crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+
+    @endpush
+
     <x-HeadTitle title="{{ $title }}"> </x-HeadTitle>
     <x-breadcrumb>
         <x-breadcrumb-link link="/dashboard"> Dashboard </x-breadcrumb-link>
@@ -18,11 +34,11 @@
                         <label for="name" class="form-label">Permission</label>
 
                         <select
-                            class="form-select"
+                            class="js-example-basic-multiple"
                             aria-label="Default select example"
-                            name="permission"
+                            name="permission[]"
+                            multiple="multiple"
                         >
-                            <option selected>Cholce The Permission</option>
                             @foreach($datas as $data)
 
                             <option value="{{ $data->name }}">
@@ -46,4 +62,9 @@
             </x-card>
         </div>
     </div>
+    <script>
+        $(document).ready(function () {
+            $(".js-example-basic-multiple").select2();
+        });
+    </script>
 </x-admin-layout>

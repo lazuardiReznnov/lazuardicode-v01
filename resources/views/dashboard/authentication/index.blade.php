@@ -73,7 +73,7 @@
                             <td>
                                 <ul>
                                     @foreach($data->permissions as $permission)
-                                    <li>{{ $permission->name }} -</li>
+                                    <li>{{ $permission->name }}</li>
                                     @endforeach
                                 </ul>
                             </td>
