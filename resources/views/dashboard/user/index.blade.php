@@ -51,8 +51,15 @@
         <div class="col-md-10">
             <x-card header="User Management">
                 <div class="row my-2">
-                    <div class="col-md"></div>
+                    <div class="col-md">
+                        <a
+                            href="/dashboard/user/create"
+                            class="btn btn-primary btn-sm"
+                            >Add User</a
+                        >
+                    </div>
                 </div>
+
                 <table class="table table-striped">
                     <thead>
                         <tr>

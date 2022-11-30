@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -48,7 +49,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.user.create', [
+            'title' => 'Create new user',
+        ]);
     }
 
     /**
@@ -59,7 +62,27 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'username' => ['required', 'string', 'max:255', 'Unique:users'],
+            'name' => ['required', 'string', 'max:255'],
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                'unique:users',
+            ],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        $validatedData['password'] = Hash::make($validatedData['password']);
+        $user = User::Create($validatedData);
+        $user->assignRole('user');
+
+        return redirect('/dashboard/user')->with(
+            'success',
+            'New User Role Has Been Registered.'
+        );
     }
 
     /**
