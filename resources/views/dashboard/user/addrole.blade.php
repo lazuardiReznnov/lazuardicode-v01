@@ -30,33 +30,43 @@
                     method="post"
                 >
                     @csrf
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Permission</label>
 
-                        <select
-                            class="js-example-basic-multiple form-select"
-                            aria-label="Default select example"
-                            name="role[]"
-                            multiple="multiple"
+                    <div class="row mb-3">
+                        <label
+                            for="name"
+                            class="col-md-4 col-form-label text-md-end"
+                            >Permission</label
                         >
-                            @foreach($roles as $role)
 
-                            <option value="{{ $role->name }}">
-                                {{ $role->name }}
-                            </option>
+                        <div class="col-md-6">
+                            <select
+                                class="js-example-basic-multiple form-select"
+                                aria-label="Default select example"
+                                name="role[]"
+                                multiple="multiple"
+                            >
+                                @foreach($roles as $role)
 
-                            @endforeach
-                        </select>
-                        @error('name')
-                        <div class="invalid-feedback">
-                            {{ $message }}
+                                <option value="{{ $role->name }}">
+                                    {{ $role->name }}
+                                </option>
+
+                                @endforeach
+                            </select>
+                            @error('name')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                            @enderror
                         </div>
-                        @enderror
                     </div>
-                    <div class="mb-3 col-md-6">
-                        <button class="btn btn-primary" type="submit">
-                            Save
-                        </button>
+
+                    <div class="row mb-0">
+                        <div class="col-md-6 offset-md-4">
+                            <button type="submit" class="btn btn-primary">
+                                {{ __("Save") }}
+                            </button>
+                        </div>
                     </div>
                 </form>
             </x-card>

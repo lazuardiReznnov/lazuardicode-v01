@@ -53,5 +53,6 @@ Route::middleware('auth')->group(function () {
         usercontroller::class,
         'storerole',
     ]);
+
     Route::resource('dashboard/user', UserController::class);
 });

@@ -127,7 +127,12 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        User::destroy($user->id);
+
+        return redirect('/dashboard/user')->with(
+            'success',
+            'New User Role Has Been Deleted.'
+        );
     }
 
     public function addrole(User $user)
@@ -145,7 +150,7 @@ class UserController extends Controller
             'role' => 'required',
         ]);
 
-        $user->assignRole($validatedData);
+        $user->syncRoles($validatedData);
 
         return redirect('/dashboard/user')->with(
             'success',

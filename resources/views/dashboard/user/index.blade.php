@@ -81,7 +81,16 @@
                             <td>
                                 @if(!empty($data->getRoleNames()))
                                 @foreach($data->getRoleNames() as $v)
-                                {{ $v }}
+                                <a
+                                    href="{{
+                                        route('editrole',[ $data->username]) 
+                                    }} "
+                                    class="badge bg-primary btn-sm text-decoration-none"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-placement="top"
+                                    title="Edit Role"
+                                    >{{ $v }}</a
+                                >
                                 @endforeach @endif
                             </td>
                             <td>
@@ -98,7 +107,7 @@
                                     class="badge bg-warning"
                                     data-bs-toggle="tooltip"
                                     data-bs-placement="top"
-                                    title="Edit Permission"
+                                    title="Edit User"
                                     ><i class="far fa-edit"></i
                                 ></a>
                                 |
@@ -112,7 +121,7 @@
                                         class="badge bg-danger border-0"
                                         data-bs-toggle="tooltip"
                                         data-bs-placement="top"
-                                        title="Delete Unit"
+                                        title="Delete User"
                                         onclick="return confirm('are You sure ??')"
                                     >
                                         <i class="fas fa-trash-alt"></i>
