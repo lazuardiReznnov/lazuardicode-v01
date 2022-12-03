@@ -10,7 +10,10 @@
     <div class="row">
         <div class="col-md-10">
             <x-card header="form Edit User">
-                <form method="POST" action="/dashboard/user">
+                <form
+                    method="POST"
+                    action="/dashboard/user/{{ $data->username }}"
+                >
                     @csrf @method('put')
 
                     <div class="row mb-3">
@@ -53,7 +56,7 @@
                                 type="text"
                                 class="form-control @error('username') is-invalid @enderror"
                                 name="username"
-                                value="{{ old('username',$data->name) }}"
+                                value="{{ old('username',$data->username) }}"
                                 required
                                 autocomplete="username"
                                 autofocus
@@ -108,7 +111,10 @@
     <div class="row">
         <div class="col-md-10">
             <x-card header="Change Password User">
-                <form method="POST" action="/dashboard/user">
+                <form
+                    method="POST"
+                    action="/dashboard/user/updatepassword/{{ $data->username }}"
+                >
                     @csrf @method('put')
 
                     <div class="row mb-3">
@@ -121,7 +127,7 @@
                         <div class="col-md-6">
                             <input
                                 id="current_password"
-                                type="current_password"
+                                type="password"
                                 class="form-control @error('current_password') is-invalid @enderror"
                                 name="current_password"
                                 required
@@ -181,7 +187,11 @@
 
                     <div class="row mb-0">
                         <div class="col-md-6 offset-md-4">
-                            <button type="submit" class="btn btn-primary">
+                            <button
+                                type="submit"
+                                class="btn btn-primary"
+                                name="update_password"
+                            >
                                 {{ __("Upadate") }}
                             </button>
                         </div>

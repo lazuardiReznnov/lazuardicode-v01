@@ -6,6 +6,7 @@ use App\Http\Controllers\RolePermission\PermissionController;
 use App\Http\Controllers\RolePermission\RoleController;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Contracts\Permission;
+use Spatie\Permission\Contracts\Role;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,14 +46,11 @@ Route::middleware('auth')->group(function () {
         AuthenticationController::class
     );
 
-    route::get('dashboard/user/addrole/{user}', [
-        usercontroller::class,
-        'addrole',
-    ]);
-    route::post('dashboard/user/storerole/{user}', [
-        usercontroller::class,
-        'storerole',
-    ]);
+    Route::controller(UserController::class)->group(function () {
+        route::get('dashboard/user/addrole/{user}', 'addrole');
+        route::post('dashboard/user/storerole/{user}', 'storerole');
+        route::put('dashboard/user/updatepassword/{user}', 'updatepassword');
+    });
 
     Route::resource('dashboard/user', UserController::class);
 });

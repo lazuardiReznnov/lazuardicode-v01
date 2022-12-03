@@ -119,7 +119,17 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $validatedData = $request->validate([
+            'username' => 'required',
+            'name' => 'required',
+            'email' => ['required', 'string', 'email', 'max:255'],
+        ]);
+
+        user::where('id', $user->id)->update($validatedData);
+        return redirect('/dashboard/user')->with(
+            'success',
+            'Your Account Has Been Updated'
+        );
     }
 
     /**
@@ -159,5 +169,28 @@ class UserController extends Controller
             'success',
             'New User Role Has Been Registered.'
         );
+    }
+
+    public function updatepassword(Request $request, User $user)
+    {
+        $request->validate([
+            'current_password' => 'required',
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        if (!hash::check($request->current_password, $user->password)) {
+            return redirect('/dashboard/users/profilUser')->with(
+                'error',
+                'Your Old Password is Different'
+            );
+        } else {
+            user::where('id', $user->id)->update([
+                'password' => Hash::make($request->password),
+            ]);
+            return redirect('/dashboard/user')->with(
+                'success',
+                'Your Password Has Been Updated'
+            );
+        }
     }
 }
