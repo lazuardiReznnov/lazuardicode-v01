@@ -80,17 +80,7 @@
                             <td>{{ $data->email }}</td>
                             <td>
                                 @if(!empty($data->getRoleNames()))
-                                @foreach($data->getRoleNames() as $v)
-                                <a
-                                    href="{{
-                                        route('editrole',[ $data->username]) 
-                                    }} "
-                                    class="badge bg-primary btn-sm text-decoration-none"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-placement="top"
-                                    title="Edit Role"
-                                    >{{ $v }}</a
-                                >
+                                @foreach($data->getRoleNames() as $v) {{ $v }}
                                 @endforeach @endif
                             </td>
                             <td>

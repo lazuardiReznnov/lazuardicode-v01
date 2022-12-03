@@ -104,7 +104,10 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('dashboard.user.edit', [
+            'title' => 'Edit Acount',
+            'data' => $user,
+        ]);
     }
 
     /**

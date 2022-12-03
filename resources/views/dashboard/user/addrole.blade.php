@@ -18,7 +18,7 @@
     <x-HeadTitle title="{{ $title }}"> </x-HeadTitle>
     <x-breadcrumb>
         <x-breadcrumb-link link="/dashboard"> Dashboard </x-breadcrumb-link>
-        <x-breadcrumb-link link="/dashboard/User">User </x-breadcrumb-link>
+        <x-breadcrumb-link link="/dashboard/user">User </x-breadcrumb-link>
         <x-breadcrumb-link-active>{{ $title }} </x-breadcrumb-link-active>
     </x-breadcrumb>
 
