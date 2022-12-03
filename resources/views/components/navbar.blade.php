@@ -49,7 +49,11 @@
                 class="dropdown-menu dropdown-menu-end"
                 aria-labelledby="navbarDropdown"
             >
-                <li><a class="dropdown-item" href="#!">Settings</a></li>
+                <li>
+                    <a class="dropdown-item" href="/dashboard/user/profil"
+                        >Profil</a
+                    >
+                </li>
                 <li>
                     <a class="dropdown-item" href="#!">Activity Log</a>
                 </li>

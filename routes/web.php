@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\ProfilUserController;
 use App\Http\Controllers\Dashboard\UserController;
 use App\Http\Controllers\RolePermission\AuthenticationController;
 use App\Http\Controllers\RolePermission\PermissionController;
@@ -46,6 +47,10 @@ Route::middleware('auth')->group(function () {
         AuthenticationController::class
     );
 
+    Route::controller(ProfilUserController::class)->group(function () {
+        Route::get('dashboard/user/profil', 'index');
+        Route::put('dashboard/user/profil/{user}', 'update');
+    });
     Route::controller(UserController::class)->group(function () {
         route::get('dashboard/user/addrole/{user}', 'addrole');
         route::post('dashboard/user/storerole/{user}', 'storerole');

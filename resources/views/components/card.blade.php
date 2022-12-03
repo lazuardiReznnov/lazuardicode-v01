@@ -1,6 +1,6 @@
 <div class="card mb-4">
     @isset($header)
-    <div class="card-header fw-bold text-uppercase">
+    <div class="card-header fw-bold text-uppercase bg-dark text-white">
         {{ $header }}
     </div>
     @endisset

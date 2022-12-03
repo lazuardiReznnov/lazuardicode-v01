@@ -25,7 +25,7 @@ class UserController extends Controller
             'only' => ['create', 'store', 'addrole', 'storerole'],
         ]);
         $this->middleware('permission:edit user', [
-            'only' => ['edit', 'update'],
+            'only' => ['edit', 'update', 'updatepassword'],
         ]);
         $this->middleware('permission:show user', [
             'only' => ['show'],
