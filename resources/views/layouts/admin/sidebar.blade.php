@@ -20,7 +20,7 @@
                 @can('view user')
                 <x-navlink link="/dashboard/user">List User</x-navlink>
                 @endcan @can('show user')
-                <x-navlink link="#">Profil</x-navlink>
+                <x-navlink link="/dashboard/user/profil">Profil</x-navlink>
                 @endcan
                 <x-navlink link="#">Role Management</x-navlink>
             </x-collapselink>

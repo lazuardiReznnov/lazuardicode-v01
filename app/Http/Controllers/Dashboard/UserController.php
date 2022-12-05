@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Models\User;
+use App\Models\Profil;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
@@ -78,6 +79,7 @@ class UserController extends Controller
         $validatedData['password'] = Hash::make($validatedData['password']);
         $user = User::Create($validatedData);
         $user->assignRole('user');
+        Profil::Create(['user_id' => $user->id]);
 
         return redirect('/dashboard/user')->with(
             'success',

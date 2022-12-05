@@ -34,6 +34,6 @@ class PermissionSeeder extends Seeder
 
         $role = Role::create(['name' => 'user']);
 
-        $role->givePermissionTo('show user');
+        $role->givePermissionTo('profil user');
     }
 }
