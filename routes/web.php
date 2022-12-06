@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Dashboard\ProfilUserController;
 use App\Http\Controllers\Dashboard\UserController;
+use App\Http\Controllers\Landingpage\LandingpageController;
 use App\Http\Controllers\RolePermission\AuthenticationController;
 use App\Http\Controllers\RolePermission\PermissionController;
 use App\Http\Controllers\RolePermission\RoleController;
@@ -20,9 +21,7 @@ use Spatie\Permission\Contracts\Role;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', LandingpageController::class);
 
 Auth::routes();
 
