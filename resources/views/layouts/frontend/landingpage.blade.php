@@ -5,6 +5,13 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>{{ $title }}| {{ config("app.name") }}</title>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,500;0,700;1,600&family=Roboto:wght@300;400;700&display=swap"
+            rel="stylesheet"
+        />
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     </head>
     <body>
@@ -91,27 +98,14 @@
         <!-- endnavbar -->
 
         <!-- jumbotron -->
-        <div class="p-5 mb-4 rounded-bottom bg-blue-100 text-center">
-            <div class="container">
-                <div class="row justify-content-between">
-                    <div class="col-md-5 d-flex align-items-center">
-                        <h1 class="display-5 fw-bold">
-                            LAZUARDI <i class="fas fa-wave-square"></i> CODE
-                        </h1>
-                    </div>
-                    <div class="col-md-5">
-                        <p class="fs-4">
-                            Using a series of utilities, you can create this
-                            jumbotron, just like the one in previous versions of
-                            Bootstrap. Check out the examples below for how you
-                            can remix and restyle it to your liking.
-                        </p>
-                    </div>
+        <div
+            class="hero p-5 mb-4 rounded-bottom bg-blue-100 text-center f-poppins opacity-75"
+        >
+            <div class="row mt-lg-4">
+                <div class="col-md">
+                    <h2 class="t-b-100">Lazuardi Code</h2>
+                    <p class="text-muted">Web Design | Program</p>
                 </div>
-
-                <button class="btn btn-primary btn-lg" type="button">
-                    Example button
-                </button>
             </div>
         </div>
 

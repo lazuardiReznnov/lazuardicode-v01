@@ -18,3 +18,24 @@
 .bg-blue-100 {
     background-color: $blue-100;
 }
+
+.f-poppins {
+    font-family: $font-poppin;
+}
+
+.t-b-600 {
+    color: $blue-600;
+}
+.t-b-800 {
+    color: $blue-800;
+}
+
+.t-b-100 {
+    color: $blue-100;
+}
+.hero {
+    background-image: url("/public/asset/image/bg-landingpage.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+}
