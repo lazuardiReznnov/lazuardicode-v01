@@ -72,14 +72,18 @@
     font-family: $font-poppin;
 }
 .cover {
-    background-image: linear-gradient(
-        180deg,
-        #a5d9f4 0,
-        #6cb4d8 50%,
-        #1d90bd 100%
+    background: rgb(2, 0, 36);
+    background: linear-gradient(
+        90deg,
+        rgba(2, 0, 36, 1) 0%,
+        rgba(9, 9, 121, 1) 51%,
+        rgba(20, 31, 153, 1) 100%
     );
 }
 
+.text-shadow-lg {
+    filter: drop-shadow(5px 5px 10px #000);
+}
 .text-shadow {
-    text-shadow: black 0.1em 0.1em 0.2em;
+    text-shadow: -1px -1px 5px rgba(126, 110, 110, 0.6);
 }
