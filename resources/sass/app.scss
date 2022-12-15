@@ -8,34 +8,73 @@
 .cyan-300 {
     background-color: $cyan-300;
 }
+.bg-blue-900 {
+    background-color: $blue-900;
+}
+.bg-blue-800 {
+    background-color: $blue-800;
+}
 .bg-blue-700 {
     background-color: $blue-700;
+}
+.bg-blue-600 {
+    background-color: $blue-600;
+}
+.bg-blue-500 {
+    background-color: $blue-500;
+}
+.bg-blue-400 {
+    background-color: $blue-400;
 }
 .bg-blue-300 {
     background-color: $blue-300;
 }
-
+.bg-blue-200 {
+    background-color: $blue-200;
+}
 .bg-blue-100 {
     background-color: $blue-100;
+}
+
+.text-blue-900 {
+    color: $blue-900;
+}
+.text-blue-800 {
+    color: $blue-800;
+}
+.text-blue-700 {
+    color: $blue-700;
+}
+.text-blue-600 {
+    color: $blue-600;
+}
+.text-blue-500 {
+    color: $blue-500;
+}
+.text-blue-400 {
+    color: $blue-400;
+}
+.text-blue-300 {
+    color: $blue-300;
+}
+.text-blue-200 {
+    color: $blue-200;
+}
+.text-blue-100 {
+    color: $blue-100;
+}
+.text-blue-100 {
+    color: $blue-100;
 }
 
 .f-poppins {
     font-family: $font-poppin;
 }
-
-.t-b-600 {
-    color: $blue-600;
-}
-.t-b-800 {
-    color: $blue-800;
-}
-
-.t-b-100 {
-    color: $blue-100;
-}
-.hero {
-    background-image: url("/public/asset/image/bg-landingpage.jpg");
-    background-size: cover;
-    background-position: center;
-    height: 300px;
+.cover {
+    background-image: linear-gradient(
+        180deg,
+        #a5d9f4 0,
+        #6cb4d8 50%,
+        #1d90bd 100%
+    );
 }

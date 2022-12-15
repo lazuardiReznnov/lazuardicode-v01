@@ -16,7 +16,9 @@
     </head>
     <body>
         <!-- navbar -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-blue-700">
+        <nav
+            class="navbar navbar-expand-lg navbar-dark bg-blue-900 shadow-sm gradient border-bottom border-light"
+        >
             <div class="container">
                 <a class="navbar-brand" href="#">
                     LAZUARDI <i class="fas fa-wave-square"></i> CODE</a
@@ -99,12 +101,19 @@
 
         <!-- jumbotron -->
         <div
-            class="hero p-5 mb-4 rounded-bottom bg-blue-100 text-center f-poppins opacity-75"
+            class="hero mb-4 rounded-bottom bg-primary.bg-gradient shadow-sm f-poppins d-flex align-items-center p-5 cover"
         >
-            <div class="row mt-lg-4">
-                <div class="col-md">
-                    <h2 class="t-b-100">Lazuardi Code</h2>
-                    <p class="text-muted">Web Design | Program</p>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md text-center">
+                        <h2 class="text-light">Lazuardi Code</h2>
+                        <p class="text-muted">Web Design | Program</p>
+                        <p class="text-blue-700">
+                            Lorem ipsum dolor sit amet consectetur adipisicing
+                            elit. Doloribus dolorum ipsum mollitia earum magni
+                            minus quidem. Voluptatum in blanditiis odio.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
