@@ -16,12 +16,13 @@
     </head>
     <body>
         <!-- navbar -->
+
         <nav
             class="navbar navbar-expand-lg navbar-dark bg-blue-900 shadow-sm gradient border-bottom border-light"
         >
             <div class="container">
                 <a class="navbar-brand" href="#">
-                    LAZUARDI <i class="fas fa-wave-square"></i> CODE</a
+                    LAZUARDI <i class="bi bi-activity"></i> CODE</a
                 >
                 <button
                     class="navbar-toggler"
@@ -104,9 +105,11 @@
             class="hero mb-4 rounded-bottom bg-primary.bg-gradient shadow-sm f-poppins d-flex align-items-center p-5 cover"
         >
             <div class="container">
-                <div class="row">
-                    <div class="col-md text-center">
-                        <h2 class="text-light">Lazuardi Code</h2>
+                <div class="row justify-content-center">
+                    <div class="col-md-6 text-center">
+                        <h2 class="text-light text-shadow">
+                            Lazuardi <i class="bi bi-activity"></i> Code
+                        </h2>
                         <p class="text-muted">Web Design | Program</p>
                         <p class="text-blue-700">
                             Lorem ipsum dolor sit amet consectetur adipisicing

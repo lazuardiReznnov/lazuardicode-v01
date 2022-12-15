@@ -5,6 +5,7 @@
 @import "bootstrap/scss/bootstrap";
 @import "@fortawesome/fontawesome-free/css/all.css";
 
+@import "bootstrap-icons/font/bootstrap-icons.css";
 .cyan-300 {
     background-color: $cyan-300;
 }
@@ -77,4 +78,8 @@
         #6cb4d8 50%,
         #1d90bd 100%
     );
+}
+
+.text-shadow {
+    text-shadow: black 0.1em 0.1em 0.2em;
 }
