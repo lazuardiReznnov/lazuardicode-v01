@@ -272,7 +272,7 @@
                     </div>
                 </div>
 
-                <div class="p-3">
+                <div class="p-3 mb-3">
                     <h1 class="text-center">Contac Us</h1>
                     <div class="row justify-content-center">
                         <div class="col-md-6">
@@ -317,5 +317,16 @@
             </div>
         </main>
         <!-- End Content -->
+
+        <!-- Footer -->
+        <footer
+            class="d-flex items-content-center justify-content-center bg-blue-900 p-5 text-white f-poppins"
+        >
+            <div>
+                Copy &copy; Right 2022, Lazuardi
+                <i class="bi bi-activity"></i> Code
+            </div>
+        </footer>
+        <!-- EndFooter -->
     </body>
 </html>
