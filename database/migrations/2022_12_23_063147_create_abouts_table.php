@@ -12,12 +12,11 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('heropages', function (Blueprint $table) {
+        Schema::create('abouts', function (Blueprint $table) {
             $table->id();
-            $table->string('heading');
             $table->string('title');
-            $table->text('descriptions');
-            $table->string('pic')->nullable();
+            $table->text('desc1');
+            $table->text('desc2');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('heropages');
+        Schema::dropIfExists('abouts');
     }
 };

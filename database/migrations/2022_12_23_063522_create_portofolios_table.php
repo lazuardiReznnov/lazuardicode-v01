@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Validation\Rules\Unique;
 
 return new class extends Migration {
     /**
@@ -12,11 +13,12 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('heropages', function (Blueprint $table) {
+        Schema::create('portofolios', function (Blueprint $table) {
             $table->id();
-            $table->string('heading');
-            $table->string('title');
-            $table->text('descriptions');
+            $table->string('name')->Unique();
+            $table->string('slug')->unique();
+            $table->string('sbody');
+            $table->text('body');
             $table->string('pic')->nullable();
             $table->timestamps();
         });
@@ -29,6 +31,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('heropages');
+        Schema::dropIfExists('portofolios');
     }
 };
