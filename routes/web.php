@@ -1,14 +1,19 @@
 <?php
 
-use App\Http\Controllers\Dashboard\ProfilUserController;
-use App\Http\Controllers\Dashboard\UserController;
-use App\Http\Controllers\Landingpage\LandingpageController;
-use App\Http\Controllers\RolePermission\AuthenticationController;
-use App\Http\Controllers\RolePermission\PermissionController;
-use App\Http\Controllers\RolePermission\RoleController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use Spatie\Permission\Contracts\Permission;
 use Spatie\Permission\Contracts\Role;
+use App\Http\Controllers\HomeController;
+use Spatie\Permission\Contracts\Permission;
+use App\Http\Controllers\Dashboard\UserController;
+use App\Http\Controllers\RolePermission\RoleController;
+use App\Http\Controllers\Dashboard\ProfilUserController;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+use App\Http\Controllers\Dashboard\DashboardHeroController;
+use App\Http\Controllers\Dashboard\DashboardPageController;
+use App\Http\Controllers\Landingpage\LandingpageController;
+use App\Http\Controllers\RolePermission\PermissionController;
+use App\Http\Controllers\RolePermission\AuthenticationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,4 +62,9 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::resource('dashboard/user', UserController::class);
+
+    // page
+    Route::get('dashboard/page', [DashboardPageController::class]);
+    // hero
+    Route::resource('dashboard/page/hero', DashboardHeroController::class);
 });
