@@ -64,7 +64,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('dashboard/user', UserController::class);
 
     // page
-    Route::get('dashboard/page', [DashboardPageController::class]);
+    Route::get('/dashboard/page', DashboardPageController::class);
     // hero
     Route::resource('dashboard/page/hero', DashboardHeroController::class);
 });

@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Landingpage;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Heropage;
+use App\Models\About;
+use App\Models\Portofolio;
 
 class LandingpageController extends Controller
 {
@@ -11,6 +14,9 @@ class LandingpageController extends Controller
     {
         return view('layouts.frontend.landingpage', [
             'title' => 'Landingpage',
+            'hero' => Heropage::get()->first(),
+            'about' => About::get()->first(),
+            'portos' => Portofolio::all(),
         ]);
     }
 }

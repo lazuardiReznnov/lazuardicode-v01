@@ -38,6 +38,10 @@
             </x-collapselink>
             @endcan
 
+            <x-collapselink titlecols="Page">
+                <x-navlink link="/dashboard/page"> Page </x-navlink>
+            </x-collapselink>
+
             <x-collapselink titlecols="Menu">
                 <x-navlink link="#">Component</x-navlink>
             </x-collapselink>

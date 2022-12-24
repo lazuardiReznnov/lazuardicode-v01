@@ -101,26 +101,39 @@
         <!-- endnavbar -->
 
         <!-- jumbotron -->
-        <div
-            class="hero mb-4 rounded-bottom bg-primary.bg-gradient shadow-sm f-poppins d-flex align-items-center p-5 cover"
-        >
+        <x-herolandingpage>
             <div class="container">
-                <div class="row justify-content-center">
-                    <div class="col-md-6 text-center">
+                <div class="row justify-content-between">
+                    <div class="col-md-6 align-content-center">
+                        @if($hero->pic)
+                        <img
+                            width="50"
+                            src="{{ asset('storage/'. $hero->pic) }}"
+                            class="rounded-circle mx-auto d-block shadow my-3"
+                            alt="Unit Image"
+                        />
+                        @else
+                        <img
+                            class="rounded-circle mx-auto border d-block shadow-lg"
+                            src="http://source.unsplash.com/200x200?truck"
+                            alt=""
+                            width="200"
+                        />
+                        @endif
+                    </div>
+                    <div class="col-md-6 text-start align-content-center">
                         <h2 class="text-light text-shadow-lg">
-                            Lazuardi <i class="bi bi-activity"></i> Code
+                            {!! $hero->heading !!}
                         </h2>
-                        <p class="text-blue-100">Web Design | Program</p>
+                        <p class="text-blue-100">{{ $hero->title }}</p>
                         <p class="text-blue-100">
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Doloribus dolorum ipsum mollitia earum magni
-                            minus quidem. Voluptatum in blanditiis odio.
+                            {{ $hero->descriptions }}
                         </p>
                         <button class="btn btn-primary">Enter</button>
                     </div>
                 </div>
             </div>
-        </div>
+        </x-herolandingpage>
         <!-- Endjumbotron -->
 
         <!-- Content -->
@@ -128,23 +141,17 @@
             <div class="container">
                 <div class="mb-5">
                     <h1 class="text-center mb-3 text-blue-800 text-shadow">
-                        About
+                        {{$about->title}}
                     </h1>
                     <div class="row justify-content-center">
                         <div class="col-md-5">
                             <p>
-                                Lorem ipsum, dolor sit amet consectetur
-                                adipisicing elit. Eius maxime recusandae vel
-                                quas commodi illo porro perferendis expedita
-                                ratione suscipit.
+                                {{$about->desc1}}
                             </p>
                         </div>
                         <div class="col-md-5">
                             <p>
-                                Lorem ipsum, dolor sit amet consectetur
-                                adipisicing elit. Eius maxime recusandae vel
-                                quas commodi illo porro perferendis expedita
-                                ratione suscipit.
+                                {{$about->desc2}}
                             </p>
                         </div>
                     </div>
@@ -155,18 +162,28 @@
                         Portofolio
                     </h1>
                     <div class="row">
+                        @foreach($portos as $porto)
                         <div class="col-md-4 mb-2">
                             <div class="card">
+                                @if($porto->pic)
+                                <img
+                                    width="200"
+                                    src="{{ asset('storage/'. $porto->pic) }}"
+                                    class="rounded-circle mx-auto d-block shadow my-3"
+                                    alt="Unit Image"
+                                />
+                                @else
                                 <img
                                     src="http://source.unsplash.com/200x200?truck"
                                     alt=""
                                 />
+                                @endif
                                 <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
+                                    <h5 class="card-title">
+                                        {{ $porto->name }}
+                                    </h5>
                                     <p class="card-text">
-                                        Some quick example text to build on the
-                                        card title and make up the bulk of the
-                                        card's content.
+                                        {{$porto->sbody}}
                                     </p>
                                     <a href="#" class="btn btn-primary"
                                         >Go somewhere</a
@@ -174,101 +191,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4 mb-2">
-                            <div class="card">
-                                <img
-                                    src="http://source.unsplash.com/200x200?car"
-                                    alt=""
-                                />
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">
-                                        Some quick example text to build on the
-                                        card title and make up the bulk of the
-                                        card's content.
-                                    </p>
-                                    <a href="#" class="btn btn-primary"
-                                        >Go somewhere</a
-                                    >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-2">
-                            <div class="card">
-                                <img
-                                    src="http://source.unsplash.com/200x200?cartoon"
-                                    alt=""
-                                />
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">
-                                        Some quick example text to build on the
-                                        card title and make up the bulk of the
-                                        card's content.
-                                    </p>
-                                    <a href="#" class="btn btn-primary"
-                                        >Go somewhere</a
-                                    >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-2">
-                            <div class="card">
-                                <img
-                                    src="http://source.unsplash.com/200x200?transformer"
-                                    alt=""
-                                />
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">
-                                        Some quick example text to build on the
-                                        card title and make up the bulk of the
-                                        card's content.
-                                    </p>
-                                    <a href="#" class="btn btn-primary"
-                                        >Go somewhere</a
-                                    >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-2">
-                            <div class="card">
-                                <img
-                                    src="http://source.unsplash.com/200x200?ford"
-                                    alt=""
-                                />
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">
-                                        Some quick example text to build on the
-                                        card title and make up the bulk of the
-                                        card's content.
-                                    </p>
-                                    <a href="#" class="btn btn-primary"
-                                        >Go somewhere</a
-                                    >
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 mb-2">
-                            <div class="card">
-                                <img
-                                    src="http://source.unsplash.com/200x200?truck"
-                                    alt=""
-                                />
-                                <div class="card-body">
-                                    <h5 class="card-title">Card title</h5>
-                                    <p class="card-text">
-                                        Some quick example text to build on the
-                                        card title and make up the bulk of the
-                                        card's content.
-                                    </p>
-                                    <a href="#" class="btn btn-primary"
-                                        >Go somewhere</a
-                                    >
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
 
