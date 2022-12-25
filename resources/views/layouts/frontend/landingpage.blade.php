@@ -16,240 +16,25 @@
     </head>
     <body>
         <!-- navbar -->
+        @include('layouts/frontend/navbar')
 
-        <nav
-            class="navbar navbar-expand-lg navbar-dark bg-blue-900 shadow-sm gradient border-bottom border-light"
-        >
-            <div class="container">
-                <a class="navbar-brand" href="#">
-                    LAZUARDI <i class="bi bi-activity"></i> CODE</a
-                >
-                <button
-                    class="navbar-toggler"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarNavDropdown"
-                    aria-controls="navbarNavDropdown"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-                >
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                    <ul class="navbar-nav ms-auto">
-                        @guest @if (Route::has('login'))
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{
-                                __("LOGIN")
-                            }}</a>
-                        </li>
-                        @endif @else
-                        <li class="nav-item dropdown">
-                            <a
-                                class="nav-link dropdown-toggle"
-                                id="navbarDropdown"
-                                href="#"
-                                role="button"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false"
-                                ><i class="fas fa-user fa-fw"></i>
-                                {{ Auth::user()->name }}</a
-                            >
-                            <ul
-                                class="dropdown-menu dropdown-menu-end"
-                                aria-labelledby="navbarDropdown"
-                            >
-                                <li>
-                                    <a
-                                        class="dropdown-item"
-                                        href="/dashboard/user/profil"
-                                        >Profil</a
-                                    >
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" href="#!"
-                                        >Activity Log</a
-                                    >
-                                </li>
-                                <li><hr class="dropdown-divider" /></li>
-                                <li>
-                                    <a
-                                        class="dropdown-item"
-                                        href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                 document.getElementById('logout-form').submit();"
-                                    >
-                                        {{ __("Logout") }}
-                                    </a>
-
-                                    <form
-                                        id="logout-form"
-                                        action="{{ route('logout') }}"
-                                        method="POST"
-                                        class="d-none"
-                                    >
-                                        @csrf
-                                    </form>
-                                </li>
-                                @endguest
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
         <!-- endnavbar -->
 
         <!-- jumbotron -->
-        <x-herolandingpage>
-            <div class="container">
-                <div class="row justify-content-between">
-                    <div class="col-md-6 align-content-center">
-                        @if($hero->pic)
-                        <img
-                            width="50"
-                            src="{{ asset('storage/'. $hero->pic) }}"
-                            class="rounded-circle mx-auto d-block shadow my-3"
-                            alt="Unit Image"
-                        />
-                        @else
-                        <img
-                            class="rounded-circle mx-auto border d-block shadow-lg"
-                            src="http://source.unsplash.com/200x200?truck"
-                            alt=""
-                            width="200"
-                        />
-                        @endif
-                    </div>
-                    <div class="col-md-6 text-start align-content-center">
-                        <h2 class="text-light text-shadow-lg">
-                            {!! $hero->heading !!}
-                        </h2>
-                        <p class="text-blue-100">{{ $hero->title }}</p>
-                        <p class="text-blue-100">
-                            {{ $hero->descriptions }}
-                        </p>
-                        <button class="btn btn-primary">Enter</button>
-                    </div>
-                </div>
-            </div>
-        </x-herolandingpage>
+
         <!-- Endjumbotron -->
 
         <!-- Content -->
         <main>
             <div class="container">
-                <div class="mb-5">
-                    <h1 class="text-center mb-3 text-blue-800 text-shadow">
-                        {{$about->title}}
-                    </h1>
-                    <div class="row justify-content-center">
-                        <div class="col-md-5">
-                            <p>
-                                {{$about->desc1}}
-                            </p>
-                        </div>
-                        <div class="col-md-5">
-                            <p>
-                                {{$about->desc2}}
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-blue-900 rounded p-3">
-                    <h1 class="text-blue-100 text-shadow text-center mb-4">
-                        Portofolio
-                    </h1>
-                    <div class="row">
-                        @foreach($portos as $porto)
-                        <div class="col-md-4 mb-2">
-                            <div class="card">
-                                @if($porto->pic)
-                                <img
-                                    width="200"
-                                    src="{{ asset('storage/'. $porto->pic) }}"
-                                    class="rounded-circle mx-auto d-block shadow my-3"
-                                    alt="Unit Image"
-                                />
-                                @else
-                                <img
-                                    src="http://source.unsplash.com/200x200?truck"
-                                    alt=""
-                                />
-                                @endif
-                                <div class="card-body">
-                                    <h5 class="card-title">
-                                        {{ $porto->name }}
-                                    </h5>
-                                    <p class="card-text">
-                                        {{$porto->sbody}}
-                                    </p>
-                                    <a href="#" class="btn btn-primary"
-                                        >Go somewhere</a
-                                    >
-                                </div>
-                            </div>
-                        </div>
-                        @endforeach
-                    </div>
-                </div>
-
-                <div class="p-3 mb-3">
-                    <h1 class="text-center">Contac Us</h1>
-                    <div class="row justify-content-center">
-                        <div class="col-md-6">
-                            <div class="card">
-                                <div class="card-header">Form Contac</div>
-                                <div class="card-body">
-                                    <div class="mb-3">
-                                        <label
-                                            for="exampleFormControlInput1"
-                                            class="form-label"
-                                            >Email address</label
-                                        >
-                                        <input
-                                            type="email"
-                                            class="form-control"
-                                            id="exampleFormControlInput1"
-                                            placeholder="name@example.com"
-                                        />
-                                    </div>
-                                    <div class="mb-3">
-                                        <label
-                                            for="exampleFormControlTextarea1"
-                                            class="form-label"
-                                            >Example textarea</label
-                                        >
-                                        <textarea
-                                            class="form-control"
-                                            id="exampleFormControlTextarea1"
-                                            rows="3"
-                                        ></textarea>
-                                    </div>
-                                    <div class="mb-3">
-                                        <button class="btn btn-primary">
-                                            Send
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {{ $slot }}
             </div>
         </main>
         <!-- End Content -->
 
         <!-- Footer -->
-        <footer
-            class="d-flex items-content-center justify-content-center bg-blue-900 p-5 text-white f-poppins"
-        >
-            <div>
-                Copy &copy; Right 2022, Lazuardi
-                <i class="bi bi-activity"></i> Code
-            </div>
-        </footer>
+        @include('layouts/frontend/footer')
+
         <!-- EndFooter -->
     </body>
 </html>

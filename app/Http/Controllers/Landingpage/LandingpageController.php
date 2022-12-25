@@ -12,7 +12,7 @@ class LandingpageController extends Controller
 {
     public function __invoke()
     {
-        return view('layouts.frontend.landingpage', [
+        return view('home', [
             'title' => 'Landingpage',
             'hero' => Heropage::get()->first(),
             'about' => About::get()->first(),
