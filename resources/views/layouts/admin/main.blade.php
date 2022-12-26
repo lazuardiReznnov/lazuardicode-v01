@@ -28,7 +28,7 @@
                 @include('layouts.admin.footer')
             </div>
         </div>
-
+        @stack('script2')
         <script src="/asset/js/scripts.js"></script>
     </body>
 </html>

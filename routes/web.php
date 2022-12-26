@@ -13,6 +13,7 @@ use App\Http\Controllers\Dashboard\DashboardHeroController;
 use App\Http\Controllers\Dashboard\DashboardPageController;
 use App\Http\Controllers\Landingpage\LandingpageController;
 use App\Http\Controllers\Dashboard\DashboardAboutController;
+use App\Http\Controllers\Dashboard\DashboardPortofolioController;
 use App\Http\Controllers\RolePermission\PermissionController;
 use App\Http\Controllers\RolePermission\AuthenticationController;
 
@@ -73,4 +74,14 @@ Route::middleware('auth')->group(function () {
         'dashboard/page/about',
         DashboardAboutController::class
     )->only('index', 'update');
+
+    Route::get('dashboard/page/portofolio/checkSlug', [
+        DashboardPortofolioController::class,
+        'checkSlug',
+    ]);
+
+    Route::resource(
+        'dashboard/page/portofolio',
+        DashboardPortofolioController::class
+    );
 });
