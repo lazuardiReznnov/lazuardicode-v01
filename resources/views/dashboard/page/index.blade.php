@@ -10,7 +10,9 @@
         <div class="col-md-6">
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">
-                    <a class="text-decoration-none" href="/dashboard/page/hero"
+                    <a
+                        class="text-decoration-none"
+                        href="/dashboard/page/heropage"
                         >Hero Page</a
                     >
                 </li>

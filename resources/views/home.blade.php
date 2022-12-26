@@ -5,9 +5,9 @@
                 <div class="col-md-6 align-content-center">
                     @if($hero->pic)
                     <img
-                        width="50"
+                        width="300"
                         src="{{ asset('storage/'. $hero->pic) }}"
-                        class="rounded-circle mx-auto d-block shadow my-3"
+                        class="rounded-circle mx-auto d-block shadow my-3 border d"
                         alt="Unit Image"
                     />
                     @else
@@ -24,9 +24,10 @@
                         {!! $hero->heading !!}
                     </h2>
                     <p class="text-blue-100">{{ $hero->title }}</p>
-                    <p class="text-blue-100">
-                        {{ $hero->descriptions }}
-                    </p>
+                    <div class="text-blue-100 mb-3">
+                        {!! $hero->descriptions !!}
+                    </div>
+
                     <button class="btn btn-primary">Enter</button>
                 </div>
             </div>

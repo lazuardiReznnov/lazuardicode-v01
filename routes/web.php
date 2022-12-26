@@ -30,10 +30,7 @@ Route::get('/', LandingpageController::class);
 
 Auth::routes();
 
-Route::get('/dashboard', [
-    App\Http\Controllers\HomeController::class,
-    'index',
-])->name('home');
+Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index']);
 
 Route::middleware('auth')->group(function () {
     Route::resource('/dashboard/authentication/role', RoleController::class);
@@ -66,5 +63,5 @@ Route::middleware('auth')->group(function () {
     // page
     Route::get('/dashboard/page', DashboardPageController::class);
     // hero
-    Route::resource('dashboard/page/hero', DashboardHeroController::class);
+    Route::resource('dashboard/page/heropage', DashboardHeroController::class);
 });

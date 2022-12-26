@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Models\Heropage;
 use Illuminate\Http\Request;
+use Illuminate\support\Facades\Storage;
 
 class DashboardHeroController extends Controller
 {
@@ -73,7 +74,26 @@ class DashboardHeroController extends Controller
      */
     public function update(Request $request, Heropage $heropage)
     {
-        //
+        $rules = [
+            'heading' => 'required',
+            'title' => 'required',
+            'descriptions' => 'required',
+            'pic' => 'image|file|max:1024',
+        ];
+
+        $validatedData = $request->validate($rules);
+        if ($request->file('pic')) {
+            if ($request->old_pic) {
+                storage::delete($request->old_pic);
+            }
+            $validatedData['pic'] = $request->file('pic')->store('page-pic');
+        }
+
+        Heropage::where('id', $heropage->id)->update($validatedData);
+        return redirect('dashboard/page/heropage')->with(
+            'success',
+            'Data Has Been Updated'
+        );
     }
 
     /**
