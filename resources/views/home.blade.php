@@ -39,14 +39,10 @@
         </h1>
         <div class="row justify-content-center">
             <div class="col-md-5">
-                <p>
-                    {{$about->desc1}}
-                </p>
+                <p>{!! $about->desc1 !!}</p>
             </div>
             <div class="col-md-5">
-                <p>
-                    {{$about->desc2}}
-                </p>
+                <p>{!! $about->desc2 !!}</p>
             </div>
         </div>
     </div>

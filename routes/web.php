@@ -12,6 +12,7 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 use App\Http\Controllers\Dashboard\DashboardHeroController;
 use App\Http\Controllers\Dashboard\DashboardPageController;
 use App\Http\Controllers\Landingpage\LandingpageController;
+use App\Http\Controllers\Dashboard\DashboardAboutController;
 use App\Http\Controllers\RolePermission\PermissionController;
 use App\Http\Controllers\RolePermission\AuthenticationController;
 
@@ -63,5 +64,13 @@ Route::middleware('auth')->group(function () {
     // page
     Route::get('/dashboard/page', DashboardPageController::class);
     // hero
-    Route::resource('dashboard/page/heropage', DashboardHeroController::class);
+    Route::resource(
+        'dashboard/page/heropage',
+        DashboardHeroController::class
+    )->only('index', 'update');
+    // About
+    Route::resource(
+        'dashboard/page/about',
+        DashboardAboutController::class
+    )->only('index', 'update');
 });
