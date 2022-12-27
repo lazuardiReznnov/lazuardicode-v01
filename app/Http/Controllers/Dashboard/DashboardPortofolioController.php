@@ -88,7 +88,10 @@ class DashboardPortofolioController extends Controller
      */
     public function edit(Portofolio $portofolio)
     {
-        //
+        return view('dashboard.page.portofolio.edit', [
+            'title' => 'Edit Portofolio',
+            'data' => $portofolio,
+        ]);
     }
 
     /**
