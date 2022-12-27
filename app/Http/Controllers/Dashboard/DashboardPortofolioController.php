@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Http\Controllers\Controller;
 use App\Models\Portofolio;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class DashboardPortofolioController extends Controller
@@ -44,7 +45,25 @@ class DashboardPortofolioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|unique:portofolios',
+            'slug' => 'required|unique:portofolios',
+            'body' => 'required',
+            'pic' => 'image|file|max:1024',
+        ]);
+
+        $validatedData['sbody'] = Str::limit(strip_tags($request->body), 200);
+
+        if ($request->file('pic')) {
+            $validatedData['pic'] = $request->file('pic')->store('page-pic');
+        }
+
+        Portofolio::create($validatedData);
+
+        return redirect('dashboard/page/portofolio')->with(
+            'success',
+            'Data Has Been Updated'
+        );
     }
 
     /**
@@ -55,7 +74,10 @@ class DashboardPortofolioController extends Controller
      */
     public function show(Portofolio $portofolio)
     {
-        //
+        return view('dashboard.page.portofolio.show', [
+            'title' => 'Detail Portofolio',
+            'data' => $portofolio,
+        ]);
     }
 
     /**

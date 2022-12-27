@@ -50,9 +50,8 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">text</th>
                             <th scope="col">pic</th>
+                            <th scope="col">Name</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -62,8 +61,6 @@
                             <th scope="row">
                                 {{ ($datas->currentpage()-1) * $datas->perpage() + $loop->index + 1 }}
                             </th>
-                            <td>{{ $data->name }}</td>
-                            <td>{{ $data->sbody }}</td>
                             <td>
                                 @if($data->pic != 0)
                                 <img
@@ -75,7 +72,18 @@
                                 {{ "-" }}
                                 @endif
                             </td>
+                            <td>{{ $data->name }}</td>
+
                             <td>
+                                <a
+                                    href="/dashboard/page/portofolio/{{ $data->slug }}"
+                                    class="badge bg-success"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-placement="top"
+                                    title="Detail Portofolio"
+                                    ><i class="far fa-edit"></i
+                                ></a>
+                                |
                                 <a
                                     href="/dashboard/page/portofolio/{{ $data->slug }}/edit"
                                     class="badge bg-warning"

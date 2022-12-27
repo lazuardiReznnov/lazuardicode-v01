@@ -14,7 +14,7 @@ class Portofolio extends Model
 
     public function getRouteKeyName()
     {
-        return 'name';
+        return 'slug';
     }
 
     public function sluggable(): array
