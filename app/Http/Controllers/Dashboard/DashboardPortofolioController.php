@@ -103,7 +103,7 @@ class DashboardPortofolioController extends Controller
      */
     public function update(Request $request, Portofolio $portofolio)
     {
-        //
+        $rules = [];
     }
 
     /**
