@@ -36,12 +36,11 @@
                     >Permission</x-navlink
                 >
             </x-collapselink>
-            @endcan
-
+            @endcan @can('View Page')
             <x-collapselink titlecols="Page">
                 <x-navlink link="/dashboard/page"> Page </x-navlink>
             </x-collapselink>
-
+            @endcan
             <x-collapselink titlecols="Menu">
                 <x-navlink link="#">Component</x-navlink>
             </x-collapselink>
