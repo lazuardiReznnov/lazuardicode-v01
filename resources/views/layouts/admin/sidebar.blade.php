@@ -10,11 +10,7 @@
                 Dashboard
             </x-navlink>
 
-            <x-headsidenav title="Administrator">
-                <x-iconlink>
-                    <i class="fas fa-tachometer-alt"></i>
-                </x-iconlink>
-            </x-headsidenav>
+            <x-headsidenav title="Administrator"> </x-headsidenav>
 
             <x-collapselink titlecols="User">
                 @can('view user')
@@ -44,6 +40,21 @@
             <x-collapselink titlecols="Menu">
                 <x-navlink link="#">Component</x-navlink>
             </x-collapselink>
+
+            <!-- uNIT -->
+            <x-headsidenav title="Unit-Management"> </x-headsidenav>
+            <x-collapselink titlecols="Unit-Data">
+                <x-navlink link="#">Brand Unit</x-navlink>
+                <x-navlink link="#">Category Unit</x-navlink>
+                <x-navlink link="#">Karoseri Unit</x-navlink>
+                <x-navlink link="#">Group Unit</x-navlink>
+                <x-navlink link="#">Flag Unit</x-navlink>
+                <x-navlink link="#">Types Unit</x-navlink>
+                <x-navlink link="#">Unit</x-navlink>
+            </x-collapselink>
+            <x-collapselink titlecols="Letter"></x-collapselink>
+
+            <!-- ENDUNIT -->
         </div>
     </div>
     <div class="sb-sidenav-footer">

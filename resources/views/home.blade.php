@@ -55,9 +55,8 @@
                 <div class="card">
                     @if($porto->pic)
                     <img
-                        width="200"
+                        width="400"
                         src="{{ asset('storage/'. $porto->pic) }}"
-                        class="rounded-circle mx-auto d-block shadow my-3"
                         alt="Unit Image"
                     />
                     @else

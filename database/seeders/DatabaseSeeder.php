@@ -23,6 +23,9 @@ class DatabaseSeeder extends Seeder
             HeropageSeeder::class,
             AboutSeeder::class,
             PortofolioSeeder::class,
+            BrandSeeder::class,
+            CategorySeeder::class,
+            CaroserySeeder::class,
         ]);
     }
 }
