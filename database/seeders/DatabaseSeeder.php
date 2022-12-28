@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Heropage;
 use Illuminate\Database\Seeder;
+use PHPUnit\TextUI\XmlConfiguration\Group;
 use Spatie\Permission\Contracts\Permission;
 
 class DatabaseSeeder extends Seeder
@@ -26,6 +27,10 @@ class DatabaseSeeder extends Seeder
             BrandSeeder::class,
             CategorySeeder::class,
             CaroserySeeder::class,
+            GroupSeeder::class,
+            FlagSeeder::class,
+            TypeSeeder::class,
+            UnitSeeder::class,
         ]);
     }
 }
