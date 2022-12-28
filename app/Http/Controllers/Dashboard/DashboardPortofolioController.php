@@ -120,7 +120,30 @@ class DashboardPortofolioController extends Controller
      */
     public function update(Request $request, Portofolio $portofolio)
     {
-        $rules = [];
+        $rules = ['body' => 'required'];
+
+        if ($request->name != $portofolio->name) {
+            $rules['name'] = 'required|unique:portofolios|max:25';
+        }
+        if ($request->slug != $portofolio->slug) {
+            $rules['slug'] = 'required|unique:portofolios';
+        }
+
+        $validatedData = $request->validate($rules);
+
+        if ($request->file('pic')) {
+            if ($request->old_pic) {
+                storage::delete($request->old_pic);
+            }
+            $validatedData['pic'] = $request->file('pic')->store('page-pic');
+        }
+
+        Portofolio::where('id', $portofolio->id)->update($validatedData);
+
+        return redirect('dashboard/page/portofolio')->with(
+            'success',
+            'Data Has Been Updated'
+        );
     }
 
     /**
