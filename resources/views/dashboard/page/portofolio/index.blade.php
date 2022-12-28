@@ -8,9 +8,9 @@
         <x-breadcrumb-link-active>{{ $title }} </x-breadcrumb-link-active>
     </x-breadcrumb>
 
+    @if(session()->has('success'))
     <div class="row">
         <div class="col-md-8">
-            @if(session()->has('success'))
             <x-card>
                 <!-- pesan -->
 
@@ -30,9 +30,9 @@
 
                 <!-- endpesan -->
             </x-card>
-            @endif
         </div>
     </div>
+    @endif
     <div class="row">
         <div class="col-md-10">
             <x-card header="Portofolio List">
@@ -126,7 +126,7 @@
 
     <div class="row">
         <div class="col-md-8">
-            {{ $datas->links() }}
+            {{ $datas->onEachSide(5)->links() }}
         </div>
     </div>
 </x-admin-layout>

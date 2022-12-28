@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Cviebrock\EloquentSluggable\Services\SlugService;
+use Illuminate\support\Facades\Storage;
 
 class DashboardPortofolioController extends Controller
 {
@@ -15,6 +16,22 @@ class DashboardPortofolioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('permission:View Page', [
+            'only' => ['index', 'show'],
+        ]);
+        $this->middleware('permission:Create Page', [
+            'only' => ['create', 'store', 'addrole', 'storerole'],
+        ]);
+        $this->middleware('permission:Edit Page', [
+            'only' => ['edit', 'update', 'updatepassword'],
+        ]);
+        $this->middleware('permission:Show Page', [
+            'only' => ['show'],
+        ]);
+        $this->middleware('permission:Delete Page', ['only' => ['destroy']]);
+    }
     public function index()
     {
         return view('dashboard.page.portofolio.index', [
@@ -114,7 +131,14 @@ class DashboardPortofolioController extends Controller
      */
     public function destroy(Portofolio $portofolio)
     {
-        //
+        Portofolio::destroy($portofolio->id);
+        if ($portofolio->pic) {
+            storage::delete($portofolio->pic);
+        }
+        return redirect('/dashboard/page/portofolio')->with(
+            'success',
+            'New File Has Been aded.'
+        );
     }
 
     public function checkSlug(Request $request)
