@@ -14,6 +14,7 @@ use App\Http\Controllers\Dashboard\DashboardPageController;
 use App\Http\Controllers\Landingpage\LandingpageController;
 use App\Http\Controllers\Dashboard\DashboardAboutController;
 use App\Http\Controllers\Dashboard\DashboardPortofolioController;
+use App\Http\Controllers\Dashboard\Unit\DashboardUnitController;
 use App\Http\Controllers\RolePermission\PermissionController;
 use App\Http\Controllers\RolePermission\AuthenticationController;
 
@@ -84,4 +85,6 @@ Route::middleware('auth')->group(function () {
         'dashboard/page/portofolio',
         DashboardPortofolioController::class
     );
+
+    Route::resource('dashboard/unit', DashboardUnitController::class);
 });

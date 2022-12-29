@@ -50,7 +50,7 @@
                 <x-navlink link="#">Group Unit</x-navlink>
                 <x-navlink link="#">Flag Unit</x-navlink>
                 <x-navlink link="#">Types Unit</x-navlink>
-                <x-navlink link="#">Unit</x-navlink>
+                <x-navlink link="/dashboard/unit">Unit</x-navlink>
             </x-collapselink>
             <x-collapselink titlecols="Letter"></x-collapselink>
 
