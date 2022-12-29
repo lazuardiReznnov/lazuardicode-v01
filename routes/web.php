@@ -86,5 +86,15 @@ Route::middleware('auth')->group(function () {
         DashboardPortofolioController::class
     );
 
+    route::get('dashboard/unit/getType', [
+        DashboardUnitController::class,
+        'getType',
+    ]);
+
+    Route::get('dashboard/unit/checkSlug', [
+        DashboardUnitController::class,
+        'checkSlug',
+    ]);
+
     Route::resource('dashboard/unit', DashboardUnitController::class);
 });

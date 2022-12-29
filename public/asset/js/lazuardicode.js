@@ -18,3 +18,24 @@ function makeslug(name, slug, link) {
             .then((data) => (slug.value = data.slug));
     });
 }
+
+function makeBrand(brand, type, link) {
+    brand.addEventListener("change", function () {
+        fetch(link + brand.value + "&category=" + category.value)
+            .then((response) => response.json())
+            .then((response) => {
+                const m = response;
+                let card = "<option>---Choice Model---</option>";
+                m.forEach(
+                    (m) =>
+                        (card +=
+                            '<option value="' +
+                            m.id +
+                            '">' +
+                            m.name +
+                            "</option>")
+                );
+                type.innerHTML = card;
+            });
+    });
+}

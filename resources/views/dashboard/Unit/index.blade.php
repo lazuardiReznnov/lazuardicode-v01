@@ -33,7 +33,15 @@
         </div>
     </div>
     <!-- endPesan -->
-
+    <!-- Tombol -->
+    <div class="row">
+        <div class="col-md-6">
+            <a href="/dashboard/unit/create" class="btn btn-sm btn-primary"
+                >add New Unit</a
+            >
+        </div>
+    </div>
+    <!-- EndTombol -->
     <!-- content -->
     <div class="row">
         <div class="col-md-10">
