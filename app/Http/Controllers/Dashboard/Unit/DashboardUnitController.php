@@ -43,6 +43,9 @@ class DashboardUnitController extends Controller
             'types' => type::all(),
             'brands' => Brand::all(),
             'categories' => Category::all(),
+            'groups' => Group::all(),
+            'flags' => flag::all(),
+            'caroseries' => Carosery::all(),
         ]);
     }
 
@@ -54,7 +57,31 @@ class DashboardUnitController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'type_id' => 'required',
+            'carosery_id' => 'required',
+            'flag_id' => 'required',
+            'group_id' => 'required',
+            'name' => 'required|max:20|unique:units',
+            'slug' => 'required|unique:units',
+            'color' => 'required',
+            'vin' => 'required',
+            'engine_numb' => 'required',
+            'fuel' => 'required',
+            'year' => 'required',
+            'pic' => 'image|file|max:2048',
+        ]);
+
+        if ($request->file('pic')) {
+            $validatedData['pic'] = $request->file('pic')->store('unit-pic');
+        }
+
+        Unit::create($validatedData);
+
+        return redirect('/dashboard/unit')->with(
+            'success',
+            'New Unit Has Been aded.'
+        );
     }
 
     /**
