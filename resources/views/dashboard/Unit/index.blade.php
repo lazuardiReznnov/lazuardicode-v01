@@ -8,7 +8,7 @@
 
     <!-- Pesan -->
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-10">
             @if(session()->has('success'))
             <x-card>
                 <!-- pesan -->
@@ -35,10 +35,10 @@
     <!-- endPesan -->
     <!-- Tombol -->
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 my-3">
             <a href="/dashboard/unit/create" class="btn btn-sm btn-primary"
-                >add New Unit</a
-            >
+                ><i class="bi bi-file-earmark-plus"></i
+            ></a>
         </div>
     </div>
     <!-- EndTombol -->

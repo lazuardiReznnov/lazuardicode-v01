@@ -106,7 +106,16 @@ class DashboardUnitController extends Controller
      */
     public function edit(Unit $unit)
     {
-        //
+        return view('dashboard.unit.edit', [
+            'title' => 'Edit Unit',
+            'unit' => $unit,
+            'types' => type::all(),
+            'brands' => Brand::all(),
+            'categories' => Category::all(),
+            'groups' => Group::all(),
+            'flags' => flag::all(),
+            'caroseries' => Carosery::all(),
+        ]);
     }
 
     /**
@@ -118,7 +127,41 @@ class DashboardUnitController extends Controller
      */
     public function update(Request $request, Unit $unit)
     {
-        //
+        $rules = [
+            'type_id' => 'required',
+            'carosery_id' => 'required',
+            'flag_id' => 'required',
+            'group_id' => 'required',
+
+            'color' => 'required',
+            'vin' => 'required',
+            'engine_numb' => 'required',
+            'fuel' => 'required',
+            'year' => 'required',
+            'pic' => 'image|file|max:2048',
+        ];
+
+        if ($request->name != $unit->name) {
+            $rules['name'] = 'required|unique:units|max:25';
+        }
+        if ($request->slug != $unit->slug) {
+            $rules['slug'] = 'required|unique:units';
+        }
+        $validatedData = $request->validate($rules);
+
+        if ($request->file('pic')) {
+            if ($request->old_pic) {
+                storage::delete($request->old_pic);
+            }
+            $validatedData['pic'] = $request->file('pic')->store('unit-pic');
+        }
+
+        Unit::where('id', $unit->id)->update($validatedData);
+
+        return redirect('/dashboard/unit')->with(
+            'success',
+            'Unit Has Been Updated.!'
+        );
     }
 
     /**
@@ -129,7 +172,14 @@ class DashboardUnitController extends Controller
      */
     public function destroy(Unit $unit)
     {
-        //
+        Unit::destroy($unit->id);
+        if ($unit->pic) {
+            storage::delete($unit->pic);
+        }
+        return redirect('/dashboard/unit')->with(
+            'success',
+            'New Post Has Been Deleted.'
+        );
     }
 
     public function checkSlug(Request $request)
