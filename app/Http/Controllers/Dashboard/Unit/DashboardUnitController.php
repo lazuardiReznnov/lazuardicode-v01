@@ -94,7 +94,7 @@ class DashboardUnitController extends Controller
     {
         return view('dashboard.unit.show', [
             'title' => 'Detail Unit',
-            'data' => $unit,
+            'data' => $unit->load('letter'),
         ]);
     }
 

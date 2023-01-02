@@ -192,6 +192,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\LazuardicodeServiceProvider::class,
     ],
 
     /*
@@ -208,6 +209,7 @@ return [
     'aliases' => Facade::defaultAliases()
         ->merge([
             // 'ExampleClass' => App\Example\ExampleClass::class,
+            'Lazuardicode' => App\Helpers\Lazuardicode::class,
         ])
         ->toArray(),
 ];

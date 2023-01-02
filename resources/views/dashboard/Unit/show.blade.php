@@ -124,12 +124,58 @@
                                     data-bs-parent="#accordionFlushExample"
                                 >
                                     <div class="accordion-body">
-                                        Placeholder content for this accordion,
-                                        which is intended to demonstrate the
-                                        <code>.accordion-flush</code> class.
-                                        This is the second item's accordion
-                                        body. Let's imagine this being filled
-                                        with some actual content.
+                                        <div class="row">
+                                            @foreach($data->Letter as $let)
+                                            <div class="col-md">
+                                                <ul class="list-group">
+                                                    <li
+                                                        class="list-group-item active text-uppercase"
+                                                        aria-current="true"
+                                                    >
+                                                        {{ $let->categoryletter->name }}
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        <b>Registration No.</b
+                                                        ><br />{{ $let->regNum }}
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        <b>Owner</b
+                                                        ><br />{{ $let->owner }}
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        <b>Registration Year</b
+                                                        ><br />
+                                                        {{ $let->reg_year }}
+                                                    </li>
+                                                    <li class="list-group-item">
+                                                        <b>Location Code</b
+                                                        ><br />{{ $let->loc_code }}
+                                                    </li>
+                                                    @if($let->tax != 0)
+                                                    <li class="list-group-item">
+                                                        @php $date_now =
+                                                        date("Y/m/d"); @endphp
+
+                                                        <b>Tax</b><br /><span
+                                                            class="text-{{ \Lazuardicode::expire($let->tax,$date_now) }}"
+                                                        >
+                                                            {{ $let->tax }}</span
+                                                        >
+                                                    </li>
+                                                    @endif
+                                                    <li class="list-group-item">
+                                                        <b>expire date</b><br />
+                                                        <span
+                                                            class="text-{{ \Lazuardicode::expire($let->expire_date,$date_now) }}"
+                                                        >
+                                                            {{ $let->expire_date }}</span
+                                                        >
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                            @endforeach
+                                        </div>
                                     </div>
                                 </div>
                             </div>

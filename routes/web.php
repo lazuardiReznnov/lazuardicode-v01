@@ -86,15 +86,11 @@ Route::middleware('auth')->group(function () {
         DashboardPortofolioController::class
     );
 
-    route::get('dashboard/unit/getType', [
-        DashboardUnitController::class,
-        'getType',
-    ]);
+    Route::controller(DashboardUnitController::class)->group(function () {
+        route::get('dashboard/unit/getType', 'getType');
 
-    Route::get('dashboard/unit/checkSlug', [
-        DashboardUnitController::class,
-        'checkSlug',
-    ]);
+        Route::get('dashboard/unit/checkSlug', 'checkSlug');
+    });
 
     Route::resource('dashboard/unit', DashboardUnitController::class);
 });
