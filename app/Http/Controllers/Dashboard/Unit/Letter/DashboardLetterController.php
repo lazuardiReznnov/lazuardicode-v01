@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard\Unit\Letter;
 
 use App\Http\Controllers\Controller;
 use App\Models\Letter;
+use App\Models\CategoryLetter;
 use Illuminate\Http\Request;
 
 class DashboardLetterController extends Controller
@@ -15,7 +16,9 @@ class DashboardLetterController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.Unit.letter.index', [
+            'data' => CategoryLetter::latest()->get(),
+        ]);
     }
 
     /**

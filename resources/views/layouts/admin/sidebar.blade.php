@@ -52,7 +52,10 @@
                 <x-navlink link="#">Types Unit</x-navlink>
                 <x-navlink link="/dashboard/unit">Unit</x-navlink>
             </x-collapselink>
-            <x-collapselink titlecols="Letter"></x-collapselink>
+            <x-collapselink titlecols="Letter">
+                <x-navlink link="/dashboard/unit/letter">Letter Unit</x-navlink>
+                <x-navlink link="#">Category Unit</x-navlink>
+            </x-collapselink>
 
             <!-- ENDUNIT -->
         </div>
