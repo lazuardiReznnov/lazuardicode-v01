@@ -93,7 +93,17 @@ Route::middleware('auth')->group(function () {
         Route::get('dashboard/unit/checkSlug', 'checkSlug');
     });
 
-    Route::resource('dashboard/unit', DashboardUnitController::class);
+    Route::controller(DashboardLetterController::class)->group(function () {
+        Route::get('/dashboard/unit/letter/data/{categoryletter}', 'data');
+        Route::get('/dashboard/unit/letter/edittax/{letter}', 'edittax');
+        Route::put('/dashboard/unit/letter/taxstore/{letter}', 'taxstore');
+        Route::get('/dashboard/unit/letter/editexpire/{letter}', 'editexpire');
+        Route::put(
+            '/dashboard/unit/letter/expirestore/{letter}',
+            'expirestore'
+        );
+    });
 
     Route::resource('dashboard/unit/letter', DashboardLetterController::class);
+    Route::resource('dashboard/unit', DashboardUnitController::class);
 });

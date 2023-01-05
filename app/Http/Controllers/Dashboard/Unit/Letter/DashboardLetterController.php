@@ -16,7 +16,8 @@ class DashboardLetterController extends Controller
      */
     public function index()
     {
-        return view('dashboard.Unit.letter.index', [
+        return view('dashboard.unit.letter.index', [
+            'title' => 'Category Letter',
             'data' => CategoryLetter::latest()->get(),
         ]);
     }
@@ -50,7 +51,10 @@ class DashboardLetterController extends Controller
      */
     public function show(Letter $letter)
     {
-        //
+        return view('dashboard.unit.letter.show', [
+            'title' => 'Detail Letter',
+            'data' => $letter,
+        ]);
     }
 
     /**
@@ -85,5 +89,17 @@ class DashboardLetterController extends Controller
     public function destroy(Letter $letter)
     {
         //
+    }
+
+    public function data(CategoryLetter $categoryletter)
+    {
+        return view('dashboard.unit.letter.data', [
+            'title' => 'Letters Data',
+            'datas' => $categoryletter
+                ->letter()
+                ->latest()
+                ->paginate(10)
+                ->withQueryString(),
+        ]);
     }
 }
