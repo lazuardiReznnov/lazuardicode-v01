@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 
-class Carosery extends Model
+class Supplier extends Model
 {
     use HasFactory, Sluggable;
 
@@ -24,10 +24,5 @@ class Carosery extends Model
     public function getRouteKeyName()
     {
         return 'slug';
-    }
-
-    public function unit()
-    {
-        return $this->hasMany(Unit::class);
     }
 }

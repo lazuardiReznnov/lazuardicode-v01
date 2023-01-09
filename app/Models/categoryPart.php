@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 
-class Carosery extends Model
+class categoryPart extends Model
 {
     use HasFactory, Sluggable;
 
@@ -26,8 +26,8 @@ class Carosery extends Model
         return 'slug';
     }
 
-    public function unit()
+    public function part()
     {
-        return $this->hasMany(Unit::class);
+        return $this->hasMany(Part::class);
     }
 }
