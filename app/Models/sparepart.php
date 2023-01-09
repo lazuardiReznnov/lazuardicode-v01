@@ -6,12 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 
-class type extends Model
+class sparepart extends Model
 {
     use HasFactory, Sluggable;
 
     protected $guarded = ['id'];
-    protected $with = ['brand', 'category'];
+
+    protected $with = ['type', 'categoryPart'];
 
     public function sluggable(): array
     {
@@ -27,23 +28,13 @@ class type extends Model
         return 'slug';
     }
 
-    public function brand()
+    public function categoryPart()
     {
-        return $this->belongsTo(brand::class);
+        return $this->belongsTo(categoryPart::class);
     }
 
-    public function category()
+    public function type()
     {
-        return $this->belongsTo(Category::class);
-    }
-
-    public function unit()
-    {
-        return $this->hasMany(Unit::class);
-    }
-
-    public function sparepart()
-    {
-        return $this->hasMany(sparepart::class);
+        return $this->belongsTo(type::class);
     }
 }

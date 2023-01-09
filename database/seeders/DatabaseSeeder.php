@@ -7,6 +7,7 @@ namespace Database\Seeders;
 use App\Models\categoryPart;
 use App\Models\Heropage;
 use App\Models\Letter;
+use App\Models\sparepart;
 use App\Models\Supplier;
 use Illuminate\Database\Seeder;
 use PHPUnit\TextUI\XmlConfiguration\Group;
@@ -38,6 +39,7 @@ class DatabaseSeeder extends Seeder
             LetterSeeder::class,
             SupplierSeeder::class,
             CategoryPartSeeder::class,
+            SparepartSeeder::class,
         ]);
     }
 }

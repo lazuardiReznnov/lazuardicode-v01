@@ -26,8 +26,8 @@ class categoryPart extends Model
         return 'slug';
     }
 
-    public function part()
+    public function sparepart()
     {
-        return $this->hasMany(Part::class);
+        return $this->hasMany(sparepart::class);
     }
 }
