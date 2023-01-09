@@ -58,6 +58,12 @@
             </x-collapselink>
 
             <!-- ENDUNIT -->
+
+            <x-headsidenav title="Stock-Management"> </x-headsidenav>
+            <x-collapselink titlecols="Stock-Data">
+                <x-navlink link="#">Stock item</x-navlink>
+                <x-navlink link="#">Supplier</x-navlink>
+            </x-collapselink>
         </div>
     </div>
     <div class="sb-sidenav-footer">

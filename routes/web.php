@@ -51,7 +51,7 @@ Route::middleware('auth')->group(function () {
         'dashboard/authentication',
         AuthenticationController::class
     );
-
+    // Page administrator
     Route::controller(ProfilUserController::class)->group(function () {
         Route::get('dashboard/user/profil', 'index');
         Route::put('dashboard/user/profil/{user}', 'update');
@@ -86,7 +86,8 @@ Route::middleware('auth')->group(function () {
         'dashboard/page/portofolio',
         DashboardPortofolioController::class
     );
-
+    // End Page administrator
+    // ekspedisi Program
     Route::controller(DashboardUnitController::class)->group(function () {
         route::get('dashboard/unit/getType', 'getType');
 
@@ -106,4 +107,6 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('dashboard/unit/letter', DashboardLetterController::class);
     Route::resource('dashboard/unit', DashboardUnitController::class);
+
+    // End ekspedisi Program
 });
