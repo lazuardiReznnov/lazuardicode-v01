@@ -36,13 +36,13 @@
 
     <div class="row">
         <div class="col-md-10">
-            <x-card header="supplier Data">
+            <x-card header="Sparepart Data">
                 <div class="row my-2">
                     <div class="col-md">
                         <a
-                            href="/dashboard/stock/supplier/create"
+                            href="/dashboard/stock/sparepart/create"
                             class="btn btn-primary btn-sm"
-                            >Add Supplier</a
+                            >Add Sparepart</a
                         >
                     </div>
                 </div>
@@ -52,10 +52,12 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Pic</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Type</th>
                             <th scope="col">Name</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Tlp</th>
-                            <th scope="col">Address</th>
+                            <th scope="col">brand</th>
+                            <th scope="col">Code Part</th>
+                            <th scope="col">Qty</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -82,14 +84,19 @@
                                 />
                                 @endif
                             </td>
+                            <td>{{ $data->CategoryPart->name }}</td>
+                            <td>
+                                {{ $data->type->brand->name }} -
+                                {{ $data->type->name }}
+                            </td>
                             <td>{{ $data->name }}</td>
-                            <td>{{ $data->email }}</td>
-                            <td>{{ $data->tlp }}</td>
-                            <td>{!! $data->address !!}</td>
+                            <td>{{ $data->brand }}</td>
+                            <td>{{ $data->codepart }}</td>
+                            <td>{{ $data->qty }}</td>
 
                             <td>
                                 <a
-                                    href="/dashboard/stock/supplier/{{ $data->slug }}/edit"
+                                    href="/dashboard/stock/sparepart/{{ $data->slug }}/edit"
                                     class="badge bg-warning"
                                     data-bs-toggle="tooltip"
                                     data-bs-placement="top"
@@ -98,7 +105,7 @@
                                 ></a>
                                 |
                                 <form
-                                    action="/dashboard/stock/supplier/{{ $data->slug }}"
+                                    action="/dashboard/stock/sparepart/{{ $data->slug }}"
                                     method="post"
                                     class="d-inline"
                                 >
