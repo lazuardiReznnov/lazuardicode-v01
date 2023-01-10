@@ -493,8 +493,6 @@
 
     @endpush @push('script')
     <script src="/asset/js/lazuardicode.js"></script>
-    <script src="/asset/js/trix.js"></script>
-    @endpush @push('css')
-    <link rel="stylesheet" href="/asset/css/trix.css" />
+
     @endpush
 </x-admin-layout>

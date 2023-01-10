@@ -14,6 +14,7 @@ use App\Http\Controllers\Dashboard\DashboardPageController;
 use App\Http\Controllers\Landingpage\LandingpageController;
 use App\Http\Controllers\Dashboard\DashboardAboutController;
 use App\Http\Controllers\Dashboard\DashboardPortofolioController;
+use App\Http\Controllers\Dashboard\stock\DashboardSupplierController;
 use App\Http\Controllers\Dashboard\Unit\DashboardUnitController;
 use App\Http\Controllers\Dashboard\Unit\Letter\DashboardLetterController;
 use App\Http\Controllers\RolePermission\PermissionController;
@@ -107,6 +108,15 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('dashboard/unit/letter', DashboardLetterController::class);
     Route::resource('dashboard/unit', DashboardUnitController::class);
+
+    Route::controller(DashboardSupplierController::class)->group(function () {
+        Route::get('/dashboard/stock/supplier/checkSlug', 'checkSlug');
+    });
+
+    Route::resource(
+        'dashboard/stock/supplier',
+        DashboardSupplierController::class
+    );
 
     // End ekspedisi Program
 });
