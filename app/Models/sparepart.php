@@ -37,4 +37,9 @@ class sparepart extends Model
     {
         return $this->belongsTo(type::class);
     }
+
+    public function stock()
+    {
+        return $this->hasMany(sparepart::class);
+    }
 }

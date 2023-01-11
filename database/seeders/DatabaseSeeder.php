@@ -40,6 +40,7 @@ class DatabaseSeeder extends Seeder
             SupplierSeeder::class,
             CategoryPartSeeder::class,
             SparepartSeeder::class,
+            StockSeeder::class,
         ]);
     }
 }

@@ -1,9 +1,36 @@
 <x-admin-layout title="{{ $title }}">
     <x-HeadTitle title="{{ $title }}"> </x-HeadTitle>
     <x-breadcrumb>
+        <x-breadcrumb-link link="/dashboard"> Dashboard </x-breadcrumb-link>
+
         <x-breadcrumb-link-active>{{ $title }} </x-breadcrumb-link-active>
     </x-breadcrumb>
 
+    <div class="row">
+        <div class="col-md mb-4">
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a
+                        class="nav-link"
+                        aria-current="page"
+                        href="/dashboard/stock/iodata"
+                        >Data In Out Stock</a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/dashboard/stock/sparepart"
+                        >Sparepart List</a
+                    >
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link disabled">Disabled</a>
+                </li>
+            </ul>
+        </div>
+    </div>
     <div class="accordion accordion-flush" id="accordionFlushExample">
         @foreach($datas as $data)
         <div class="accordion-item">
@@ -29,16 +56,6 @@
                     <div class="row">
                         <div class="col-md">
                             <x-card header="Sparepart Data">
-                                <div class="row my-2">
-                                    <div class="col-md">
-                                        <a
-                                            href="/dashboard/stock/sparepart/create"
-                                            class="btn btn-primary btn-sm"
-                                            >Add Sparepart</a
-                                        >
-                                    </div>
-                                </div>
-
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
@@ -49,8 +66,6 @@
                                             <th scope="col">brand</th>
                                             <th scope="col">Code Part</th>
                                             <th scope="col">Qty</th>
-
-                                            <th scope="col">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -95,40 +110,10 @@
                                             <td>
                                                 {{ $part->qty }}
                                             </td>
-
-                                            <td>
-                                                <a
-                                                    href="/dashboard/stock/sparepart/{{ $part->slug }}/edit"
-                                                    class="badge bg-warning"
-                                                    data-bs-toggle="tooltip"
-                                                    data-bs-placement="top"
-                                                    title="Edit stock"
-                                                    ><i class="far fa-edit"></i
-                                                ></a>
-                                                |
-                                                <form
-                                                    action="/dashboard/stock/sparepartpart/{{ $part->slug }}"
-                                                    method="post"
-                                                    class="d-inline"
-                                                >
-                                                    @method('delete') @csrf
-                                                    <button
-                                                        class="badge bg-danger border-0"
-                                                        data-bs-toggle="tooltip"
-                                                        data-bs-placement="top"
-                                                        title="Delete stock"
-                                                        onclick="return confirm('are You sure ??')"
-                                                    >
-                                                        <i
-                                                            class="fas fa-trash-alt"
-                                                        ></i>
-                                                    </button>
-                                                </form>
-                                            </td>
                                         </tr>
                                         @endforeach @else
                                         <tr>
-                                            <td colspan="4" class="text-center">
+                                            <td colspan="7" class="text-center">
                                                 Data Not Found
                                             </td>
                                         </tr>
