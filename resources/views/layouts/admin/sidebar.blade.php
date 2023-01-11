@@ -61,7 +61,7 @@
 
             <x-headsidenav title="Stock-Management"> </x-headsidenav>
             <x-collapselink titlecols="Stock-Data">
-                <x-navlink link="#">Stock item</x-navlink>
+                <x-navlink link="/dashboard/stock">Stock item</x-navlink>
                 <x-navlink link="/dashboard/stock/supplier">Supplier</x-navlink>
                 <x-navlink link="/dashboard/stock/sparepart"
                     >Sparepart</x-navlink

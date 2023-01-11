@@ -35,7 +35,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-10">
+        <div class="col-md">
             <x-card header="Sparepart Data">
                 <div class="row my-2">
                     <div class="col-md">
@@ -57,7 +57,7 @@
                             <th scope="col">Name</th>
                             <th scope="col">brand</th>
                             <th scope="col">Code Part</th>
-                            <th scope="col">Qty</th>
+
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -92,7 +92,6 @@
                             <td>{{ $data->name }}</td>
                             <td>{{ $data->brand }}</td>
                             <td>{{ $data->codepart }}</td>
-                            <td>{{ $data->qty }}</td>
 
                             <td>
                                 <a

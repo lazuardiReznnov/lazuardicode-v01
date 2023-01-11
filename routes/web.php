@@ -15,6 +15,7 @@ use App\Http\Controllers\Landingpage\LandingpageController;
 use App\Http\Controllers\Dashboard\DashboardAboutController;
 use App\Http\Controllers\Dashboard\DashboardPortofolioController;
 use App\Http\Controllers\Dashboard\stock\DashboardSparepartController;
+use App\Http\Controllers\Dashboard\stock\DashboardStockController;
 use App\Http\Controllers\Dashboard\stock\DashboardSupplierController;
 use App\Http\Controllers\Dashboard\Unit\DashboardUnitController;
 use App\Http\Controllers\Dashboard\Unit\Letter\DashboardLetterController;
@@ -123,6 +124,10 @@ Route::middleware('auth')->group(function () {
         'dashboard/stock/sparepart',
         DashboardSparepartController::class
     );
+
+    Route::controller(DashboardStockController::class)->group(function () {
+        Route::get('/dashboard/stock', 'index');
+    });
 
     // End ekspedisi Program
 });
