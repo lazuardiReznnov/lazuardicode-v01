@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\categoryPart;
 use App\Models\Heropage;
+use App\Models\invStock;
 use App\Models\Letter;
 use App\Models\sparepart;
 use App\Models\Supplier;
@@ -40,6 +41,7 @@ class DatabaseSeeder extends Seeder
             SupplierSeeder::class,
             CategoryPartSeeder::class,
             SparepartSeeder::class,
+            InvStockSeeder::class,
             StockSeeder::class,
         ]);
     }

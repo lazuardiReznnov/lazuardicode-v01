@@ -12,26 +12,18 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('stocks', function (Blueprint $table) {
+        Schema::create('inv_stocks', function (Blueprint $table) {
             $table->id();
-            $table
-                ->foreignId('sparepart_id')
-                ->constrained('spareparts')
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
             $table
                 ->foreignId('supplier_id')
                 ->constrained('suppliers')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
+            $table->string('name')->unique();
+            $table->string('slug');
             $table->date('tgl');
-            $table->string('inv');
-            $table->string('slug')->unique();
             $table->string('payment');
-            $table->integer('qty');
-            $table->integer('price');
             $table->string('pic')->nullable();
-
             $table->timestamps();
         });
     }
@@ -43,6 +35,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('stocks');
+        Schema::dropIfExists('inv_stocks');
     }
 };

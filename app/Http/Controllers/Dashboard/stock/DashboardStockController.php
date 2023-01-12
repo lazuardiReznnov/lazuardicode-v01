@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Supplier;
 use App\Models\sparepart;
 use App\Models\categoryPart;
+use App\Models\invStock;
 use App\Models\Stock;
 
 class DashboardStockController extends Controller
@@ -28,10 +29,24 @@ class DashboardStockController extends Controller
     {
         return view('dashboard.stock.iodata', [
             'title' => 'In Out Data Stock',
-            'datas' => Stock::select('inv')
-                ->groupBy('inv')
+            'datas' => Supplier::latest()
                 ->paginate(10)
                 ->withQueryString(),
+        ]);
+    }
+
+    public function inv(Request $request, Supplier $supplier)
+    {
+        $inv = invStock::Where('supplier_id', $supplier->id)
+            ->paginate(10)
+            ->withQueryString();
+        // ->orderBy('tgl', 'desc')
+        // ->paginate(10)
+        // ->withQueryString();
+
+        return view('dashboard.stock.inv', [
+            'title' => 'Inv Data',
+            'datas' => $inv,
         ]);
     }
 }

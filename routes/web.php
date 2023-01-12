@@ -128,6 +128,7 @@ Route::middleware('auth')->group(function () {
     Route::controller(DashboardStockController::class)->group(function () {
         Route::get('/dashboard/stock', 'index');
         Route::get('/dashboard/stock/iodata', 'iodata');
+        Route::get('/dashboard/stock/inv/{supplier}', 'inv');
     });
 
     // End ekspedisi Program

@@ -19,33 +19,30 @@ class StockSeeder extends Seeder
     {
         Stock::create([
             'sparepart_id' => 1,
-            'supplier_id' => 1,
+            'inv_stock_id' => 1,
             'tgl' => '2023/01/05',
-            'inv' => 003,
+
             'slug' => '003-1',
-            'payment' => 'Cash',
             'qty' => 10,
             'price' => 390000,
         ]);
 
         Stock::create([
             'sparepart_id' => 2,
-            'supplier_id' => 1,
+            'inv_stock_id' => 2,
             'tgl' => '2023/01/05',
-            'inv' => 003,
+
             'slug' => '003-2',
-            'payment' => 'Cash',
             'qty' => 10,
             'price' => 49000,
         ]);
 
         Stock::create([
             'sparepart_id' => 3,
-            'supplier_id' => 1,
+            'inv_stock_id' => 1,
             'tgl' => '2023/01/05',
-            'inv' => 003,
+
             'slug' => '003-3',
-            'payment' => 'Cash',
             'qty' => 10,
             'price' => 70000,
         ]);

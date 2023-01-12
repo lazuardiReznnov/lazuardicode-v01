@@ -2,16 +2,16 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Stock extends Model
+class stock extends Model
 {
     use HasFactory, Sluggable;
 
     protected $guarded = ['id'];
-    protected $with = ['sparepart', 'supplier'];
+    protected $with = ['sparepart', 'invStock'];
 
     public function getRouteKeyName()
     {
@@ -32,8 +32,8 @@ class Stock extends Model
         return $this->belongsTo(sparepart::class);
     }
 
-    public function supplier()
+    public function invStock()
     {
-        return $this->belongsTo(supplier::class);
+        return $this->belongsTo(invStock::class);
     }
 }
