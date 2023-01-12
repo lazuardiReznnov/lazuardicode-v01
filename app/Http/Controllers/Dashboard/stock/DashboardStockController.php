@@ -35,7 +35,7 @@ class DashboardStockController extends Controller
         ]);
     }
 
-    public function inv(Request $request, Supplier $supplier)
+    public function inv(Supplier $supplier)
     {
         $inv = invStock::Where('supplier_id', $supplier->id)
             ->paginate(10)
@@ -47,6 +47,17 @@ class DashboardStockController extends Controller
         return view('dashboard.stock.inv', [
             'title' => 'Inv Data',
             'datas' => $inv,
+        ]);
+    }
+
+    public function detail(invStock $invStock)
+    {
+        return view('dashboard.stock.detail', [
+            'title' => 'Detail Invoice',
+            'datas' => stock::where('inv_stock_id', $invStock->id)
+                ->paginate(10)
+                ->withQueryString(),
+            'link' => $invStock->supplier->slug,
         ]);
     }
 }

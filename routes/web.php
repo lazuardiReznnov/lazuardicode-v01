@@ -129,6 +129,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/dashboard/stock', 'index');
         Route::get('/dashboard/stock/iodata', 'iodata');
         Route::get('/dashboard/stock/inv/{supplier}', 'inv');
+        Route::get('/dashboard/stock/detail/{invStock}', 'detail');
     });
 
     // End ekspedisi Program

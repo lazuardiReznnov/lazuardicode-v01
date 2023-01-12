@@ -8,6 +8,9 @@
         <x-breadcrumb-link link="/dashboard/stock/iodata">
             invoicement
         </x-breadcrumb-link>
+        <x-breadcrumb-link link="/dashboard/stock/inv/{{ $link }}">
+            Inv Data
+        </x-breadcrumb-link>
         <x-breadcrumb-link-active>{{ $title }} </x-breadcrumb-link-active>
     </x-breadcrumb>
 
@@ -54,11 +57,11 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Pic</th>
+
                             <th scope="col">Date</th>
-                            <th scope="col">Invoice</th>
-                            <th scope="col">Store</th>
-                            <th scope="col">Payment</th>
+                            <th scope="col">Sparepart</th>
+                            <th scope="col">Qty</th>
+                            <th scope="col">price</th>
                             <th scope="col " class="text-md-center">Sum</th>
 
                             <th scope="col">Action</th>
@@ -70,37 +73,15 @@
                             <th scope="row">
                                 {{ ($datas->currentpage()-1) * $datas->perpage() + $loop->index + 1 }}
                             </th>
-                            <td>
-                                @if($data->pic)
-                                <img
-                                    width="50"
-                                    src="{{ asset('storage/'. $data->pic) }}"
-                                    class="rounded-circle mx-auto d-block shadow my-3"
-                                    alt="Unit Image"
-                                />
-                                @else
-                                <img
-                                    class="rounded-circle mx-auto d-block shadow my-3"
-                                    src="http://source.unsplash.com/200x200?truck"
-                                    alt=""
-                                    width="50"
-                                />
-                                @endif
-                            </td>
+
                             <td>
                                 {{ \Carbon\Carbon::parse($data->tgl)->format('d/m/Y') }}
                             </td>
-                            <td>
-                                <a
-                                    href="/dashboard/stock/detail/{{ $data->slug }}"
-                                    >{{ $data->name }}</a
-                                >
-                            </td>
-                            <td>{{ $data->supplier->name }}</td>
-                            <td>{{ $data->payment }}</td>
-                            @php $ttl=
-                            $data->stock->sum('price')*$data->stock->sum('qty')
-                            @endphp
+
+                            <td>{{ $data->sparepart->name}}</td>
+                            <td>{{ $data->qty }}</td>
+                            <td class="text-md-end">@currency($data->price)</td>
+                            @php $ttl= $data->qty*$data->price @endphp
 
                             <td class="text-md-end">@currency($ttl)</td>
 

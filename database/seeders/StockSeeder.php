@@ -46,5 +46,24 @@ class StockSeeder extends Seeder
             'qty' => 10,
             'price' => 70000,
         ]);
+
+        Stock::create([
+            'sparepart_id' => 2,
+            'inv_stock_id' => 3,
+            'tgl' => '2023/01/05',
+
+            'slug' => '003-4',
+            'qty' => 10,
+            'price' => 49000,
+        ]);
+        Stock::create([
+            'sparepart_id' => 2,
+            'inv_stock_id' => 4,
+            'tgl' => '2023/01/05',
+
+            'slug' => '003-5',
+            'qty' => 10,
+            'price' => 49000,
+        ]);
     }
 }
