@@ -98,11 +98,14 @@
                             </td>
                             <td>{{ $data->supplier->name }}</td>
                             <td>{{ $data->payment }}</td>
-                            @php $ttl=
-                            $data->stock->sum('price')*$data->stock->sum('qty')
-                            @endphp
-
-                            <td class="text-md-end">@currency($ttl)</td>
+                            <?php
+                            $gttl = 0;
+                           ?>
+                            @foreach($data->stock as $stock)
+                            <?php 
+                                        $ttl = $stock->qty * $stock->price;
+                            $gttl = $gttl+$ttl; ?> @endforeach
+                            <td class="text-md-end">@currency($gttl)</td>
 
                             <td>
                                 <a

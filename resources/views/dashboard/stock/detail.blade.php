@@ -68,7 +68,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if($datas->count()) @foreach($datas as $data)
+                        @php $grandtotal =0; @endphp @if($datas->count())
+                        @foreach($datas as $data)
                         <tr>
                             <th scope="row">
                                 {{ ($datas->currentpage()-1) * $datas->perpage() + $loop->index + 1 }}
@@ -113,7 +114,14 @@
                                 </form>
                             </td>
                         </tr>
-                        @endforeach @else
+                        @php $grandtotal = $grandtotal+$ttl; @endphp @endforeach
+
+                        <tr>
+                            <td colspan="5">Total</td>
+                            <td class="text-md-end">@currency($grandtotal)</td>
+                            <td></td>
+                        </tr>
+                        @else
                         <tr>
                             <td colspan="4" class="text-center">
                                 Data Not Found
