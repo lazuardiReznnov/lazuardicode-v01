@@ -128,7 +128,10 @@ Route::middleware('auth')->group(function () {
     Route::controller(DashboardStockController::class)->group(function () {
         Route::get('/dashboard/stock', 'index');
         Route::get('/dashboard/stock/iodata', 'iodata');
-        Route::get('/dashboard/stock/inv/{supplier}', 'inv');
+        Route::get('/dashboard/stock/invStock/checkSlug', 'checkSlug');
+        Route::get('/dashboard/stock/invStock/create/{supplier}', 'invCreate');
+
+        Route::get('/dashboard/stock/invStock/{supplier}', 'inv');
         Route::get('/dashboard/stock/detail/{invStock}', 'detail');
     });
 

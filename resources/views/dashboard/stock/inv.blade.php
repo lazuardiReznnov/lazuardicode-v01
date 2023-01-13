@@ -43,7 +43,7 @@
                 <div class="row my-2">
                     <div class="col-md">
                         <a
-                            href="/dashboard/stock/sparepart/create"
+                            href="/dashboard/stock/invStock/create/{{ $data }}"
                             class="btn btn-primary btn-sm"
                             >Add Item</a
                         >

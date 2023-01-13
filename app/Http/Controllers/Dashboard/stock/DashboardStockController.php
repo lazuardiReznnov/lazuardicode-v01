@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\Dashboard\stock;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Stock;
+use App\Models\invStock;
 use App\Models\Supplier;
 use App\Models\sparepart;
 use App\Models\categoryPart;
-use App\Models\invStock;
-use App\Models\Stock;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Cviebrock\EloquentSluggable\Services\SlugService;
+use Database\Seeders\InvStockSeeder;
 
 class DashboardStockController extends Controller
 {
@@ -48,6 +50,7 @@ class DashboardStockController extends Controller
             'title' => 'Inv Data',
             'datas' => $inv,
             'name' => $supplier->name,
+            'data' => $supplier->slug,
         ]);
     }
 
@@ -61,5 +64,23 @@ class DashboardStockController extends Controller
             'link' => $invStock->supplier->slug,
             'name' => $invStock->name,
         ]);
+    }
+
+    public function invCreate(invStock $invStock)
+    {
+        return view('dashboard.stock.inv.create', [
+            'title' => 'Create New INV',
+            'data' => $invStock,
+        ]);
+    }
+
+    public function checkSlug(Request $request)
+    {
+        $slug = SlugService::createSlug(
+            InvStock::class,
+            'slug',
+            $request->name
+        );
+        return response()->json(['slug' => $slug]);
     }
 }

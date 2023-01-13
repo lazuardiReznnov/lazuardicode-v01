@@ -25,7 +25,7 @@
                                     <p>address : {{ $data->address }}</p>
                                 </div>
                                 <a
-                                    href="/dashboard/stock/inv/{{ $data->slug }}"
+                                    href="/dashboard/stock/invStock/{{ $data->slug }}"
                                     class="btn btn-primary"
                                     >Go somewhere</a
                                 >
