@@ -47,6 +47,7 @@ class DashboardStockController extends Controller
         return view('dashboard.stock.inv', [
             'title' => 'Inv Data',
             'datas' => $inv,
+            'name' => $supplier->name,
         ]);
     }
 
@@ -58,6 +59,7 @@ class DashboardStockController extends Controller
                 ->paginate(10)
                 ->withQueryString(),
             'link' => $invStock->supplier->slug,
+            'name' => $invStock->name,
         ]);
     }
 }

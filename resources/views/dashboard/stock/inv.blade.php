@@ -39,7 +39,7 @@
 
     <div class="row">
         <div class="col-md">
-            <x-card header="Invoice Store">
+            <x-card header="{{ $name }} Store">
                 <div class="row my-2">
                     <div class="col-md">
                         <a
