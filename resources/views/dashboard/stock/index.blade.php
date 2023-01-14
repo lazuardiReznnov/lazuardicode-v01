@@ -14,7 +14,7 @@
                         class="nav-link"
                         aria-current="page"
                         href="/dashboard/stock/iodata"
-                        >Data In Out Stock</a
+                        >Purchassing Stock</a
                     >
                 </li>
                 <li class="nav-item">

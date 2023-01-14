@@ -61,6 +61,11 @@
                         name="supplier_id"
                         value="{{ $data->id }}"
                     />
+                    <input
+                        type="hidden"
+                        name="supplier_slug"
+                        value="{{ $data->slug }}"
+                    />
 
                     <div class="row mb-3">
                         <label
@@ -143,6 +148,32 @@
                         </div>
                     </div>
 
+                    <div class="row mb-3">
+                        <label
+                            for="slug"
+                            class="col-md-4 col-form-label text-md-end"
+                            >{{ __("Payment") }}</label
+                        >
+
+                        <div class="col-md-6">
+                            <input
+                                id="payment"
+                                type="text"
+                                class="form-control @error('slug') is-invalid @enderror"
+                                name="payment"
+                                value="{{ old('payment') }}"
+                                required
+                                autocomplete="payment"
+                                autofocus
+                            />
+
+                            @error('payment')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
                     <div class="row mb-3 ms-1">
                         <div class="col-md text-md-end">
                             <button

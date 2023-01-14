@@ -37,23 +37,6 @@ class DashboardStockController extends Controller
         ]);
     }
 
-    public function inv(Supplier $supplier)
-    {
-        $inv = invStock::Where('supplier_id', $supplier->id)
-            ->paginate(10)
-            ->withQueryString();
-        // ->orderBy('tgl', 'desc')
-        // ->paginate(10)
-        // ->withQueryString();
-
-        return view('dashboard.stock.inv', [
-            'title' => 'Inv Data',
-            'datas' => $inv,
-            'name' => $supplier->name,
-            'data' => $supplier->slug,
-        ]);
-    }
-
     public function detail(invStock $invStock)
     {
         return view('dashboard.stock.detail', [
@@ -64,23 +47,5 @@ class DashboardStockController extends Controller
             'link' => $invStock->supplier->slug,
             'name' => $invStock->name,
         ]);
-    }
-
-    public function invCreate(invStock $invStock)
-    {
-        return view('dashboard.stock.inv.create', [
-            'title' => 'Create New INV',
-            'data' => $invStock,
-        ]);
-    }
-
-    public function checkSlug(Request $request)
-    {
-        $slug = SlugService::createSlug(
-            InvStock::class,
-            'slug',
-            $request->name
-        );
-        return response()->json(['slug' => $slug]);
     }
 }

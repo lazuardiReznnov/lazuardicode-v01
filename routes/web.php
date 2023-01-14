@@ -14,6 +14,7 @@ use App\Http\Controllers\Dashboard\DashboardPageController;
 use App\Http\Controllers\Landingpage\LandingpageController;
 use App\Http\Controllers\Dashboard\DashboardAboutController;
 use App\Http\Controllers\Dashboard\DashboardPortofolioController;
+use App\Http\Controllers\Dashboard\stock\DashboardInvstockController;
 use App\Http\Controllers\Dashboard\stock\DashboardSparepartController;
 use App\Http\Controllers\Dashboard\stock\DashboardStockController;
 use App\Http\Controllers\Dashboard\stock\DashboardSupplierController;
@@ -128,11 +129,15 @@ Route::middleware('auth')->group(function () {
     Route::controller(DashboardStockController::class)->group(function () {
         Route::get('/dashboard/stock', 'index');
         Route::get('/dashboard/stock/iodata', 'iodata');
-        Route::get('/dashboard/stock/invStock/checkSlug', 'checkSlug');
-        Route::get('/dashboard/stock/invStock/create/{supplier}', 'invCreate');
 
-        Route::get('/dashboard/stock/invStock/{supplier}', 'inv');
         Route::get('/dashboard/stock/detail/{invStock}', 'detail');
+    });
+
+    Route::controller(DashboardInvstockController::class)->group(function () {
+        Route::get('/dashboard/stock/invStock/checkSlug', 'checkSlug');
+        Route::get('/dashboard/stock/invStock/{supplier}', 'index');
+        Route::get('/dashboard/stock/invStock/create/{supplier}', 'create');
+        Route::post('/dashboard/stock/invStock', 'store');
     });
 
     // End ekspedisi Program
