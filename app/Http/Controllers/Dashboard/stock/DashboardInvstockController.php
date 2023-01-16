@@ -7,6 +7,7 @@ use App\Models\Supplier;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Cviebrock\EloquentSluggable\Services\SlugService;
+use Illuminate\support\Facades\Storage;
 
 class DashboardInvstockController extends Controller
 {
@@ -115,7 +116,13 @@ class DashboardInvstockController extends Controller
      */
     public function destroy(invStock $invStock)
     {
-        //
+        invStock::destroy($invStock->id);
+        if ($invStock->pic) {
+            storage::delete($invStock->pic);
+        }
+        return redirect(
+            '/dashboard/stock/invStock/' . $invStock->supplier->slug
+        )->with('success', 'New Post Has Been Deleted.');
     }
 
     public function checkSlug(Request $request)

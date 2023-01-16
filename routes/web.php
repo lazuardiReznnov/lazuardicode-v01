@@ -138,6 +138,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/dashboard/stock/invStock/{supplier}', 'index');
         Route::get('/dashboard/stock/invStock/create/{supplier}', 'create');
         Route::post('/dashboard/stock/invStock', 'store');
+        Route::delete('/dashboard/stock/invStock/{invStock}', 'destroy');
     });
 
     // End ekspedisi Program

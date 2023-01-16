@@ -13,6 +13,7 @@ class sparepart extends Model
     protected $guarded = ['id'];
 
     protected $with = ['type', 'categoryPart'];
+    protected $load = ['stock'];
 
     public function sluggable(): array
     {
@@ -40,6 +41,6 @@ class sparepart extends Model
 
     public function stock()
     {
-        return $this->hasMany(sparepart::class);
+        return $this->hasMany(stock::class);
     }
 }

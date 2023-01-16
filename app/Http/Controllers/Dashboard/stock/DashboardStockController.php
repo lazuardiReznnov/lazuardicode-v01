@@ -24,6 +24,7 @@ class DashboardStockController extends Controller
             //     ->paginate(10)
             //     ->withQueryString(),
             'datas' => $categorypart->load('sparepart'),
+            'datas2' => sparepart::all()->load('stock'),
         ]);
     }
 

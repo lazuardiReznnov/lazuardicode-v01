@@ -118,7 +118,7 @@
                                 ></a>
                                 |
                                 <form
-                                    action="/dashboard/stock/sparepart/{{ $data->slug }}"
+                                    action="/dashboard/stock/invStock/{{ $data->slug }}"
                                     method="post"
                                     class="d-inline"
                                 >
