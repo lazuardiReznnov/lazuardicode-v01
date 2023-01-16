@@ -8,7 +8,9 @@
         <x-breadcrumb-link link="/dashboard/stock/iodata">
             invoicement
         </x-breadcrumb-link>
-        <x-breadcrumb-link link="/dashboard/stock/inv/{{ $link }}">
+        <x-breadcrumb-link
+            link="/dashboard/stock/invStock/{{ $invStock->supplier->slug }}"
+        >
             Inv Data
         </x-breadcrumb-link>
         <x-breadcrumb-link-active>{{ $title }} </x-breadcrumb-link-active>
@@ -42,11 +44,11 @@
 
     <div class="row">
         <div class="col-md">
-            <x-card header="{{ $name }}">
+            <x-card header="{{ $invStock->name }}">
                 <div class="row my-2">
                     <div class="col-md">
                         <a
-                            href="/dashboard/stock/sparepart/create"
+                            href="/dashboard/stock/create/{{ $invStock->slug }}"
                             class="btn btn-primary btn-sm"
                             >Add Item</a
                         >
@@ -123,7 +125,7 @@
                         </tr>
                         @else
                         <tr>
-                            <td colspan="4" class="text-center">
+                            <td colspan="7" class="text-center">
                                 Data Not Found
                             </td>
                         </tr>

@@ -129,7 +129,7 @@ Route::middleware('auth')->group(function () {
     Route::controller(DashboardStockController::class)->group(function () {
         Route::get('/dashboard/stock', 'index');
         Route::get('/dashboard/stock/iodata', 'iodata');
-
+        Route::get('/dashboard/stock/create/{invStock}', 'create');
         Route::get('/dashboard/stock/detail/{invStock}', 'detail');
     });
 

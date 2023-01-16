@@ -44,8 +44,16 @@ class DashboardStockController extends Controller
             'datas' => stock::where('inv_stock_id', $invStock->id)
                 ->paginate(10)
                 ->withQueryString(),
-            'link' => $invStock->supplier->slug,
-            'name' => $invStock->name,
+            'invStock' => $invStock,
+        ]);
+    }
+
+    public function create(invStock $invStock)
+    {
+        return view('dashboard.stock.create', [
+            'title' => 'add Sparepart',
+            'sparepart' => sparepart::all(),
+            'invStock' => $invStock,
         ]);
     }
 }

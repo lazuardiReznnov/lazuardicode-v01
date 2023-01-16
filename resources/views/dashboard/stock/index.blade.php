@@ -108,7 +108,7 @@
                                                 {{ $part->codepart }}
                                             </td>
                                             <td>
-                                                {{ $part->stock->sum('qty') }}
+                                                {{ $part->stock->sum() }}
                                             </td>
                                         </tr>
                                         @endforeach @else
