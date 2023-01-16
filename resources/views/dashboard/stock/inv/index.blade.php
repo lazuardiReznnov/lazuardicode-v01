@@ -109,7 +109,7 @@
 
                             <td>
                                 <a
-                                    href="/dashboard/stock/sparepart/{{ $data->slug }}/edit"
+                                    href="/dashboard/stock/invStock/{{ $data->slug }}/edit"
                                     class="badge bg-warning"
                                     data-bs-toggle="tooltip"
                                     data-bs-placement="top"

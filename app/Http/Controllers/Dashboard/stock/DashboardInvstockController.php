@@ -93,7 +93,10 @@ class DashboardInvstockController extends Controller
      */
     public function edit(invStock $invStock)
     {
-        //
+        return view('dashboard.stock.inv.edit', [
+            'title' => 'Edit Invoice',
+            'data' => $invStock,
+        ]);
     }
 
     /**
@@ -105,7 +108,34 @@ class DashboardInvstockController extends Controller
      */
     public function update(Request $request, invStock $invStock)
     {
-        //
+        $rules = [
+            'tgl' => 'required',
+            'payment' => 'required',
+            'pic' => 'image|file|max:2048',
+        ];
+
+        if ($request->name != $invStock->name) {
+            $rules['name'] = 'required|unique:inv_stocks|max:25';
+        }
+        if ($request->slug != $invStock->slug) {
+            $rules['slug'] = 'required|unique:inv_stocks';
+        }
+        $validatedData = $request->validate($rules);
+
+        $validatedData['supplier_id'] = $invStock->supplier_id;
+
+        if ($request->file('pic')) {
+            if ($request->old_pic) {
+                storage::delete($request->old_pic);
+            }
+            $validatedData['pic'] = $request->file('pic')->store('inv-pic');
+        }
+
+        invStock::where('id', $invStock->id)->update($validatedData);
+
+        return redirect(
+            '/dashboard/stock/invStock/' . $invStock->supplier->slug
+        )->with('success', 'New Unit Has Been aded.');
     }
 
     /**
