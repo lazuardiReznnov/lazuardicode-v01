@@ -63,8 +63,8 @@
                             <th scope="col">Date</th>
                             <th scope="col">Sparepart</th>
                             <th scope="col">Qty</th>
-                            <th scope="col">price</th>
-                            <th scope="col " class="text-md-center">Sum</th>
+                            <th scope="col" class="text-md-end">price</th>
+                            <th scope="col " class="text-md-end">Sum</th>
 
                             <th scope="col">Action</th>
                         </tr>
@@ -90,7 +90,7 @@
 
                             <td>
                                 <a
-                                    href="/dashboard/stock/sparepart/{{ $data->slug }}/edit"
+                                    href="/dashboard/stock/{{ $data->slug }}/edit"
                                     class="badge bg-warning"
                                     data-bs-toggle="tooltip"
                                     data-bs-placement="top"
@@ -99,7 +99,7 @@
                                 ></a>
                                 |
                                 <form
-                                    action="/dashboard/stock/sparepart/{{ $data->slug }}"
+                                    action="/dashboard/stock/{{ $data->slug }}"
                                     method="post"
                                     class="d-inline"
                                 >

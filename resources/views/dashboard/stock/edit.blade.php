@@ -9,11 +9,13 @@
             invoicement
         </x-breadcrumb-link>
         <x-breadcrumb-link
-            link="/dashboard/stock/invStock/{{ $invStock->supplier->slug }}"
+            link="/dashboard/stock/invStock/{{ $data->invStock->supplier->slug }}"
         >
             Inv Data
         </x-breadcrumb-link>
-        <x-breadcrumb-link link="/dashboard/stock/detail/{{ $invStock->slug }}">
+        <x-breadcrumb-link
+            link="/dashboard/stock/detail/{{ $data->invStock->slug }}"
+        >
             Invoice
         </x-breadcrumb-link>
         <x-breadcrumb-link-active>{{ $title }} </x-breadcrumb-link-active>
@@ -21,24 +23,13 @@
 
     <div class="row">
         <div class="col-md-10">
-            <x-card header="Form Invoice">
+            <x-card header="Edit Stock">
                 <form
-                    action="/dashboard/stock"
+                    action="/dashboard/stock/{{ $data->slug }}"
                     method="post"
                     enctype="multipart/form-data"
                 >
-                    @csrf
-
-                    <input
-                        type="hidden"
-                        name="inv_stock_id"
-                        value="{{ $invStock->id }}"
-                    />
-                    <input
-                        type="hidden"
-                        name="inv_stock_slug"
-                        value="{{ $invStock->slug }}"
-                    />
+                    @csrf @method('put')
 
                     <div class="row mb-3">
                         <label
@@ -53,7 +44,7 @@
                                 type="date"
                                 class="form-control @error('tgl') is-invalid @enderror"
                                 name="tgl"
-                                value="{{ old('tgl') }}"
+                                value="{{ old('tgl',$data->tgl) }}"
                                 required
                                 autocomplete="tgl"
                                 autofocus
@@ -71,7 +62,7 @@
                         <label
                             for="carosery_id"
                             class="col-md-4 col-form-label text-md-end"
-                            >{{ __("carosery") }}</label
+                            >{{ __("Sparepart") }}</label
                         >
 
                         <div class="col-md-6">
@@ -83,7 +74,7 @@
                             >
                                 <option selected>Select Part</option>
                                 @foreach($sparepart as $part)
-                                @if(old('part_id')==$part->id)
+                                @if(old('part_id',$data->sparepart_id)==$part->id)
                                 <option value="{{ $part->id }}" selected>
                                     {{ $part->categoryPart->name }} -
                                     {{ $part->type->name }} -
@@ -119,7 +110,7 @@
                                 type="text"
                                 class="form-control @error('qty') is-invalid @enderror"
                                 name="qty"
-                                value="{{ old('qty') }}"
+                                value="{{ old('qty',$data->qty) }}"
                                 required
                                 autocomplete="qty"
                                 autofocus
@@ -146,7 +137,7 @@
                                 type="text"
                                 class="form-control @error('price') is-invalid @enderror"
                                 name="price"
-                                value="{{ old('price') }}"
+                                value="{{ old('price',$data->price) }}"
                                 required
                                 autocomplete="price"
                                 autofocus

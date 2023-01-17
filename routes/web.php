@@ -131,6 +131,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/dashboard/stock/iodata', 'iodata');
         Route::get('/dashboard/stock/create/{invStock}', 'create');
         Route::get('/dashboard/stock/detail/{invStock}', 'detail');
+        Route::post('/dashboard/stock', 'store');
+        Route::get('/dashboard/stock/{stock}/edit', 'edit');
+        Route::put('/dashboard/stock/{stock}', 'update');
+        Route::delete('/dashboard/stock/{stock}', 'destroy');
     });
 
     Route::controller(DashboardInvstockController::class)->group(function () {
