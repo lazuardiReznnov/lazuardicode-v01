@@ -113,7 +113,7 @@
                                         class="badge bg-danger border-0"
                                         data-bs-toggle="tooltip"
                                         data-bs-placement="top"
-                                        title="Delete stock"
+                                        title="Delete sparepart"
                                         onclick="return confirm('are You sure ??')"
                                     >
                                         <i class="fas fa-trash-alt"></i>

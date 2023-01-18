@@ -121,6 +121,11 @@ Route::middleware('auth')->group(function () {
         DashboardSupplierController::class
     );
 
+    Route::controller(DashboardSparepartController::class)->group(function () {
+        Route::get('dashboard/stock/sparepart/checkSlug', 'checkSlug');
+        route::get('dashboard/stock/sparepart/getType', 'getType');
+    });
+
     Route::resource(
         'dashboard/stock/sparepart',
         DashboardSparepartController::class

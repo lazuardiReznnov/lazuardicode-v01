@@ -75,5 +75,13 @@ class TypeSeeder extends Seeder
             'description' =>
                 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit porro perferendis consectetur voluptatibus fuga reiciendis alias laborum, iste illo expedita.',
         ]);
+        Type::create([
+            'brand_id' => 7,
+            'category_id' => 5,
+            'name' => 'Universal All Unit',
+            'slug' => 'univesal-all-unit',
+            'description' =>
+                'Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit porro perferendis consectetur voluptatibus fuga reiciendis alias laborum, iste illo expedita.',
+        ]);
     }
 }

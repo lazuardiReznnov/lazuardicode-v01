@@ -2,8 +2,11 @@
     <x-HeadTitle title="{{ $title }}"> </x-HeadTitle>
     <x-breadcrumb>
         <x-breadcrumb-link link="/dashboard"> Dashboard </x-breadcrumb-link>
-        <x-breadcrumb-link link="/dashboard/unit">
-            Unit Management
+        <x-breadcrumb-link link="/dashboard/stock">
+            Stock management
+        </x-breadcrumb-link>
+        <x-breadcrumb-link link="/dashboard/stock/sparepart">
+            sparepart
         </x-breadcrumb-link>
 
         <x-breadcrumb-link-active>{{ $title }} </x-breadcrumb-link-active>
@@ -11,13 +14,13 @@
 
     <div class="row">
         <div class="col-md-10">
-            <x-card header="Form Unit">
+            <x-card header="Form Sparepart">
                 <form
-                    action="/dashboard/unit"
+                    action="/dashboard/stock/sparepart/{{ $data->slug }}"
                     method="post"
                     enctype="multipart/form-data"
                 >
-                    @csrf
+                    @csrf @method('put')
 
                     <div class="row mb-3">
                         <label
@@ -27,11 +30,19 @@
                         >
 
                         <div class="col-md-6">
-                            <img
-                                width="200"
-                                class="img-preview img-fluid mb-2"
-                                alt=""
+                            @if($data->pic)
+                            <input
+                                type="hidden"
+                                name="old_pic"
+                                value="{{ $data->pic }}"
                             />
+                            <img
+                                src="{{ asset('storage/'. $data->pic) }}"
+                                class="d-block img-fluid mb-2 col-sm-5"
+                            />
+                            @else
+                            <img class="img-preview img-fluid mb-2 col-sm-5" />
+                            @endif
 
                             <input
                                 id="pic"
@@ -56,7 +67,7 @@
                         <label
                             for="name"
                             class="col-md-4 col-form-label text-md-end"
-                            >{{ __("Registration Number") }}</label
+                            >{{ __("Name") }}</label
                         >
 
                         <div class="col-md-6">
@@ -65,7 +76,7 @@
                                 type="text"
                                 class="form-control @error('name') is-invalid @enderror"
                                 name="name"
-                                value="{{ old('name') }}"
+                                value="{{ old('name',$data->name) }}"
                                 required
                                 autocomplete="name"
                                 autofocus
@@ -92,7 +103,7 @@
                                 type="text"
                                 class="form-control @error('slug') is-invalid @enderror"
                                 name="slug"
-                                value="{{ old('slug') }}"
+                                value="{{ old('slug', $data->slug) }}"
                                 required
                                 autocomplete="slug"
                                 autofocus
@@ -108,102 +119,35 @@
 
                     <div class="row mb-3">
                         <label
-                            for="group"
+                            for="category_id"
                             class="col-md-4 col-form-label text-md-end"
-                            >{{ __("group") }}</label
+                            >{{ __("Category Sparepart") }}</label
                         >
 
                         <div class="col-md-6">
                             <select
-                                class="form-select @error('group_id') is-invalid @enderror"
-                                id="group"
-                                aria-label="group"
-                                name="group_id"
+                                class="form-select @error('category_part_id') is-invalid @enderror"
+                                id="category_part_id"
+                                aria-label="category_part_id"
+                                name="category_part_id"
                             >
-                                <option selected>Select group</option>
-                                @foreach($groups as $group)
-                                @if(old('group_id')==$group->id)
-                                <option value="{{ $group->id }}" selected>
-                                    {{ $group->name }}
+                                <option selected>
+                                    Select Category Sparepart
+                                </option>
+                                @foreach($catparts as $cat)
+                                @if(old('category_part_id',
+                                $data->category_part_id)==$cat->id)
+                                <option value="{{ $cat->id }}" selected>
+                                    {{ $cat->name }}
                                 </option>
                                 @else
-                                <option value="{{ $group->id }}">
-                                    {{ $group->name }}
+                                <option value="{{ $cat->id }}">
+                                    {{ $cat->name }}
                                 </option>
                                 @endif @endforeach
                             </select>
 
-                            @error('group_id')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <label
-                            for="flag_id"
-                            class="col-md-4 col-form-label text-md-end"
-                            >{{ __("Flag") }}</label
-                        >
-
-                        <div class="col-md-6">
-                            <select
-                                class="form-select @error('flag_id') is-invalid @enderror"
-                                id="flag"
-                                aria-label="flag_id"
-                                name="flag_id"
-                            >
-                                <option selected>Select flag</option>
-                                @foreach($flags as $flag)
-                                @if(old('flag_id')==$flag->id)
-                                <option value="{{ $flag->id }}" selected>
-                                    {{ $flag->name }}
-                                </option>
-                                @else
-                                <option value="{{ $flag->id }}">
-                                    {{ $flag->name }}
-                                </option>
-                                @endif @endforeach
-                            </select>
-
-                            @error('flag_id')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <label
-                            for="carosery_id"
-                            class="col-md-4 col-form-label text-md-end"
-                            >{{ __("carosery") }}</label
-                        >
-
-                        <div class="col-md-6">
-                            <select
-                                class="form-select @error('carosery_id') is-invalid @enderror"
-                                id="carosery"
-                                aria-label="carosery_id"
-                                name="carosery_id"
-                            >
-                                <option selected>Select carosery</option>
-                                @foreach($caroseries as $carosery)
-                                @if(old('carosery_id')==$carosery->id)
-                                <option value="{{ $carosery->id }}" selected>
-                                    {{ $carosery->name }}
-                                </option>
-                                @else
-                                <option value="{{ $carosery->id }}">
-                                    {{ $carosery->name }}
-                                </option>
-                                @endif @endforeach
-                            </select>
-
-                            @error('carosery_id')
+                            @error('cat_id')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -215,7 +159,7 @@
                         <label
                             for="category_id"
                             class="col-md-4 col-form-label text-md-end"
-                            >{{ __("Category") }}</label
+                            >{{ __("Category Models") }}</label
                         >
 
                         <div class="col-md-6">
@@ -227,7 +171,7 @@
                             >
                                 <option selected>Select Category</option>
                                 @foreach($categories as $category)
-                                @if(old('category_id')==$category->id)
+                                @if(old('category_id',$data->type->category_id)==$category->id)
                                 <option value="{{ $category->id }}" selected>
                                     {{ $category->name }}
                                 </option>
@@ -262,7 +206,7 @@
                             >
                                 <option selected>Select Brand</option>
                                 @foreach($brands as $brand)
-                                @if(old('brand_id')==$brand->id)
+                                @if(old('brand_id',$data->type->brand_id)==$brand->id)
                                 <option value="{{ $brand->id }}" selected>
                                     {{ $brand->name }}
                                 </option>
@@ -294,7 +238,14 @@
                                 aria-label="type_id"
                                 id="type"
                                 name="type_id"
-                            ></select>
+                            >
+                                @if(old('type_id',$data->type_id)==
+                                $data->type_id)
+                                <option value="{{ $data->type_id }}" selected>
+                                    {{ $data->type->name }}
+                                </option>
+                                @endif
+                            </select>
 
                             @error('type_id')
                             <span class="invalid-feedback" role="alert">
@@ -306,23 +257,23 @@
 
                     <div class="row mb-3">
                         <label
-                            for="color"
+                            for="brand"
                             class="col-md-4 col-form-label text-md-end"
-                            >{{ __("Color") }}</label
+                            >{{ __("brand") }}</label
                         >
 
                         <div class="col-md-6">
                             <input
-                                id="color"
+                                id="brand"
                                 type="text"
-                                class="form-control @error('color') is-invalid @enderror"
-                                name="color"
-                                value="{{ old('color') }}"
+                                class="form-control @error('brand') is-invalid @enderror"
+                                name="brand"
+                                value="{{ old('brand',$data->brand) }}"
                                 required
-                                autocomplete="color"
+                                autocomplete="brand"
                                 autofocus
                             />
-                            @error('color')
+                            @error('brand')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -332,124 +283,23 @@
 
                     <div class="row mb-3">
                         <label
-                            for="vin"
+                            for="codepart"
                             class="col-md-4 col-form-label text-md-end"
-                            >{{ __("Vin") }}</label
+                            >{{ __("codepart") }}</label
                         >
 
                         <div class="col-md-6">
                             <input
-                                id="vin"
+                                id="codepart"
                                 type="text"
-                                class="form-control @error('vin') is-invalid @enderror"
-                                name="vin"
-                                value="{{ old('vin') }}"
+                                class="form-control @error('codepart') is-invalid @enderror"
+                                name="codepart"
+                                value="{{ old('codepart',$data->codepart) }}"
                                 required
-                                autocomplete="vin"
+                                autocomplete="codepart"
                                 autofocus
                             />
-                            @error('vin')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <label
-                            for="engine_numb"
-                            class="col-md-4 col-form-label text-md-end"
-                            >{{ __("Engine number") }}</label
-                        >
-
-                        <div class="col-md-6">
-                            <input
-                                id="engine_numb"
-                                type="text"
-                                class="form-control @error('engine_numb') is-invalid @enderror"
-                                name="engine_numb"
-                                value="{{ old('engine_numb') }}"
-                                required
-                                autocomplete="engine_numb"
-                                autofocus
-                            />
-                            @error('engine_numb')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <label
-                            for="fuel"
-                            class="col-md-4 col-form-label text-md-end"
-                            >{{ __("Fuel") }}</label
-                        >
-
-                        <div class="col-md-6">
-                            <input
-                                id="fuel"
-                                type="text"
-                                class="form-control @error('fuel') is-invalid @enderror"
-                                name="fuel"
-                                value="{{ old('fuel') }}"
-                                required
-                                autocomplete="fuel"
-                                autofocus
-                            />
-                            @error('fuel')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <label
-                            for="cylinder"
-                            class="col-md-4 col-form-label text-md-end"
-                            >{{ __("cylinder") }}</label
-                        >
-
-                        <div class="col-md-6">
-                            <input
-                                id="cylinder"
-                                type="text"
-                                class="form-control @error('cylinder') is-invalid @enderror"
-                                name="cylinder"
-                                value="{{ old('cylinder') }}"
-                                required
-                                autocomplete="cylinder"
-                                autofocus
-                            />
-                            @error('cylinder')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <label
-                            for="year"
-                            class="col-md-4 col-form-label text-md-end"
-                            >{{ __("year") }}</label
-                        >
-
-                        <div class="col-md-6">
-                            @php $now = date('Y'); @endphp
-                            <select name="year" class="form-select">
-                                <option selected>--Choice Year--</option>
-                                @for ($a=2012;$a<=$now;$a++)
-                                <option value="{{ $a }}">{{ $a }}</option>
-                                @endfor
-                            </select>
-                            @error('year')
+                            @error('codepart')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -464,7 +314,7 @@
                                 type="submit"
                                 name="save"
                             >
-                                Save
+                                Update
                             </button>
                         </div>
                     </div>
@@ -479,14 +329,14 @@
 
         const name = document.querySelector("#name");
         const slug = document.querySelector("#slug");
-        const link = "/dashboard/unit/checkSlug?name=";
+        const link = "/dashboard/stock/sparepart/checkSlug?name=";
 
         makeslug(name, slug, link);
 
         const brand = document.querySelector("#brand");
         const category = document.querySelector("#category");
         const type = document.querySelector("#type");
-        const link2 = "/dashboard/unit/getType?brand=";
+        const link2 = "/dashboard/stock/sparepart/getType?brand=";
 
         makeBrand(brand, type, link2);
     </script>

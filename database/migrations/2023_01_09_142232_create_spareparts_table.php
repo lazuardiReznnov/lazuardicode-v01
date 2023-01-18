@@ -28,7 +28,6 @@ return new class extends Migration {
             $table->string('slug')->unique();
             $table->string('brand');
             $table->string('codepart');
-            $table->integer('qty')->default(0);
             $table->string('pic')->nullable();
             $table->timestamps();
         });
