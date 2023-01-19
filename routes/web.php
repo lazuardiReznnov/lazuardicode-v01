@@ -18,6 +18,7 @@ use App\Http\Controllers\Dashboard\stock\DashboardInvstockController;
 use App\Http\Controllers\Dashboard\stock\DashboardSparepartController;
 use App\Http\Controllers\Dashboard\stock\DashboardStockController;
 use App\Http\Controllers\Dashboard\stock\DashboardSupplierController;
+use App\Http\Controllers\Dashboard\Unit\DashboardBrandController;
 use App\Http\Controllers\Dashboard\Unit\DashboardUnitController;
 use App\Http\Controllers\Dashboard\Unit\Letter\DashboardLetterController;
 use App\Http\Controllers\RolePermission\PermissionController;
@@ -92,11 +93,12 @@ Route::middleware('auth')->group(function () {
     );
     // End Page administrator
     // ekspedisi Program
-    Route::controller(DashboardUnitController::class)->group(function () {
-        route::get('dashboard/unit/getType', 'getType');
 
-        Route::get('dashboard/unit/checkSlug', 'checkSlug');
+    Route::controller(DashboardBrandController::class)->group(function () {
+        Route::get('dashboard/unit/brand/checkSlug', 'checkSlug');
     });
+
+    Route::resource('dashboard/unit/brand', DashboardBrandController::class);
 
     Route::controller(DashboardLetterController::class)->group(function () {
         Route::get('/dashboard/unit/letter/data/{categoryletter}', 'data');
@@ -110,6 +112,12 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::resource('dashboard/unit/letter', DashboardLetterController::class);
+
+    Route::controller(DashboardUnitController::class)->group(function () {
+        route::get('dashboard/unit/getType', 'getType');
+
+        Route::get('dashboard/unit/checkSlug', 'checkSlug');
+    });
     Route::resource('dashboard/unit', DashboardUnitController::class);
 
     Route::controller(DashboardSupplierController::class)->group(function () {

@@ -44,7 +44,7 @@
             <!-- uNIT -->
             <x-headsidenav title="Unit-Management"> </x-headsidenav>
             <x-collapselink titlecols="Unit-Data">
-                <x-navlink link="#">Brand Unit</x-navlink>
+                <x-navlink link="/dashboard/unit/brand">Brand Unit</x-navlink>
                 <x-navlink link="#">Category Unit</x-navlink>
                 <x-navlink link="#">Karoseri Unit</x-navlink>
                 <x-navlink link="#">Group Unit</x-navlink>
