@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Dashboard\Unit;
 
 use App\Models\Brand;
 use Illuminate\Http\Request;
+use App\Imports\Unit\BrandsImport;
 use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class DashboardBrandController extends Controller
@@ -132,5 +134,27 @@ class DashboardBrandController extends Controller
     {
         $slug = SlugService::createSlug(Brand::class, 'slug', $request->name);
         return response()->json(['slug' => $slug]);
+    }
+
+    public function createexcl()
+    {
+        return view('dashboard.Unit.brand.create-excel', [
+            'title' => 'File Import Via Excel',
+        ]);
+    }
+
+    public function storeexcl(Request $request)
+    {
+        $validatedData = $request->validate([
+            'excl' => 'required:mimes:xlsx,xls,csv|max:2048',
+        ]);
+
+        if ($request->file('excl')) {
+            Excel::import(new BrandsImport(), $validatedData['excl']);
+            return redirect('/dashboard/unit/brand')->with(
+                'success',
+                'New Data Has Been Aded.!'
+            );
+        }
     }
 }

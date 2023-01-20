@@ -96,6 +96,8 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(DashboardBrandController::class)->group(function () {
         Route::get('dashboard/unit/brand/checkSlug', 'checkSlug');
+        Route::get('dashboard/unit/brand/create-excl', 'createexcl');
+        Route::post('dashboard/unit/brand/store-excl', 'storeexcl');
     });
 
     Route::resource('dashboard/unit/brand', DashboardBrandController::class);

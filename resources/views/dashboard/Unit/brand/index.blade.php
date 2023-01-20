@@ -44,6 +44,11 @@
                 class="btn btn-sm btn-primary"
                 ><i class="bi bi-file-earmark-plus"></i
             ></a>
+            <a
+                href="/dashboard/unit/brand/create-excl"
+                class="btn btn-sm btn-primary"
+                ><i class="bi bi-file-earmark-spreadsheet"></i
+            ></a>
         </div>
     </div>
     <!-- EndTombol -->
