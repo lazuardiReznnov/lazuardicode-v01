@@ -63,9 +63,6 @@
             <x-collapselink titlecols="Stock-Data">
                 <x-navlink link="/dashboard/stock">Stock item</x-navlink>
                 <x-navlink link="/dashboard/stock/supplier">Supplier</x-navlink>
-                <x-navlink link="/dashboard/stock/sparepart"
-                    >Sparepart</x-navlink
-                >
             </x-collapselink>
         </div>
     </div>
