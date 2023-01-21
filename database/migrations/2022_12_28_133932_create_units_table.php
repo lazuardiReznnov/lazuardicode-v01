@@ -23,7 +23,7 @@ return new class extends Migration {
                 ->foreignId('carosery_id')
                 ->constrained('caroseries')
                 ->cascadeOnUpdate()
-                ->cascadeOnUpdate();
+                ->cascadeOnDelete();
             $table
                 ->foreignId('flag_id')
                 ->constrained('flags')

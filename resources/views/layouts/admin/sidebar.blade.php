@@ -48,7 +48,9 @@
                 <x-navlink link="/dashboard/unit/category"
                     >Category Unit</x-navlink
                 >
-                <x-navlink link="#">Karoseri Unit</x-navlink>
+                <x-navlink link="/dashboard/unit/carosery"
+                    >Karoseri Unit</x-navlink
+                >
                 <x-navlink link="#">Group Unit</x-navlink>
                 <x-navlink link="#">Flag Unit</x-navlink>
                 <x-navlink link="#">Types Unit</x-navlink>

@@ -19,6 +19,7 @@ use App\Http\Controllers\Dashboard\stock\DashboardSparepartController;
 use App\Http\Controllers\Dashboard\stock\DashboardStockController;
 use App\Http\Controllers\Dashboard\stock\DashboardSupplierController;
 use App\Http\Controllers\Dashboard\Unit\DashboardBrandController;
+use App\Http\Controllers\Dashboard\Unit\DashboardCaroseriesController;
 use App\Http\Controllers\Dashboard\Unit\DashboardCategoriesController;
 use App\Http\Controllers\Dashboard\Unit\DashboardUnitController;
 use App\Http\Controllers\Dashboard\Unit\Letter\DashboardLetterController;
@@ -116,8 +117,20 @@ Route::middleware('auth')->group(function () {
         'dashboard/unit/category',
         DashboardCategoriesController::class
     );
-
     // End Categories Unit
+
+    // Carosery
+    Route::controller(DashboardCaroseriesController::class)->group(function () {
+        Route::get('dashboard/unit/carosery/checkSlug', 'checkSlug');
+        Route::get('dashboard/unit/carosery/create-excl', 'createexcl');
+        Route::post('dashboard/unit/carosery/store-excl', 'storeexcl');
+    });
+
+    Route::resource(
+        'dashboard/unit/carosery',
+        DashboardCaroseriesController::class
+    );
+    // End Carosery
 
     Route::controller(DashboardLetterController::class)->group(function () {
         Route::get('/dashboard/unit/letter/data/{categoryletter}', 'data');

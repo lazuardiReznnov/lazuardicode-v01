@@ -5,20 +5,21 @@
         <x-breadcrumb-link link="/dashboard/unit">
             Unit Management
         </x-breadcrumb-link>
-        <x-breadcrumb-link link="/dashboard/unit/category">
-            Category Unit
+        <x-breadcrumb-link link="/dashboard/unit/carosery">
+            Carosery Unit
         </x-breadcrumb-link>
         <x-breadcrumb-link-active>{{ $title }} </x-breadcrumb-link-active>
     </x-breadcrumb>
 
     <div class="row">
         <div class="col-md-10">
-            <x-card header="Edit Form Unit">
+            <x-card header="Form Unit">
                 <form
-                    action="/dashboard/unit/category/{{ $data->slug }}"
+                    action="/dashboard/unit/carosery"
                     method="post"
+                    enctype="multipart/form-data"
                 >
-                    @csrf @method('put')
+                    @csrf
 
                     <div class="row mb-3">
                         <label
@@ -33,7 +34,7 @@
                                 type="text"
                                 class="form-control @error('name') is-invalid @enderror"
                                 name="name"
-                                value="{{ old('name',$data->name) }}"
+                                value="{{ old('name') }}"
                                 required
                                 autocomplete="name"
                                 autofocus
@@ -60,7 +61,7 @@
                                 type="text"
                                 class="form-control @error('slug') is-invalid @enderror"
                                 name="slug"
-                                value="{{ old('slug',$data->slug) }}"
+                                value="{{ old('slug') }}"
                                 required
                                 autocomplete="slug"
                                 autofocus
@@ -87,9 +88,7 @@
                                 type="hidden"
                                 name="description"
                             />
-                            <trix-editor input="description"
-                                >{!! $data->description !!}</trix-editor
-                            >
+                            <trix-editor input="description"></trix-editor>
 
                             @error('description')
                             <span class="invalid-feedback" role="alert">
@@ -121,7 +120,7 @@
 
         const name = document.querySelector("#name");
         const slug = document.querySelector("#slug");
-        const link = "/dashboard/unit/category/checkSlug?name=";
+        const link = "/dashboard/unit/carosery/checkSlug?name=";
 
         makeslug(name, slug, link);
     </script>
