@@ -17,7 +17,7 @@ class SparepartSeeder extends Seeder
     {
         sparepart::create([
             'category_part_id' => '4',
-            'type_id' => '5',
+            'type_id' => '8',
             'name' => 'Mediteran SC',
             'brand' => 'Pertamina',
             'slug' => 'mediteran-sc',
