@@ -19,6 +19,7 @@ use App\Http\Controllers\Dashboard\stock\DashboardSparepartController;
 use App\Http\Controllers\Dashboard\stock\DashboardStockController;
 use App\Http\Controllers\Dashboard\stock\DashboardSupplierController;
 use App\Http\Controllers\Dashboard\Unit\DashboardBrandController;
+use App\Http\Controllers\Dashboard\Unit\DashboardCategoriesController;
 use App\Http\Controllers\Dashboard\Unit\DashboardUnitController;
 use App\Http\Controllers\Dashboard\Unit\Letter\DashboardLetterController;
 use App\Http\Controllers\RolePermission\PermissionController;
@@ -94,6 +95,7 @@ Route::middleware('auth')->group(function () {
     // End Page administrator
     // ekspedisi Program
 
+    // Unit Brand
     Route::controller(DashboardBrandController::class)->group(function () {
         Route::get('dashboard/unit/brand/checkSlug', 'checkSlug');
         Route::get('dashboard/unit/brand/create-excl', 'createexcl');
@@ -101,6 +103,21 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::resource('dashboard/unit/brand', DashboardBrandController::class);
+    // End Unit Brand
+
+    // Categories Unit
+    Route::controller(DashboardCategoriesController::class)->group(function () {
+        Route::get('dashboard/unit/category/checkSlug', 'checkSlug');
+        Route::get('dashboard/unit/category/create-excl', 'createexcl');
+        Route::post('dashboard/unit/category/store-excl', 'storeexcl');
+    });
+
+    Route::resource(
+        'dashboard/unit/category',
+        DashboardCategoriesController::class
+    );
+
+    // End Categories Unit
 
     Route::controller(DashboardLetterController::class)->group(function () {
         Route::get('/dashboard/unit/letter/data/{categoryletter}', 'data');
@@ -130,7 +147,7 @@ Route::middleware('auth')->group(function () {
         'dashboard/stock/supplier',
         DashboardSupplierController::class
     );
-
+    // Sparepart
     Route::controller(DashboardSparepartController::class)->group(function () {
         Route::get('dashboard/stock/sparepart/checkSlug', 'checkSlug');
         route::get('dashboard/stock/sparepart/getType', 'getType');
@@ -140,6 +157,9 @@ Route::middleware('auth')->group(function () {
         'dashboard/stock/sparepart',
         DashboardSparepartController::class
     );
+    // End Sparepart
+
+    // stock
 
     Route::controller(DashboardStockController::class)->group(function () {
         Route::get('/dashboard/stock', 'index');
@@ -151,7 +171,8 @@ Route::middleware('auth')->group(function () {
         Route::put('/dashboard/stock/{stock}', 'update');
         Route::delete('/dashboard/stock/{stock}', 'destroy');
     });
-
+    // end Stock
+    // inv Stock
     Route::controller(DashboardInvstockController::class)->group(function () {
         Route::get('/dashboard/stock/invStock/checkSlug', 'checkSlug');
         Route::get('/dashboard/stock/invStock/{supplier}', 'index');
@@ -161,6 +182,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/dashboard/stock/invStock/{invStock}/edit', 'edit');
         Route::put('/dashboard/stock/invStock/{invStock}', 'update');
     });
+    // end Inv Stock
 
     // End ekspedisi Program
 });
