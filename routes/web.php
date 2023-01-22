@@ -21,6 +21,7 @@ use App\Http\Controllers\Dashboard\stock\DashboardSupplierController;
 use App\Http\Controllers\Dashboard\Unit\DashboardBrandController;
 use App\Http\Controllers\Dashboard\Unit\DashboardCaroseriesController;
 use App\Http\Controllers\Dashboard\Unit\DashboardCategoriesController;
+use App\Http\Controllers\Dashboard\Unit\DashboardGroupController;
 use App\Http\Controllers\Dashboard\Unit\DashboardUnitController;
 use App\Http\Controllers\Dashboard\Unit\Letter\DashboardLetterController;
 use App\Http\Controllers\RolePermission\PermissionController;
@@ -131,6 +132,15 @@ Route::middleware('auth')->group(function () {
         DashboardCaroseriesController::class
     );
     // End Carosery
+
+    // Group
+    Route::controller(DashboardGroupController::class)->group(function () {
+        Route::get('dashboard/unit/group/checkSlug', 'checkSlug');
+        Route::get('dashboard/unit/group/create-excl', 'createexcl');
+        Route::post('dashboard/unit/group/store-excl', 'storeexcl');
+    });
+    Route::resource('dashboard/unit/group', DashboardGroupController::class);
+    // End Group
 
     Route::controller(DashboardLetterController::class)->group(function () {
         Route::get('/dashboard/unit/letter/data/{categoryletter}', 'data');
