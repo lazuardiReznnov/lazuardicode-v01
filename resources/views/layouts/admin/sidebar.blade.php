@@ -52,7 +52,7 @@
                     >Karoseri Unit</x-navlink
                 >
                 <x-navlink link="/dashboard/unit/group">Group Unit</x-navlink>
-                <x-navlink link="#">Flag Unit</x-navlink>
+                <x-navlink link="/dashboard/unit/flag">Flag Unit</x-navlink>
                 <x-navlink link="#">Types Unit</x-navlink>
                 <x-navlink link="/dashboard/unit">Unit</x-navlink>
             </x-collapselink>
