@@ -23,6 +23,7 @@ use App\Http\Controllers\Dashboard\Unit\DashboardCaroseriesController;
 use App\Http\Controllers\Dashboard\Unit\DashboardCategoriesController;
 use App\Http\Controllers\Dashboard\Unit\DashboardFlagController;
 use App\Http\Controllers\Dashboard\Unit\DashboardGroupController;
+use App\Http\Controllers\Dashboard\Unit\DashboardTypeController;
 use App\Http\Controllers\Dashboard\Unit\DashboardUnitController;
 use App\Http\Controllers\Dashboard\Unit\Letter\DashboardLetterController;
 use App\Http\Controllers\RolePermission\PermissionController;
@@ -153,6 +154,17 @@ Route::middleware('auth')->group(function () {
     Route::resource('dashboard/unit/flag', DashboardFlagController::class);
     // endflag
 
+    // Type
+    Route::controller(DashboardTypeController::class)->group(function () {
+        Route::get('dashboard/unit/type/checkSlug', 'checkSlug');
+        Route::get('dashboard/unit/type/create-excl', 'createexcl');
+        Route::post('dashboard/unit/type/store-excl', 'storeexcl');
+    });
+
+    Route::resource('dashboard/unit/type', DashboardTypeController::class);
+    // End Type
+
+    // Letter
     Route::controller(DashboardLetterController::class)->group(function () {
         Route::get('/dashboard/unit/letter/data/{categoryletter}', 'data');
         Route::get('/dashboard/unit/letter/edittax/{letter}', 'edittax');
@@ -165,6 +177,7 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::resource('dashboard/unit/letter', DashboardLetterController::class);
+    // end Letter
 
     Route::controller(DashboardUnitController::class)->group(function () {
         route::get('dashboard/unit/getType', 'getType');
