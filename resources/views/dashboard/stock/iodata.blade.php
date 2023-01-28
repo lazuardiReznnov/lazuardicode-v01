@@ -11,7 +11,7 @@
     <div class="row">
         <div class="col-md">
             <x-card header="Sparepart Data">
-                <div class="row">
+                <!-- <div class="row">
                     @foreach($datas as $data)
                     <div class="col-sm-6">
                         <div class="card">
@@ -33,7 +33,23 @@
                         </div>
                     </div>
                     @endforeach
-                </div>
+                </div> -->
+                <ul>
+                    @foreach($datas as $data)
+                    <li>
+                        {{ $data->name }}
+                        <ul>
+                            <li>
+                                @foreach($data->invStock as $inv)
+                                <ul>
+                                    <li>{{ $inv->name }}</li>
+                                </ul>
+                                @endforeach
+                            </li>
+                        </ul>
+                    </li>
+                    @endforeach
+                </ul>
             </x-card>
         </div>
     </div>
