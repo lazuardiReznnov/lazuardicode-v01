@@ -8,11 +8,7 @@
         <x-breadcrumb-link link="/dashboard/stock/iodata">
             invoicement
         </x-breadcrumb-link>
-        <x-breadcrumb-link
-            link="/dashboard/stock/invStock/{{ $invStock->supplier->slug }}"
-        >
-            Inv Data
-        </x-breadcrumb-link>
+
         <x-breadcrumb-link-active>{{ $title }} </x-breadcrumb-link-active>
     </x-breadcrumb>
 
@@ -43,7 +39,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md">
+        <div class="col-md-8">
             <x-card header="{{ $invStock->name }}">
                 <div class="row my-2">
                     <div class="col-md">
