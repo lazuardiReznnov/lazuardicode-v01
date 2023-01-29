@@ -20,7 +20,8 @@ class InvStockSeeder extends Seeder
             'name' => 'inv/002/2023',
             'slug' => 'inv-002-2023',
             'tgl' => '2023/01/01',
-            'payment' => 'cash',
+            'payment' => 'credit',
+            'state' => 'belum',
         ]);
         invStock::create([
             'supplier_id' => 1,
@@ -34,7 +35,8 @@ class InvStockSeeder extends Seeder
             'name' => 'inv/004/2023',
             'slug' => 'inv-004-2023',
             'tgl' => '2023/01/01',
-            'payment' => 'cash',
+            'payment' => 'credit',
+            'state' => 'belum',
         ]);
         invStock::create([
             'supplier_id' => 2,

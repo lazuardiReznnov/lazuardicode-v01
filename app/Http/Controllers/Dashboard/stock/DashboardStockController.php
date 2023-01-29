@@ -32,13 +32,19 @@ class DashboardStockController extends Controller
     public function iodata()
     {
         return view('dashboard.stock.iodata', [
-            'title' => 'Invoicement',
-            // 'datas' => invStock::whereMonth('tgl', '=', date('m'))
-            //     ->paginate(10)
-            //     ->withQueryString(),
-            'datas' => Supplier::latest()
+            'title' => 'Billing List',
+            'datas1' => invStock::whereMonth('tgl', '=', date('m'))
+                ->where('state', 'belum')
                 ->paginate(10)
                 ->withQueryString(),
+            'datas2' => invStock::whereMonth('tgl', '=', date('m'))
+                ->where('state', 'lunas')
+                ->paginate(10)
+                ->withQueryString(),
+
+            // 'datas' => Supplier::latest()
+            //     ->paginate(10)
+            //     ->withQueryString(),
         ]);
     }
 
