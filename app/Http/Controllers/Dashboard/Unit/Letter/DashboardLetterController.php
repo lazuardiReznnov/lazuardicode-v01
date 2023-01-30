@@ -93,13 +93,22 @@ class DashboardLetterController extends Controller
 
     public function data(CategoryLetter $categoryletter)
     {
+        if ($categoryletter->id === 1) {
+            $data = Letter::whereMonth('tax', '=', date('m'));
+        } elseif ($categoryletter->id === 2) {
+            $data = Letter::whereMonth('expire_date', '=', date('m'));
+        }
         return view('dashboard.unit.letter.data', [
-            'title' => 'Letters Data',
-            'datas' => $categoryletter
-                ->letter()
-                ->latest()
+            'title' => $categoryletter->name,
+            'datas' => $data
+                ->where('category_letter_id', $categoryletter->id)
                 ->paginate(10)
                 ->withQueryString(),
+            // 'datas' => $categoryletter
+            //     ->letter()
+            //     ->latest()
+            //     ->paginate(10)
+            //     ->withQueryString(),
         ]);
     }
 }
