@@ -36,7 +36,28 @@
 
     <div class="row">
         <div class="col-md-5">
-            <x-card> </x-card>
+            <div class="dropdown">
+                <button
+                    class="btn btn-dark dropdown-toggle"
+                    type="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                >
+                    Add New Invoice
+                </button>
+                <ul class="dropdown-menu">
+                    @foreach($datas3 as $sup)
+                    <li>
+                        <a
+                            class="dropdown-item"
+                            href="/dashboard/stock/invStock/{{ $sup->slug }}"
+                            >{{ $sup->name }}</a
+                        >
+                    </li>
+
+                    @endforeach
+                </ul>
+            </div>
         </div>
     </div>
     <div class="row mt-3">

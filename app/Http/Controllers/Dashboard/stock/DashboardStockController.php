@@ -42,9 +42,7 @@ class DashboardStockController extends Controller
                 ->paginate(10)
                 ->withQueryString(),
 
-            // 'datas' => Supplier::latest()
-            //     ->paginate(10)
-            //     ->withQueryString(),
+            'datas3' => Supplier::all(),
         ]);
     }
 
