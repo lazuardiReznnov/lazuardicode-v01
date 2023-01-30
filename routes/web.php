@@ -217,6 +217,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/dashboard/stock/{stock}/edit', 'edit');
         Route::put('/dashboard/stock/{stock}', 'update');
         Route::delete('/dashboard/stock/{stock}', 'destroy');
+        Route::post('dashboard/stock/pay/{invStock}', 'pay');
     });
     // end Stock
     // inv Stock

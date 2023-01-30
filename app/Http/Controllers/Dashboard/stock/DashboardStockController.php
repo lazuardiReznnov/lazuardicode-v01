@@ -122,4 +122,13 @@ class DashboardStockController extends Controller
             '/dashboard/stock/detail/' . $stock->invStock->slug
         )->with('success', 'New Post Has Been Deleted.');
     }
+
+    public function pay(invStock $invStock)
+    {
+        invStock::where('id', $invStock->id)->update(['state' => 'lunas']);
+        return redirect('/dashboard/stock/iodata')->with(
+            'success',
+            'New Post Has Been Paid'
+        );
+    }
 }

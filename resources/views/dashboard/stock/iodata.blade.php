@@ -7,6 +7,38 @@
         </x-breadcrumb-link>
         <x-breadcrumb-link-active>{{ $title }} </x-breadcrumb-link-active>
     </x-breadcrumb>
+
+    <div class="row">
+        <div class="col-md">
+            @if(session()->has('success'))
+            <x-card>
+                <!-- pesan -->
+
+                <div
+                    class="alert alert-success alert-dismissible fade show"
+                    role="alert"
+                >
+                    {{ session("success") }}
+
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert"
+                        aria-label="close"
+                    ></button>
+                </div>
+
+                <!-- endpesan -->
+            </x-card>
+            @endif
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-5">
+            <x-card> </x-card>
+        </div>
+    </div>
     <div class="row mt-3">
         <div class="col-md-10">
             <x-card header=" Billing">
@@ -55,6 +87,7 @@
 
                                     <th scope="col">Total Bill</th>
                                     <th scope="col">Payment</th>
+                                    <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -65,13 +98,47 @@
                                     <th scope="row">
                                         {{ ($datas1->currentpage()-1) * $datas1->perpage() + $loop->index + 1 }}
                                     </th>
-                                    <td>{{ $data1->supplier->name }}</td>
-                                    <td>{{ $data1->name }}</td>
+                                    <td>
+                                        <a
+                                            href="/dashboard/stock/invStock/{{ $data1->supplier->slug }}"
+                                            class="text-decoration-none"
+                                        >
+                                            {{ $data1->supplier->name }}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a
+                                            href="/dashboard/stock/detail/{{ $data1->slug }}"
+                                            class="text-decoration-none"
+                                        >
+                                            {{ $data1->name }}</a
+                                        >
+                                    </td>
                                     @foreach($data1->stock as $stock1) @php $ttl
                                     = $stock1->qty*$stock1->price; @endphp
                                     @endforeach
                                     <td>@currency($ttl)</td>
                                     <td>{{ $data1->payment }}</td>
+                                    <td>
+                                        <form
+                                            action="/dashboard/stock/pay/{{ $data1->slug }}"
+                                            method="post"
+                                            class="d-inline"
+                                        >
+                                            @csrf
+                                            <button
+                                                class="badge bg-success border-0"
+                                                data-bs-toggle="tooltip"
+                                                data-bs-placement="top"
+                                                title="Paid Inv stock"
+                                                onclick="return confirm('are You sure ??')"
+                                            >
+                                                <i
+                                                    class="bi bi-credit-card"
+                                                ></i>
+                                            </button>
+                                        </form>
+                                    </td>
                                 </tr>
                                 @php $gttl = $ttl+$gttl; @endphp @endforeach
                                 <tr class="fw-bold">
@@ -80,7 +147,7 @@
                                 </tr>
                                 @else
                                 <tr>
-                                    <td colspan="4" class="text-center">
+                                    <td colspan="6" class="text-center">
                                         Data Not Found
                                     </td>
                                 </tr>
@@ -119,8 +186,22 @@
                                     <th scope="row">
                                         {{ ($datas2->currentpage()-1) * $datas2->perpage() + $loop->index + 1 }}
                                     </th>
-                                    <td>{{ $data2->supplier->name }}</td>
-                                    <td>{{ $data2->name }}</td>
+                                    <td>
+                                        <a
+                                            href="/dashboard/stock/invStock/{{ $data2->supplier->slug }}"
+                                            class="text-decoration-none"
+                                        >
+                                            {{ $data2->supplier->name }}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a
+                                            href="/dashboard/stock/detail/{{ $data2->slug }}"
+                                            class="text-decoration-none"
+                                        >
+                                            {{ $data2->name }}
+                                        </a>
+                                    </td>
                                     @foreach($data2->stock as $stock2) @php $ttl
                                     = $stock2->qty*$stock2->price; @endphp
                                     @endforeach
@@ -134,7 +215,7 @@
                                 </tr>
                                 @else
                                 <tr>
-                                    <td colspan="4" class="text-center">
+                                    <td colspan="6" class="text-center">
                                         Data Not Found
                                     </td>
                                 </tr>
@@ -150,12 +231,18 @@
                 </div>
                 <div class="row">
                     <div class="col-md-10">
-                        <p>
-                            Total Tagihan Bulan {{ date("F") }} :
-                            @currency($gttl+$gttl2)
-                        </p>
-                        <p>Total Tagihan Terbayar @currency($gttl2)</p>
-                        <p>Total Tagihan Blm Terbayar @currency($gttl)</p>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                Total Paid Billing : @currency($gttl2)
+                            </li>
+                            <li class="list-group-item">
+                                Total Unpaid Billing : @currency($gttl)
+                            </li>
+                            <li class="list-group-item">
+                                Billing Total Month {{ date("F") }} :
+                                @currency($gttl+$gttl2)
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </x-card>

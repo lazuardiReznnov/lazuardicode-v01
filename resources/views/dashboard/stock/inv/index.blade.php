@@ -6,7 +6,7 @@
             Stock Management
         </x-breadcrumb-link>
         <x-breadcrumb-link link="/dashboard/stock/iodata">
-            invoicement
+            Billing List
         </x-breadcrumb-link>
         <x-breadcrumb-link-active>{{ $title }} </x-breadcrumb-link-active>
     </x-breadcrumb>
