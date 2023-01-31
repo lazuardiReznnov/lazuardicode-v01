@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers\Dashboard\Unit;
 
-use App\Http\Controllers\Controller;
-use App\Models\Unit;
-use Illuminate\Http\Request;
-use Cviebrock\EloquentSluggable\Services\SlugService;
-use Illuminate\support\Facades\Storage;
+use App\Models\flag;
 use App\Models\type;
+use App\Models\Unit;
 use App\Models\Brand;
+use App\Models\group;
 use App\Models\Carosery;
 use App\Models\Category;
-use App\Models\flag;
-use App\Models\group;
+use Illuminate\Http\Request;
+use App\Imports\Unit\unitsImport;
+use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\support\Facades\Storage;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class DashboardUnitController extends Controller
 {
@@ -195,5 +197,27 @@ class DashboardUnitController extends Controller
             ['category_id', $request->category],
         ])->get();
         return response()->json($type);
+    }
+
+    public function createexcl()
+    {
+        return view('dashboard.Unit.create-excel', [
+            'title' => 'File Import Via Excel',
+        ]);
+    }
+
+    public function storeexcl(Request $request)
+    {
+        $validatedData = $request->validate([
+            'excl' => 'required:mimes:xlsx,xls,csv|max:2048',
+        ]);
+
+        if ($request->file('excl')) {
+            Excel::import(new unitsImport(), $validatedData['excl']);
+            return redirect('/dashboard/unit')->with(
+                'success',
+                'New Data Has Been Aded.!'
+            );
+        }
     }
 }

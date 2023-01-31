@@ -37,7 +37,7 @@
 
     <div class="row">
         <div class="col-md-10">
-            <x-card>
+            <x-card header="{{ date('F') }}">
                 <table id="table" class="table table-responsive">
                     <thead>
                         <tr>

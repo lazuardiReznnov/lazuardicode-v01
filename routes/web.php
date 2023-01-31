@@ -181,7 +181,8 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(DashboardUnitController::class)->group(function () {
         route::get('dashboard/unit/getType', 'getType');
-
+        Route::get('dashboard/unit/create-excl', 'createexcl');
+        Route::post('dashboard/unit/store-excl', 'storeexcl');
         Route::get('dashboard/unit/checkSlug', 'checkSlug');
     });
     Route::resource('dashboard/unit', DashboardUnitController::class);

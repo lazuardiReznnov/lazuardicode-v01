@@ -39,6 +39,9 @@
             <a href="/dashboard/unit/create" class="btn btn-sm btn-primary"
                 ><i class="bi bi-file-earmark-plus"></i
             ></a>
+            <a href="/dashboard/unit/create-excl" class="btn btn-sm btn-primary"
+                ><i class="bi bi-file-earmark-plus"></i
+            ></a>
         </div>
     </div>
     <!-- EndTombol -->
