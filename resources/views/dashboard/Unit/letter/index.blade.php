@@ -31,6 +31,14 @@
             @endif
         </div>
     </div>
+
+    <div class="row mb-5">
+        <div class="col-md-10">
+            <a href="/dashboard/unit/letter/create" class="btn btn-primary">
+                Add Letter Data
+            </a>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-8">
             <x-card header="Letter">

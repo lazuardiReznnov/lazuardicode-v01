@@ -470,9 +470,7 @@
                                 <option value="{{ $a }}">
                                     {{ $a }}
                                 </option>
-                                @endif
-                                <option value="{{ $a }}">{{ $a }}</option>
-                                @endfor
+                                @endif @endfor
                             </select>
                             @error('year')
                             <span class="invalid-feedback" role="alert">

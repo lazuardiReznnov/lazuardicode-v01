@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers\Dashboard\Unit\Letter;
 
-use App\Http\Controllers\Controller;
+use App\Models\flag;
+use App\Models\unit;
 use App\Models\Letter;
-use App\Models\CategoryLetter;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\CategoryLetter;
+use App\Imports\Unit\lettersImport;
+use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\support\Facades\Storage;
 
 class DashboardLetterController extends Controller
 {
@@ -29,7 +35,12 @@ class DashboardLetterController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.unit.letter.create', [
+            'title' => 'Add Letter Unit Data',
+            'units' => unit::all(),
+            'categorys' => CategoryLetter::all(),
+            'flags' => flag::all(),
+        ]);
     }
 
     /**
@@ -40,7 +51,41 @@ class DashboardLetterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'category_letter_id' => 'required',
+            'unit_id' => 'required',
+            'regNum' => 'required',
+            'owner' => 'required',
+            'owner_add' => 'required',
+            'reg_year' => 'required',
+            'loc_code' => 'required',
+            'lpc' => 'required',
+            'vodn' => 'required',
+            'expire_date' => 'required',
+            'pic' => 'image|file|max:2048',
+        ];
+
+        if ($request->category_letter_id == 1) {
+            $rules['tax'] = 'required';
+        }
+
+        $validatedData = $request->validate($rules);
+
+        $str_rand = Str::random(3);
+        $validatedData['slug'] = Str::of(
+            $str_rand . ' ' . $request->regNum
+        )->slug('-');
+
+        if ($request->file('pic')) {
+            $validatedData['pic'] = $request->file('pic')->store('Letter-pic');
+        }
+
+        Letter::create($validatedData);
+
+        return redirect('/dashboard/unit/letter')->with(
+            'success',
+            'New Post Has Been Created.'
+        );
     }
 
     /**
@@ -65,7 +110,12 @@ class DashboardLetterController extends Controller
      */
     public function edit(Letter $letter)
     {
-        //
+        return view('dashboard.Unit.letter.edit', [
+            'title' => 'Edit Unit Letter Data',
+            'data' => $letter,
+            'categorys' => CategoryLetter::all(),
+            'units' => unit::all(),
+        ]);
     }
 
     /**
@@ -77,7 +127,39 @@ class DashboardLetterController extends Controller
      */
     public function update(Request $request, Letter $letter)
     {
-        //
+        $rules = [
+            'category_letter_id' => 'required',
+            'unit_id' => 'required',
+            'regNum' => 'required',
+            'owner' => 'required',
+            'owner_add' => 'required',
+            'reg_year' => 'required',
+            'loc_code' => 'required',
+            'lpc' => 'required',
+            'vodn' => 'required',
+            'expire_date' => 'required',
+            'pic' => 'image|file|max:2048',
+        ];
+
+        if ($request->category_letter_id == 1) {
+            $rules['tax'] = 'required';
+        }
+
+        $validatedData = $request->validate($rules);
+
+        if ($request->file('pic')) {
+            if ($request->old_pic) {
+                storage::delete($request->old_pic);
+            }
+            $validatedData['pic'] = $request->file('pic')->store('unit-pic');
+        }
+
+        Letter::where('id', $letter->id)->update($validatedData);
+
+        return redirect('/dashboard/unit/letter')->with(
+            'success',
+            'New Post Has Been Created.'
+        );
     }
 
     /**
@@ -88,7 +170,14 @@ class DashboardLetterController extends Controller
      */
     public function destroy(Letter $letter)
     {
-        //
+        Letter::destroy($letter->id);
+        if ($letter->pic) {
+            storage::delete($letter->pic);
+        }
+        return redirect('/dashboard/unit/letter')->with(
+            'success',
+            'New Post Has Been Deleted.'
+        );
     }
 
     public function data(CategoryLetter $categoryletter)
@@ -110,5 +199,27 @@ class DashboardLetterController extends Controller
             //     ->paginate(10)
             //     ->withQueryString(),
         ]);
+    }
+
+    public function createexcl()
+    {
+        return view('dashboard.Unit.letter.create-excel', [
+            'title' => 'File Import Via Excel',
+        ]);
+    }
+
+    public function storeexcl(Request $request)
+    {
+        $validatedData = $request->validate([
+            'excl' => 'required:mimes:xlsx,xls,csv|max:2048',
+        ]);
+
+        if ($request->file('excl')) {
+            Excel::import(new lettersImport(), $validatedData['excl']);
+            return redirect('/dashboard/unit/letter')->with(
+                'success',
+                'New Data Has Been Aded.!'
+            );
+        }
     }
 }
