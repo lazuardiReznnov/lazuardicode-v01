@@ -40,7 +40,7 @@
                 ><i class="bi bi-file-earmark-plus"></i
             ></a>
             <a href="/dashboard/unit/create-excl" class="btn btn-sm btn-primary"
-                ><i class="bi bi-file-earmark-plus"></i
+                ><i class="bi bi-file-earmark-spreadsheet-fill"></i
             ></a>
         </div>
     </div>

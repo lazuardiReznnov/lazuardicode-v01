@@ -61,4 +61,9 @@ class unit extends Model
     {
         return $this->hasMany(letter::class);
     }
+
+    public function maintenance()
+    {
+        return $this->hasMany(Maintenance::class);
+    }
 }
