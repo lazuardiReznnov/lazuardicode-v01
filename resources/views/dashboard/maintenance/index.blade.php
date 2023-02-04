@@ -70,7 +70,9 @@
                                 {{ ($datas->currentpage()-1) * $datas->perpage() + $loop->index + 1 }}
                             </th>
 
-                            <td>{{ $data->tgl }}</td>
+                            <td class="align-item-center">
+                                {{ \Carbon\Carbon::parse($data->tgl)->format('d/m/Y') }}
+                            </td>
                             <td>
                                 {{ $data->unit->name }}
                             </td>
