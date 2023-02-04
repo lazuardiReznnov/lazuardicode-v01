@@ -102,11 +102,19 @@
 
                             <td>
                                 <a
+                                    href="/dashboard/maintenance/status/{{ $data->slug }}"
+                                    class="badge bg-success"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-placement="top"
+                                    title="update maintenance"
+                                    ><i class="bi bi-arrow-up-left-square"></i
+                                ></a>
+                                <a
                                     href="/dashboard/maintenance/{{ $data->slug }}"
                                     class="badge bg-success"
                                     data-bs-toggle="tooltip"
                                     data-bs-placement="top"
-                                    title="Detail User"
+                                    title="Detail maintenance"
                                     ><i class="bi bi-eye"></i
                                 ></a>
                                 <a
