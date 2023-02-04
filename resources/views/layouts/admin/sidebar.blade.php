@@ -68,6 +68,13 @@
                 <x-navlink link="/dashboard/stock">Stock item</x-navlink>
                 <x-navlink link="/dashboard/stock/supplier">Supplier</x-navlink>
             </x-collapselink>
+
+            <x-headsidenav title="Maintenance-Management"> </x-headsidenav>
+            <x-collapselink titlecols="Maintenance-Data">
+                <x-navlink link="/dashboard/maintenance"
+                    >maintenance item</x-navlink
+                >
+            </x-collapselink>
         </div>
     </div>
     <div class="sb-sidenav-footer">

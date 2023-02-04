@@ -8,6 +8,7 @@ use App\Models\categoryPart;
 use App\Models\Heropage;
 use App\Models\invStock;
 use App\Models\Letter;
+use App\Models\Maintenance;
 use App\Models\sparepart;
 use App\Models\Supplier;
 use Illuminate\Database\Seeder;
@@ -43,6 +44,7 @@ class DatabaseSeeder extends Seeder
             SparepartSeeder::class,
             InvStockSeeder::class,
             StockSeeder::class,
+            MaintenanceSeeder::class,
         ]);
     }
 }

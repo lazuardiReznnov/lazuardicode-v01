@@ -14,6 +14,7 @@ use App\Http\Controllers\Dashboard\DashboardPageController;
 use App\Http\Controllers\Landingpage\LandingpageController;
 use App\Http\Controllers\Dashboard\DashboardAboutController;
 use App\Http\Controllers\Dashboard\DashboardPortofolioController;
+use App\Http\Controllers\Dashboard\Maintenance\DashboardMaintenanceController;
 use App\Http\Controllers\Dashboard\stock\DashboardInvstockController;
 use App\Http\Controllers\Dashboard\stock\DashboardSparepartController;
 use App\Http\Controllers\Dashboard\stock\DashboardStockController;
@@ -234,6 +235,13 @@ Route::middleware('auth')->group(function () {
         Route::put('/dashboard/stock/invStock/{invStock}', 'update');
     });
     // end Inv Stock
+
+    // Maintenance
+    Route::resource(
+        '/dashboard/maintenance',
+        DashboardMaintenanceController::class
+    );
+    // Endmaintenance
 
     // End ekspedisi Program
 });

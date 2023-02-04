@@ -19,11 +19,12 @@ return new class extends Migration {
                 ->constrained('units')
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
-            $table->string('name')->unique();
+            $table->string('name');
             $table->string('slug')->unique();
             $table->date('tgl');
             $table->date('finish');
             $table->text('description');
+            $table->text('instruktion');
             $table->string('status')->default('start');
             $table->timestamps();
         });
