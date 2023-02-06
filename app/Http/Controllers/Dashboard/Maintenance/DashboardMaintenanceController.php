@@ -86,6 +86,11 @@ class DashboardMaintenanceController extends Controller
      */
     public function destroy(Maintenance $maintenance)
     {
-        //
+        Maintenance::destroy($maintenance->id);
+
+        return redirect('/dashboard/maintenance')->with(
+            'success',
+            'New Post Has Been Deleted.'
+        );
     }
 }
