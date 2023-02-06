@@ -23,7 +23,7 @@ class MaintenanceSeeder extends Seeder
             'finish' => '2023/02/05',
             'description' =>
                 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, dolorum?',
-            'instruktion' => '-Cek System Stater',
+            'instruction' => '-Cek System Stater',
             'status' => 'processing',
         ]);
 
@@ -35,7 +35,7 @@ class MaintenanceSeeder extends Seeder
             'finish' => '2023/02/05',
             'description' =>
                 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum, dolorum?',
-            'instruktion' => '-Cek System Stater',
+            'instruction' => '-Cek System Stater',
             'status' => 'checking',
         ]);
     }

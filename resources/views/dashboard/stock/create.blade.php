@@ -69,9 +69,9 @@
 
                     <div class="row mb-3">
                         <label
-                            for="carosery_id"
+                            for="sparepart_id"
                             class="col-md-4 col-form-label text-md-end"
-                            >{{ __("carosery") }}</label
+                            >{{ __("Sparepart") }}</label
                         >
 
                         <div class="col-md-6">
@@ -83,7 +83,7 @@
                             >
                                 <option selected>Select Part</option>
                                 @foreach($sparepart as $part)
-                                @if(old('part_id')==$part->id)
+                                @if(old('sparepart_id')==$part->id)
                                 <option value="{{ $part->id }}" selected>
                                     {{ $part->categoryPart->name }} -
                                     {{ $part->type->name }} -

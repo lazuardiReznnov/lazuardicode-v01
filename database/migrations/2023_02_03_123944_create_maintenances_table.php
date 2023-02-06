@@ -24,7 +24,7 @@ return new class extends Migration {
             $table->date('tgl');
             $table->date('finish');
             $table->text('description');
-            $table->text('instruktion');
+            $table->text('instruction');
             $table->string('status')->default('start');
             $table->timestamps();
         });
