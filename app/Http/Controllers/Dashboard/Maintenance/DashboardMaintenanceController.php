@@ -52,7 +52,10 @@ class DashboardMaintenanceController extends Controller
      */
     public function show(Maintenance $maintenance)
     {
-        //
+        return view('dashboard.maintenance.show', [
+            'title' => 'Detail Maintenance Data',
+            'data' => $maintenance,
+        ]);
     }
 
     /**
