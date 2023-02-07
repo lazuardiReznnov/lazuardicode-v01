@@ -237,6 +237,15 @@ Route::middleware('auth')->group(function () {
     // end Inv Stock
 
     // Maintenance
+    Route::controller(DashboardMaintenanceController::class)->group(
+        function () {
+            Route::get(
+                '/dashboard/maintenance/print-spk/{maintenance}',
+                'printspk'
+            );
+        }
+    );
+
     Route::resource(
         '/dashboard/maintenance',
         DashboardMaintenanceController::class

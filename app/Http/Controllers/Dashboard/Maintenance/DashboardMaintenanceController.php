@@ -7,6 +7,7 @@ use App\Models\Maintenance;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Msparepart;
 
 class DashboardMaintenanceController extends Controller
 {
@@ -75,7 +76,13 @@ class DashboardMaintenanceController extends Controller
      */
     public function show(Maintenance $maintenance)
     {
-        //
+        return view('dashboard.maintenance.show', [
+            'title' => 'Detail Maintenance data',
+            'data' => $maintenance,
+            'mparts' => Msparepart::where('maintenance_id', $maintenance->id)
+                ->paginate(10)
+                ->withQueryString(),
+        ]);
     }
 
     /**
@@ -133,5 +140,13 @@ class DashboardMaintenanceController extends Controller
             'success',
             'New Post Has Been Deleted.'
         );
+    }
+
+    public function printspk(Maintenance $maintenance)
+    {
+        return view('dashboard.maintenance.print', [
+            'title' => 'Print Out SPK',
+            'data' => $maintenance,
+        ]);
     }
 }
