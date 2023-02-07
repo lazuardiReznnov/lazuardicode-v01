@@ -14,9 +14,55 @@
     </head>
     <body>
         <div class="container">
-            <div class="row">
+            <div class="row mt-2">
                 <div class="col-sm">
-                    <h3>Head</h3>
+                    <h4 class="text-uppercase text-center mb-4">Work Order</h4>
+                </div>
+            </div>
+            <div class="row justify-content-between">
+                <div class="col-sm-4">
+                    <div class="card p-2">
+                        <div class="row">
+                            <small class="col-sm-4"> Date </small>
+                            <small class="col-sm-4"> : {{ $data->tgl }} </small>
+                        </div>
+                        <div class="row">
+                            <small class="col-sm-4"> Unit Name </small>
+                            <small class="col-sm-4">
+                                : {{ $data->unit->name }}
+                            </small>
+                        </div>
+                        <div class="row">
+                            <small class="col-sm-4"> Brand/Type </small>
+                            <small class="col-sm-8">
+                                : {{ $data->unit->type->brand->name }}
+                                {{ $data->unit->type->name }}
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="card p-2">
+                        <div class="row">
+                            <small class="col-sm-4"> Group </small>
+                            <small class="col-sm-4">
+                                : {{ $data->unit->group->name }}
+                            </small>
+                        </div>
+                        <div class="row">
+                            <small class="col-sm-4"> Flag </small>
+                            <small class="col-sm-8">
+                                : {{ $data->unit->flag->name }}
+                            </small>
+                        </div>
+                        <div class="row">
+                            <small class="col-sm-4"> Brand/Type </small>
+                            <small class="col-sm-8">
+                                : {{ $data->unit->type->brand->name }}
+                                {{ $data->unit->type->name }}
+                            </small>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
