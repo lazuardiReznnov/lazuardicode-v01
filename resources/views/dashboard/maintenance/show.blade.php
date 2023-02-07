@@ -3,55 +3,176 @@
     <x-breadcrumb>
         <x-breadcrumb-link link="/dashboard"> Dashboard </x-breadcrumb-link>
         <x-breadcrumb-link link="/dashboard/maintenance">
-            Maintenance Management
+            maintenance Management
         </x-breadcrumb-link>
 
         <x-breadcrumb-link-active>{{ $title }} </x-breadcrumb-link-active>
     </x-breadcrumb>
+
+    <div class="btn-group mb-4">
+        <a
+            href="/dashboard/maintenance/part/{{ $data->slug }}"
+            class="btn btn-primary"
+            aria-current="page"
+            >Add Sparepart</a
+        >
+        <a
+            href="/dashboard/maintenance/print-spk/{{ $data->slug }}"
+            class="btn btn-primary"
+            >Print SPK</a
+        >
+        <a
+            href="/dashboard/maintenance/update-state/{{ $data->slug }}"
+            class="btn btn-primary"
+            >Update</a
+        >
+    </div>
     <x-card>
-        <div class="row justify-content-between">
-            <div class="col-md-6">
+        <h4>Unit Detail</h4>
+        <hr />
+        <div class="row">
+            <div class="col-md-4">
                 <div class="row">
-                    <small class="col-md-3">Unit Name</small>
-                    <small class="col-md-6">: {{ $data->unit->name }}</small>
-                </div>
-                <div class="row">
-                    <small class="col-md-3">Brand Type</small>
-                    <small class="col-md-6">
+                    <small class="col-md-5">Brand/Type Unit</small>
+                    <small class="col-md-7">
                         : {{ $data->unit->type->brand->name }}
                         {{ $data->unit->type->name }}
                     </small>
                 </div>
-                <div class="row">
-                    <small class="col-md-3">carosery</small>
-                    <small class="col-md-6">
-                        : {{ $data->unit->carosery->name }}
-                    </small>
+                <div class="row mb">
+                    <small class="col-md-5">Category</small>
+                    <small class="col-md-7"
+                        >: {{ $data->unit->type->category->name }}</small
+                    >
+                </div>
+                <div class="row mb-2">
+                    <small class="col-md-5">Unit Name</small>
+                    <small class="col-md-7">: {{ $data->unit->name }}</small>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="row">
+        </div>
+    </x-card>
+
+    <x-card>
+        <h4>Repaired Detail</h4>
+        <hr />
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row mb">
                     <small class="col-md-3">Date</small>
                     <small class="col-md-6"
                         >:
                         {{ \Carbon\Carbon::parse($data->tgl)->format('d/m/Y') }}</small
                     >
                 </div>
-                <div class="row">
-                    <small class="col-md-3">Repaire Request</small>
-                    <small class="col-md-6"> : {{ $data->name }} </small>
+                <div class="row mb">
+                    <small class="col-md-3">Request Repaired</small>
+                    <small class="col-md-6">: {{ $data->name }}</small>
                 </div>
-                <div class="row">
+                <div class="row mb">
                     <small class="col-md-3">Description</small>
-                    <small class="col-md-6"> : {{ $data->description }} </small>
+                    <small class="col-md-6">: {{ $data->description }}</small>
                 </div>
-                <div class="row">
-                    <small class="col-md-3">Estimasi</small>
-                    <small class="col-md-6">
-                        : @php $est = date_diff($data->finish, $data->tgl);
-                        @endphp {{ $est }}
+                <div class="row mb">
+                    <small class="col-md-3">Repair Instructions</small>
+                    <small class="col-md-6">: {{ $data->instruction}}</small>
+                </div>
+                <div class="row mb">
+                    <small class="col-md-3">Repair State</small>
+                    <small class="col-md-6"
+                        >: {{ $data->status }} <br />
+
+                        @php if($data->status == 'start'){ $prog = 0; }elseif(
+                        $data->status =='checking' ){ $prog = 25;
+                        }elseif($data->status == 'processing'){ $prog = 50;
+                        }elseif($data->status == 'finishing'){ $prog = 75;
+                        }elseif($data->status == 'complated'){ $prog = 100; }
+                        @endphp
+
+                        <div class="progress">
+                            <div
+                                class="progress-bar"
+                                role="progressbar"
+                                aria-label="Example with label"
+                                style="width: {{ $prog }}%"
+                                aria-valuenow="{{ $prog }}"
+                                aria-valuemin="0"
+                                aria-valuemax="100"
+                            >
+                                {{ $prog }}%
+                            </div>
+                        </div>
                     </small>
                 </div>
+            </div>
+        </div>
+    </x-card>
+
+    <x-card>
+        <h4>Sparepart Data</h4>
+        <hr />
+
+        <table id="table" class="table table-responsive mt-2">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Sparepart</th>
+                    <th>Qty</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if($mparts->count()) @foreach($mparts as $mpart)
+
+                <tr>
+                    <th scope="row">
+                        {{ ($mparts->currentpage()-1) * $mparts->perpage() + $loop->index + 1 }}
+                    </th>
+
+                    <td>
+                        {{ $mpart->sparepart->name }}
+                    </td>
+                    <td>{{ $mpart->qty }}</td>
+
+                    <td>
+                        <a
+                            href="/dashboard/maintenance/mpart/{{ $mpart->slug }}/edit"
+                            class="badge bg-warning"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="top"
+                            title="Edit maintenance"
+                            ><i class="bi bi-pencil-square"></i
+                        ></a>
+
+                        <form
+                            action="/dashboard/maintenance/mpart/{{ $mpart->slug }}"
+                            method="post"
+                            class="d-inline"
+                        >
+                            @method('delete') @csrf
+                            <button
+                                class="badge bg-danger"
+                                data-bs-toggle="tooltip"
+                                data-bs-placement="top"
+                                title="Delete maintenance"
+                                onclick="return confirm('are You sure ??')"
+                            >
+                                <i class="bi bi-file-x-fill"></i>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                @endforeach @else
+                <tr>
+                    <td colspan="6" class="text-center">Data Not Found</td>
+                </tr>
+                @endif
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="col-md-8">
+                {{ $mparts->onEachside(2)->links() }}
             </div>
         </div>
     </x-card>

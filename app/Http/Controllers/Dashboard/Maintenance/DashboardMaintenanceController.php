@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Dashboard\Maintenance;
 
-use App\Http\Controllers\Controller;
+use App\Models\unit;
 use App\Models\Maintenance;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\Msparepart;
 
 class DashboardMaintenanceController extends Controller
 {
@@ -30,7 +33,10 @@ class DashboardMaintenanceController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.maintenance.create', [
+            'title' => 'Form Maintenance Data',
+            'units' => unit::all(),
+        ]);
     }
 
     /**
@@ -41,7 +47,25 @@ class DashboardMaintenanceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'unit_id' => 'required',
+            'name' => 'required',
+            'tgl' => 'required',
+            'finish' => 'required',
+            'description' => 'required',
+            'instruction' => 'required',
+        ]);
+        $str_rand = Str::random(5);
+        $validatedData['slug'] = Str::of(
+            $str_rand . ' ' . $request->unit_id
+        )->slug('-');
+
+        Maintenance::create($validatedData);
+
+        return redirect('/dashboard/maintenance')->with(
+            'success',
+            'New Post Has Been Aded.'
+        );
     }
 
     /**
@@ -53,8 +77,11 @@ class DashboardMaintenanceController extends Controller
     public function show(Maintenance $maintenance)
     {
         return view('dashboard.maintenance.show', [
-            'title' => 'Detail Maintenance Data',
+            'title' => 'Detail Maintenance data',
             'data' => $maintenance,
+            'mparts' => Msparepart::where('maintenance_id', $maintenance->id)
+                ->paginate(10)
+                ->withQueryString(),
         ]);
     }
 
@@ -66,7 +93,11 @@ class DashboardMaintenanceController extends Controller
      */
     public function edit(Maintenance $maintenance)
     {
-        //
+        return view('dashboard.maintenance.edit', [
+            'title' => 'Edit Maintenance Data',
+            'data' => $maintenance,
+            'units' => unit::all(),
+        ]);
     }
 
     /**
@@ -78,7 +109,21 @@ class DashboardMaintenanceController extends Controller
      */
     public function update(Request $request, Maintenance $maintenance)
     {
-        //
+        $validatedData = $request->validate([
+            'unit_id' => 'required',
+            'name' => 'required',
+            'tgl' => 'required',
+            'finish' => 'required',
+            'description' => 'required',
+            'instruction' => 'required',
+        ]);
+
+        Maintenance::where('id', $maintenance->id)->update($validatedData);
+
+        return redirect('/dashboard/maintenance')->with(
+            'success',
+            'New Post Has Been updated.'
+        );
     }
 
     /**
@@ -89,6 +134,19 @@ class DashboardMaintenanceController extends Controller
      */
     public function destroy(Maintenance $maintenance)
     {
-        //
+        Maintenance::destroy($maintenance->id);
+
+        return redirect('/dashboard/maintenance')->with(
+            'success',
+            'New Post Has Been Deleted.'
+        );
+    }
+
+    public function printspk(Maintenance $maintenance)
+    {
+        return view('dashboard.maintenance.print', [
+            'title' => 'Print Out SPK',
+            'data' => $maintenance,
+        ]);
     }
 }

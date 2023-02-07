@@ -104,7 +104,7 @@
 
                             <td>
                                 <a
-                                    href="/dashboard/maintenance/status/{{ $data->slug }}"
+                                    href="/dashboard/maintenance//{{ $data->slug }}"
                                     class="badge bg-success"
                                     data-bs-toggle="tooltip"
                                     data-bs-placement="top"

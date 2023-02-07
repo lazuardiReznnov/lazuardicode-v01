@@ -10,7 +10,7 @@ class Maintenance extends Model
     use HasFactory;
 
     protected $with = ['unit'];
-    protected $load = ['mfile', 'msparepart'];
+    protected $load = ['mfile', 'mspareparts'];
     protected $guarded = ['id'];
 
     public function getRouteKeyName()
