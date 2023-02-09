@@ -243,6 +243,23 @@ Route::middleware('auth')->group(function () {
                 '/dashboard/maintenance/print-spk/{maintenance}',
                 'printspk'
             );
+            Route::get(
+                '/dashboard/maintenance/part/{maintenance}',
+                'createpart'
+            );
+            Route::post('dashboard/maintenance/part', 'storepart');
+
+            Route::delete(
+                '/dashboard/maintenance/part/{maintenance}/{msparepart}',
+                'deletepart'
+            );
+
+            Route::get(
+                '/dashboard/maintenance/part/{maintenance}/{msparepart}/edit',
+                'editpart'
+            );
+
+            Route::put('dashboard/maintenance/part/{msparepart}', 'updatepart');
         }
     );
 

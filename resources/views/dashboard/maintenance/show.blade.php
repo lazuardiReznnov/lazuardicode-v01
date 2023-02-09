@@ -27,6 +27,33 @@
             >Update</a
         >
     </div>
+    <!-- Pesan -->
+    <div class="row">
+        <div class="col-md-10">
+            @if(session()->has('success'))
+            <x-card>
+                <!-- pesan -->
+
+                <div
+                    class="alert alert-success alert-dismissible fade show"
+                    role="alert"
+                >
+                    {{ session("success") }}
+
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert"
+                        aria-label="close"
+                    ></button>
+                </div>
+
+                <!-- endpesan -->
+            </x-card>
+            @endif
+        </div>
+    </div>
+    <!-- endPesan -->
     <x-card>
         <h4>Unit Detail</h4>
         <hr />
@@ -137,7 +164,7 @@
 
                     <td>
                         <a
-                            href="/dashboard/maintenance/mpart/{{ $mpart->slug }}/edit"
+                            href="/dashboard/maintenance/part/{{ $data->slug }}/{{ $mpart->slug }}/edit"
                             class="badge bg-warning"
                             data-bs-toggle="tooltip"
                             data-bs-placement="top"
@@ -146,7 +173,7 @@
                         ></a>
 
                         <form
-                            action="/dashboard/maintenance/mpart/{{ $mpart->slug }}"
+                            action="/dashboard/maintenance/part/{{ $data->slug }}/{{ $mpart->slug }}"
                             method="post"
                             class="d-inline"
                         >

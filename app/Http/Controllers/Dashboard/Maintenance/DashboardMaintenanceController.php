@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Msparepart;
+use App\Models\sparepart;
 
 class DashboardMaintenanceController extends Controller
 {
@@ -148,5 +149,71 @@ class DashboardMaintenanceController extends Controller
             'title' => 'Print Out SPK',
             'data' => $maintenance,
         ]);
+    }
+
+    public function createpart(Maintenance $maintenance)
+    {
+        return view('dashboard.maintenance.sparepart.create', [
+            'title' => 'Add Sparepart',
+            'data' => $maintenance,
+            'spareparts' => sparepart::all(),
+        ]);
+    }
+
+    public function storepart(Request $request)
+    {
+        $validatedData = $request->validate([
+            'sparepart_id' => 'required',
+            'qty' => 'required',
+        ]);
+
+        $str_rand = Str::random(3);
+        $validatedData['slug'] = Str::of(
+            $str_rand . ' ' . $request->regNum
+        )->slug('-');
+
+        $validatedData['maintenance_id'] = $request->maintenance_id;
+
+        Msparepart::create($validatedData);
+
+        return redirect(
+            '/dashboard/maintenance/' . $request->maintenance_slug
+        )->with('success', 'New Sparepart Has Been aded.');
+    }
+
+    public function deletepart(Maintenance $maintenance, Msparepart $msparepart)
+    {
+        Msparepart::destroy($msparepart->id);
+
+        return redirect('/dashboard/maintenance/' . $maintenance->slug)->with(
+            'success',
+            'New Sparepart Has Been Deleted.'
+        );
+    }
+
+    public function editpart(Maintenance $maintenance, Msparepart $msparepart)
+    {
+        return view('dashboard.maintenance.sparepart.edit', [
+            'title' => 'Edit Sparepart Data',
+            'maintenance' => $maintenance,
+            'data' => $msparepart,
+            'spareparts' => sparepart::all(),
+        ]);
+    }
+
+    public function updatepart(Msparepart $msparepart, Request $request)
+    {
+        $validatedData = $request->validate([
+            'sparepart_id' => 'required',
+            'qty' => 'required',
+        ]);
+
+        $validatedData['maintenance_id'] = $request->maintenance_id;
+
+        Msparepart::where('id', $msparepart->id)->update($validatedData);
+
+        return redirect(
+            '/dashboard/maintenance/' . $request->maintenance_slug
+        )->with('success', 'New Sparepart Has Been Update.');
     }
 }
