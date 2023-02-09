@@ -22,7 +22,7 @@
             >Print SPK</a
         >
         <a
-            href="/dashboard/maintenance/update-state/{{ $data->slug }}"
+            href="/dashboard/maintenance/state/{{ $data->slug }}"
             class="btn btn-primary"
             >Update</a
         >
@@ -58,7 +58,7 @@
         <h4>Unit Detail</h4>
         <hr />
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="row">
                     <small class="col-md-5">Brand/Type Unit</small>
                     <small class="col-md-7">
@@ -76,6 +76,27 @@
                     <small class="col-md-5">Unit Name</small>
                     <small class="col-md-7">: {{ $data->unit->name }}</small>
                 </div>
+                <div class="row">
+                    <small class="col-sm-5"> VIN </small>
+                    <small class="col-sm-7">
+                        :
+                        {{ $data->unit->vin }}
+                    </small>
+                </div>
+                <div class="row">
+                    <small class="col-sm-5"> Engine Number </small>
+                    <small class="col-sm-7">
+                        :
+                        {{ $data->unit->engine_numb}}
+                    </small>
+                </div>
+                <div class="row">
+                    <small class="col-sm-5"> Year </small>
+                    <small class="col-sm-7">
+                        :
+                        {{ $data->unit->year}}
+                    </small>
+                </div>
             </div>
         </div>
     </x-card>
@@ -86,27 +107,27 @@
         <div class="row">
             <div class="col-md-8">
                 <div class="row mb">
-                    <small class="col-md-3">Date</small>
-                    <small class="col-md-6"
+                    <small class="col-md-4">Date</small>
+                    <small class="col-md-8"
                         >:
-                        {{ \Carbon\Carbon::parse($data->tgl)->format('d/m/Y') }}</small
+                        {{ \Carbon\Carbon::parse($data->tgl)->format('d F Y') }}</small
                     >
                 </div>
                 <div class="row mb">
-                    <small class="col-md-3">Request Repaired</small>
-                    <small class="col-md-6">: {{ $data->name }}</small>
+                    <small class="col-md-4">Request Repaired</small>
+                    <small class="col-md-8">: {{ $data->name }}</small>
                 </div>
                 <div class="row mb">
-                    <small class="col-md-3">Description</small>
-                    <small class="col-md-6">: {{ $data->description }}</small>
+                    <small class="col-md-4">Description</small>
+                    <small class="col-md-8">: {{ $data->description }}</small>
                 </div>
                 <div class="row mb">
-                    <small class="col-md-3">Repair Instructions</small>
-                    <small class="col-md-6">: {{ $data->instruction}}</small>
+                    <small class="col-md-4">Repair Instructions</small>
+                    <small class="col-md-8">: {{ $data->instruction}}</small>
                 </div>
                 <div class="row mb">
-                    <small class="col-md-3">Repair State</small>
-                    <small class="col-md-6"
+                    <small class="col-md-4">Repair State</small>
+                    <small class="col-md-8"
                         >: {{ $data->status }} <br />
 
                         @php if($data->status == 'start'){ $prog = 0; }elseif(

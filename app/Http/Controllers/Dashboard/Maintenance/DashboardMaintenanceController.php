@@ -216,4 +216,28 @@ class DashboardMaintenanceController extends Controller
             '/dashboard/maintenance/' . $request->maintenance_slug
         )->with('success', 'New Sparepart Has Been Update.');
     }
+
+    public function editstate(Maintenance $maintenance)
+    {
+        $state = ['start', 'checking', 'processing', 'finishing', 'completed'];
+        return view('dashboard.maintenance.state', [
+            'title' => 'Maintenance Update State',
+            'data' => $maintenance,
+            'states' => $state,
+        ]);
+    }
+
+    public function updatestate(Request $request, Maintenance $maintenance)
+    {
+        $validatedData = $request->validate([
+            'status' => 'required',
+        ]);
+
+        Maintenance::where('id', $maintenance->id)->update($validatedData);
+
+        return redirect('/dashboard/maintenance/' . $maintenance->slug)->with(
+            'success',
+            'New Sparepart Has Been Update.'
+        );
+    }
 }

@@ -260,6 +260,15 @@ Route::middleware('auth')->group(function () {
             );
 
             Route::put('dashboard/maintenance/part/{msparepart}', 'updatepart');
+
+            Route::get(
+                'dashboard/maintenance/state/{maintenance}',
+                'editstate'
+            );
+            Route::put(
+                '/dashboard/maintenance/state/{maintenance}',
+                'updatestate'
+            );
         }
     );
 
