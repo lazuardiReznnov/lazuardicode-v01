@@ -148,8 +148,12 @@
                                 aria-valuemax="100"
                             >
                                 {{ $prog }}%
+                                <br />
                             </div>
                         </div>
+                        <p>
+                            Update at : {{ $data->updated_at->diffForHumans() }}
+                        </p>
                     </small>
                 </div>
             </div>
@@ -209,6 +213,11 @@
                                 <i class="bi bi-file-x-fill"></i>
                             </button>
                         </form>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="6" class="text-center">
+                        Update At : {{ $data->updated_at->diffForHumans() }}
                     </td>
                 </tr>
                 @endforeach @else
