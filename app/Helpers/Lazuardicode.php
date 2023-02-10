@@ -1,6 +1,8 @@
 <?php
 namespace App\Helpers;
 
+use DateTime;
+
 class Lazuardicode
 {
     public static function expire($date1, $date2)
@@ -11,5 +13,12 @@ class Lazuardicode
             $css = 'success';
         }
         return $css;
+    }
+
+    public static function estimate($date1, $date2)
+    {
+        $tgl = new DateTime($date1);
+        $finish = new DateTime($date2);
+        return $tgl->diff($finish)->days;
     }
 }

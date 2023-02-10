@@ -169,7 +169,7 @@ class DashboardMaintenanceController extends Controller
 
         $str_rand = Str::random(3);
         $validatedData['slug'] = Str::of(
-            $str_rand . ' ' . $request->regNum
+            $str_rand . ' ' . $request->maintenance_id
         )->slug('-');
 
         $validatedData['maintenance_id'] = $request->maintenance_id;

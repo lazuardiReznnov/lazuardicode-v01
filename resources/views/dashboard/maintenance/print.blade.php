@@ -44,10 +44,8 @@
                         <div class="row">
                             <small class="col-sm-5"> Estimate </small>
                             <small class="col-sm-7">
-                                @php $tgl = new DateTime($data->tgl); $finish =
-                                new DateTime($data->finish); $diff =
-                                $tgl->diff($finish); @endphp :
-                                {{$diff->days}} Day
+                                {{ \Lazuardicode::estimate($data->tgl, $data->finish) }}
+                                Days
                             </small>
                         </div>
                     </div>
@@ -153,6 +151,18 @@
                                             {{ $data->instruction }}
                                         </small>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center p-3">
+                    <div class="col-sm-12">
+                        <div class="card p-2">
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <h5 class="mb-5">Repair Report</h5>
                                 </div>
                             </div>
                         </div>

@@ -125,6 +125,14 @@
                     <small class="col-md-4">Repair Instructions</small>
                     <small class="col-md-8">: {{ $data->instruction}}</small>
                 </div>
+                <div class="row">
+                    <small class="col-sm-4"> Estimate </small>
+                    <small class="col-sm-8">
+                        :
+                        {{ \Lazuardicode::estimate($data->tgl, $data->finish) }}
+                        Days
+                    </small>
+                </div>
                 <div class="row mb">
                     <small class="col-md-4">Repair State</small>
                     <small class="col-md-8"
@@ -171,6 +179,7 @@
                     <th>Sparepart</th>
                     <th>Qty</th>
                     <th>Action</th>
+                    <th></th>
                 </tr>
             </thead>
 
@@ -214,12 +223,11 @@
                             </button>
                         </form>
                     </td>
-                </tr>
-                <tr>
-                    <td colspan="6" class="text-center">
-                        Update At : {{ $data->updated_at->diffForHumans() }}
+                    <td>
+                        Update At : {{ $mpart->updated_at->diffForHumans() }}
                     </td>
                 </tr>
+
                 @endforeach @else
                 <tr>
                     <td colspan="6" class="text-center">Data Not Found</td>

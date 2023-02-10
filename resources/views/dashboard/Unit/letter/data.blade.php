@@ -34,7 +34,29 @@
             @endif
         </div>
     </div>
-
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <form action="/dashboard/unit/letter/data/{{ $slug }}">
+                <div class="input-group mb-3">
+                    <input
+                        type="month"
+                        class="form-control"
+                        placeholder="Month"
+                        aria-label="Month"
+                        aria-describedby="save"
+                        name="month"
+                    />
+                    <button
+                        class="btn btn-outline-secondary"
+                        type="submit"
+                        id="save"
+                    >
+                        Button
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-10">
             <x-card header="{{ date('F') }}">

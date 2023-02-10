@@ -10,9 +10,6 @@ use Illuminate\Support\Str;
 use App\Models\categoryPart;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Database\Seeders\InvStockSeeder;
-use Cviebrock\EloquentSluggable\Services\SlugService;
-use Nette\Utils\Random;
 
 class DashboardStockController extends Controller
 {
