@@ -18,18 +18,28 @@ class DashboardInvstockController extends Controller
      */
     public function index(Supplier $supplier)
     {
-        $inv = invStock::Where('supplier_id', $supplier->id)
-            ->paginate(10)
-            ->withQueryString();
-        // ->orderBy('tgl', 'desc')
-        // ->paginate(10)
-        // ->withQueryString();
+        $month = '';
+        if (request('month')) {
+            $month = request('month');
+            $pisah = explode('-', $month);
+            $data = invStock::whereMonth('tgl', '=', $pisah[1])->whereYear(
+                'tgl',
+                '=',
+                $pisah[0]
+            );
+        } else {
+            $data = invStock::whereMonth('tgl', '=', date('m'));
+        }
 
         return view('dashboard.stock.inv.index', [
             'title' => 'Inv Data',
-            'datas' => $inv,
+            'datas' => $data
+                ->Where('supplier_id', $supplier->id)
+                ->paginate(10)
+                ->withQueryString(),
             'name' => $supplier->name,
             'data' => $supplier->slug,
+            'month' => $month,
         ]);
     }
 
@@ -93,9 +103,14 @@ class DashboardInvstockController extends Controller
      */
     public function edit(invStock $invStock)
     {
+        $month = explode('-', $invStock->tgl);
+        $data = \array_slice($month, 0, 2);
+        $data1 = implode('-', $data);
+
         return view('dashboard.stock.inv.edit', [
             'title' => 'Edit Invoice',
             'data' => $invStock,
+            'month' => $data1,
         ]);
     }
 
@@ -134,7 +149,10 @@ class DashboardInvstockController extends Controller
         invStock::where('id', $invStock->id)->update($validatedData);
 
         return redirect(
-            '/dashboard/stock/invStock/' . $invStock->supplier->slug
+            '/dashboard/stock/invStock/' .
+                $invStock->supplier->slug .
+                '?month=' .
+                $request->month
         )->with('success', 'New Unit Has Been aded.');
     }
 

@@ -37,6 +37,31 @@
         </div>
     </div>
 
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h6>Pilih Bulan</h6>
+            <form action="/dashboard/stock/invStock/{{ $data }}">
+                <div class="input-group mb-3">
+                    <input
+                        type="month"
+                        class="form-control"
+                        placeholder="Month"
+                        aria-label="Month"
+                        aria-describedby="save"
+                        name="month"
+                    />
+                    <button
+                        class="btn btn-outline-secondary"
+                        type="submit"
+                        id="save"
+                    >
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-md">
             <x-card header="{{ $name }} Store">
@@ -57,7 +82,6 @@
                             <th scope="col">Pic</th>
                             <th scope="col">Date</th>
                             <th scope="col">Invoice</th>
-                            <th scope="col">Store</th>
                             <th scope="col">Payment</th>
                             <th scope="col " class="text-md-center">Sum</th>
 
@@ -65,7 +89,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @if($datas->count()) @foreach($datas as $data)
+                        @php $grt = 0; @endphp @if($datas->count())
+                        @foreach($datas as $data)
                         <tr>
                             <th scope="row">
                                 {{ ($datas->currentpage()-1) * $datas->perpage() + $loop->index + 1 }}
@@ -96,7 +121,7 @@
                                     >{{ $data->name }}</a
                                 >
                             </td>
-                            <td>{{ $data->supplier->name }}</td>
+
                             <td>{{ $data->payment }}</td>
                             <?php
                             $gttl = 0;
@@ -106,7 +131,7 @@
                                         $ttl = $stock->qty * $stock->price;
                             $gttl = $gttl+$ttl; ?> @endforeach
                             <td class="text-md-end">@currency($gttl)</td>
-
+                            @php $grt = $grt+$gttl; @endphp
                             <td>
                                 <a
                                     href="/dashboard/stock/invStock/{{ $data->slug }}/edit"
@@ -135,9 +160,16 @@
                                 </form>
                             </td>
                         </tr>
-                        @endforeach @else
+
+                        @endforeach
+                        <tr class="fw-bold">
+                            <td colspan="5">GrandTotal</td>
+                            <td class="text-md-end">@currency($grt)</td>
+                            <td></td>
+                        </tr>
+                        @else
                         <tr>
-                            <td colspan="4" class="text-center">
+                            <td colspan="7" class="text-center">
                                 Data Not Found
                             </td>
                         </tr>

@@ -23,7 +23,7 @@
                     enctype="multipart/form-data"
                 >
                     @csrf @method('put')
-
+                    <input type="hidden" name="month" value="{{ $month }}" />
                     <div class="row mb-3">
                         <label
                             for="pic"
