@@ -34,6 +34,31 @@
         </div>
     </div>
 
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h5>Pilih Bulan</h5>
+            <form action="/dashboard/stock/iodata">
+                <div class="input-group mb-3">
+                    <input
+                        type="month"
+                        class="form-control"
+                        placeholder="Month"
+                        aria-label="Month"
+                        aria-describedby="save"
+                        name="month"
+                    />
+                    <button
+                        class="btn btn-outline-secondary"
+                        type="submit"
+                        id="save"
+                    >
+                        Button
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-md-5">
             <div class="dropdown">
@@ -60,6 +85,7 @@
             </div>
         </div>
     </div>
+
     <div class="row mt-3">
         <div class="col-md-10">
             <x-card header=" Billing">

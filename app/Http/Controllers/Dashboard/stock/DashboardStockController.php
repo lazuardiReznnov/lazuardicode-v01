@@ -28,16 +28,33 @@ class DashboardStockController extends Controller
 
     public function iodata()
     {
+        $month = request('month');
+        $pisah = explode('-', $month);
+
+        if (request('month')) {
+            $data1 = invStock::whereMonth('tgl', '=', $pisah[1])
+                ->whereYear('tgl', '=', $pisah[0])
+                ->where('state', 'belum');
+
+            $data2 = invStock::whereMonth('tgl', '=', $pisah[1])
+                ->whereYear('tgl', '=', $pisah[0])
+                ->where('state', 'lunas');
+        } else {
+            $data1 = invStock::whereMonth('tgl', '=', date('m'))->where(
+                'state',
+                'belum'
+            );
+
+            $data2 = invStock::whereMonth('tgl', '=', date('m'))->where(
+                'state',
+                'belum'
+            );
+        }
+
         return view('dashboard.stock.iodata', [
             'title' => 'Billing List',
-            'datas1' => invStock::whereMonth('tgl', '=', date('m'))
-                ->where('state', 'belum')
-                ->paginate(10)
-                ->withQueryString(),
-            'datas2' => invStock::whereMonth('tgl', '=', date('m'))
-                ->where('state', 'lunas')
-                ->paginate(10)
-                ->withQueryString(),
+            'datas1' => $data1->paginate(10)->withQueryString(),
+            'datas2' => $data2->paginate(10)->withQueryString(),
 
             'datas3' => Supplier::all(),
         ]);

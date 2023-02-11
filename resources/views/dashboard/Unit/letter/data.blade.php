@@ -36,6 +36,7 @@
     </div>
     <div class="row mb-4">
         <div class="col-md-6">
+            <h5>Pilih Bulan</h5>
             <form action="/dashboard/unit/letter/data/{{ $slug }}">
                 <div class="input-group mb-3">
                     <input
@@ -59,7 +60,7 @@
     </div>
     <div class="row">
         <div class="col-md-10">
-            <x-card header="{{ date('F') }}">
+            <x-card header=" {{ \Carbon\Carbon::parse($heads)->format('F') }}">
                 <table id="table" class="table table-responsive">
                     <thead>
                         <tr>

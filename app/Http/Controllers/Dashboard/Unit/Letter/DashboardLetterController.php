@@ -183,8 +183,8 @@ class DashboardLetterController extends Controller
     public function data(CategoryLetter $categoryletter)
     {
         if (request('month')) {
-            $data = request('month');
-            $pisah = explode('-', $data);
+            $month = request('month');
+            $pisah = explode('-', $month);
             if ($categoryletter->id === 1) {
                 $data = Letter::whereMonth('tax', '=', $pisah[1])->whereYear(
                     'tax',
@@ -198,17 +198,20 @@ class DashboardLetterController extends Controller
                     $pisah[1]
                 )->whereYear('expire_date', '=', $pisah[0]);
             }
+            $head = request('month');
         } else {
             if ($categoryletter->id === 1) {
                 $data = Letter::whereMonth('tax', '=', date('m'));
             } elseif ($categoryletter->id === 2) {
                 $data = Letter::whereMonth('expire_date', '=', date('m'));
             }
+            $head = date('F');
         }
 
         return view('dashboard.unit.letter.data', [
             'title' => $categoryletter->name,
             'slug' => $categoryletter->slug,
+            'heads' => $head,
             'datas' => $data
                 ->where('category_letter_id', $categoryletter->id)
                 ->paginate(10)
