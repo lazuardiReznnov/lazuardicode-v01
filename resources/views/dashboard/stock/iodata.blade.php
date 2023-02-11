@@ -52,7 +52,7 @@
                         type="submit"
                         id="save"
                     >
-                        Button
+                        <i class="bi bi-search"></i>
                     </button>
                 </div>
             </form>
@@ -173,6 +173,11 @@
                                             class="d-inline"
                                         >
                                             @csrf
+                                            <input
+                                                type="hidden"
+                                                name="month"
+                                                value="{{ $month }}"
+                                            />
                                             <button
                                                 class="badge bg-success border-0"
                                                 data-bs-toggle="tooltip"

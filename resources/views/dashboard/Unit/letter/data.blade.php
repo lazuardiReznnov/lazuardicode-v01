@@ -35,9 +35,12 @@
         </div>
     </div>
     <div class="row mb-4">
-        <div class="col-md-6">
-            <h5>Pilih Bulan</h5>
-            <form action="/dashboard/unit/letter/data/{{ $slug }}">
+        <div class="col-md-5">
+            <small class="me-4">Choise Month</small>
+            <form
+                action="/dashboard/unit/letter/data/{{ $slug }}"
+                class="d-inline align-self-center"
+            >
                 <div class="input-group mb-3">
                     <input
                         type="month"
@@ -52,7 +55,7 @@
                         type="submit"
                         id="save"
                     >
-                        Button
+                        <i class="bi bi-search"></i>
                     </button>
                 </div>
             </form>

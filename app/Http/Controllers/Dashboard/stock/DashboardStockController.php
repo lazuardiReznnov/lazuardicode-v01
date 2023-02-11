@@ -28,10 +28,10 @@ class DashboardStockController extends Controller
 
     public function iodata()
     {
-        $month = request('month');
-        $pisah = explode('-', $month);
-
+        $month = '';
         if (request('month')) {
+            $month = request('month');
+            $pisah = explode('-', $month);
             $data1 = invStock::whereMonth('tgl', '=', $pisah[1])
                 ->whereYear('tgl', '=', $pisah[0])
                 ->where('state', 'belum');
@@ -53,6 +53,7 @@ class DashboardStockController extends Controller
 
         return view('dashboard.stock.iodata', [
             'title' => 'Billing List',
+            'month' => $month,
             'datas1' => $data1->paginate(10)->withQueryString(),
             'datas2' => $data2->paginate(10)->withQueryString(),
 
@@ -138,9 +139,8 @@ class DashboardStockController extends Controller
     public function pay(invStock $invStock)
     {
         invStock::where('id', $invStock->id)->update(['state' => 'lunas']);
-        return redirect('/dashboard/stock/iodata')->with(
-            'success',
-            'New Post Has Been Paid'
-        );
+        return redirect(
+            '/dashboard/stock/iodata?month=' . request('month')
+        )->with('success', 'New Post Has Been Paid');
     }
 }
