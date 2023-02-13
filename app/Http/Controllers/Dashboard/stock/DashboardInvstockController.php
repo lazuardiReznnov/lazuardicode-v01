@@ -75,6 +75,14 @@ class DashboardInvstockController extends Controller
         if ($request->file('pic')) {
             $validatedData['pic'] = $request->file('pic')->store('inv-pic');
         }
+
+        if ($request->payment == 'credit') {
+            $validatedData['state'] = 'belum';
+        } elseif ($request->payment == 'cash') {
+            $validatedData['state'] = 'lunas';
+        } else {
+            $validatedData['state'] = 'belum';
+        }
         $validatedData['supplier_id'] = $request->supplier_id;
 
         invStock::create($validatedData);

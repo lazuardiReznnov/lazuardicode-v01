@@ -161,10 +161,11 @@
                                             {{ $data1->name }}</a
                                         >
                                     </td>
+                                    @php $grt1 = 0; @endphp
                                     @foreach($data1->stock as $stock1) @php $ttl
-                                    = $stock1->qty*$stock1->price; @endphp
-                                    @endforeach
-                                    <td>@currency($ttl)</td>
+                                    = $stock1->qty*$stock1->price; $grt1 =
+                                    $grt1+$ttl @endphp @endforeach
+                                    <td>@currency($grt1)</td>
                                     <td>{{ $data1->payment }}</td>
                                     <td>
                                         <form
@@ -192,7 +193,7 @@
                                         </form>
                                     </td>
                                 </tr>
-                                @php $gttl = $ttl+$gttl; @endphp @endforeach
+                                @php $gttl = $grt1+$gttl; @endphp @endforeach
                                 <tr class="fw-bold">
                                     <td colspan="3">grandtotal</td>
                                     <td colspan="3">@currency($gttl)</td>
@@ -231,7 +232,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @php $ttl = 0; $gttl2=0; @endphp
+                                @php $ttl = 0; $gttl2=0; $grt2 = 0; @endphp
                                 @if($datas2->count())
                                 <tr>
                                     @foreach($datas2 as $data2)
@@ -255,12 +256,12 @@
                                         </a>
                                     </td>
                                     @foreach($data2->stock as $stock2) @php $ttl
-                                    = $stock2->qty*$stock2->price; @endphp
-                                    @endforeach
-                                    <td>@currency($ttl)</td>
+                                    = $stock2->qty*$stock2->price; $grt2 =
+                                    $grt2+$ttl; @endphp @endforeach
+                                    <td>@currency($grt2)</td>
                                     <td>{{ $data2->payment }}</td>
                                 </tr>
-                                @php $gttl2 = $ttl+$gttl2; @endphp @endforeach
+                                @php $gttl2 = $grt2+$gttl2; @endphp @endforeach
                                 <tr class="fw-bold">
                                     <td colspan="3">grandtotal</td>
                                     <td colspan="3">@currency($gttl2)</td>

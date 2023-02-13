@@ -47,7 +47,7 @@ class DashboardStockController extends Controller
 
             $data2 = invStock::whereMonth('tgl', '=', date('m'))->where(
                 'state',
-                'belum'
+                'lunas'
             );
         }
 
