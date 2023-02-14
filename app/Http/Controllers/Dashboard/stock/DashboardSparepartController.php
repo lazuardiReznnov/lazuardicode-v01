@@ -139,10 +139,9 @@ class DashboardSparepartController extends Controller
 
         sparepart::where('id', $sparepart->id)->update($validatedData);
 
-        return redirect('/dashboard/stock/sparepart')->with(
-            'success',
-            'New Unit Has Been aded.'
-        );
+        return redirect(
+            '/dashboard/stock/sparepart/detail/' . $sparepart->type->slug
+        )->with('success', 'New Unit Has Been aded.');
     }
 
     /**
@@ -157,10 +156,9 @@ class DashboardSparepartController extends Controller
         if ($sparepart->pic) {
             storage::delete($sparepart->pic);
         }
-        return redirect('/dashboard/stock/sparepart')->with(
-            'success',
-            'New Post Has Been Deleted.'
-        );
+        return redirect(
+            '/dashboard/stock/sparepart/detail/' . $sparepart->type->slug
+        )->with('success', 'New Post Has Been Deleted.');
     }
 
     public function checkSlug(Request $request)
