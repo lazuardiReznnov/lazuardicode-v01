@@ -202,6 +202,9 @@ Route::middleware('auth')->group(function () {
     Route::controller(DashboardSparepartController::class)->group(function () {
         Route::get('dashboard/stock/sparepart/checkSlug', 'checkSlug');
         route::get('dashboard/stock/sparepart/getType', 'getType');
+        Route::get('dashboard/stock/sparepart/detail/{type}', 'detail');
+        Route::get('dashboard/stock/sparepart/add/{type}', 'addsparepart');
+        Route::post('dashboard/stock/sparepart/storepart', 'storepart');
     });
 
     Route::resource(

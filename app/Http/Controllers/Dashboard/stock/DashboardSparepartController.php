@@ -23,7 +23,7 @@ class DashboardSparepartController extends Controller
     {
         return view('dashboard.stock.sparepart.index', [
             'title' => 'Sparepart',
-            'datas' => Sparepart::latest()
+            'datas' => type::latest()
                 ->paginate(10)
                 ->withQueryString(),
         ]);
@@ -180,5 +180,51 @@ class DashboardSparepartController extends Controller
             ['category_id', $request->category],
         ])->get();
         return response()->json($type);
+    }
+
+    public function detail(Type $type)
+    {
+        return view('dashboard.stock.sparepart.detail', [
+            'title' => 'Sparepart ' . $type->name,
+            'type' => $type,
+            'datas' => sparepart::where('type_id', $type->id)
+                ->latest()
+                ->paginate(10)
+                ->withQueryString(),
+        ]);
+    }
+
+    public function addsparepart(Type $type)
+    {
+        return view('dashboard.stock.sparepart.add', [
+            'title' => 'Add sparepart Data' . $type->name,
+            'type' => $type,
+            'catparts' => categoryPart::all(),
+        ]);
+    }
+
+    public function storepart(Request $request)
+    {
+        $validatedData = $request->validate([
+            'type_id' => 'required',
+            'category_part_id' => 'required',
+            'name' => 'required',
+            'slug' => 'required|unique:spareparts',
+            'brand' => 'required',
+            'codepart' => 'required',
+            'pic' => 'image|file|max:2048',
+        ]);
+
+        if ($request->file('pic')) {
+            $validatedData['pic'] = $request
+                ->file('pic')
+                ->store('sparepart-pic');
+        }
+
+        sparepart::create($validatedData);
+
+        return redirect(
+            '/dashboard/stock/sparepart/detail/' . $request->type_slug
+        )->with('success', 'New Unit Has Been aded.');
     }
 }
