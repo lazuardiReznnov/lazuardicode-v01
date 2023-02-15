@@ -11,6 +11,8 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\categoryPart;
 use Illuminate\support\Facades\Storage;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\stock\sparepartImport;
 
 class DashboardSparepartController extends Controller
 {
@@ -224,5 +226,27 @@ class DashboardSparepartController extends Controller
         return redirect(
             '/dashboard/stock/sparepart/detail/' . $request->type_slug
         )->with('success', 'New Unit Has Been aded.');
+    }
+
+    public function createexcl()
+    {
+        return view('dashboard.stock.sparepart.create-excel', [
+            'title' => 'File Import Via Excel',
+        ]);
+    }
+
+    public function storeexcl(Request $request)
+    {
+        $validatedData = $request->validate([
+            'excl' => 'required:mimes:xlsx,xls,csv|max:2048',
+        ]);
+
+        if ($request->file('excl')) {
+            Excel::import(new sparepartImport(), $validatedData['excl']);
+            return redirect('/dashboard/stock/sparepart')->with(
+                'success',
+                'New Data Has Been Aded.!'
+            );
+        }
     }
 }

@@ -33,7 +33,17 @@
             @endif
         </div>
     </div>
-
+    <div class="row my-2">
+        <div class="col-md">
+            <div class="btn-group">
+                <a
+                    href="/dashboard/stock/sparepart/create-excl"
+                    class="btn btn-primary btn-sm"
+                    ><i class="bi bi-file-plus"></i
+                ></a>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md">
             <x-card header="Category Sparepart Data">
