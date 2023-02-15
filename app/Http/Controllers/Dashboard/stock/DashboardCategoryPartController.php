@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Dashboard\stock;
 use App\Models\categoryPart;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\stock\categoryPartImport;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class DashboardCategoryPartController extends Controller
@@ -136,5 +138,30 @@ class DashboardCategoryPartController extends Controller
             $request->name
         );
         return response()->json(['slug' => $slug]);
+    }
+
+    public function createexcl()
+    {
+        return view(
+            'dashboard.stock.sparepart.category-sparepart.create-excel',
+            [
+                'title' => 'File Import Via Excel',
+            ]
+        );
+    }
+
+    public function storeexcl(Request $request)
+    {
+        $validatedData = $request->validate([
+            'excl' => 'required:mimes:xlsx,xls,csv|max:2048',
+        ]);
+
+        if ($request->file('excl')) {
+            Excel::import(new categoryPartImport(), $validatedData['excl']);
+            return redirect('/dashboard/stock/sparepart')->with(
+                'success',
+                'New Data Has Been Aded.!'
+            );
+        }
     }
 }

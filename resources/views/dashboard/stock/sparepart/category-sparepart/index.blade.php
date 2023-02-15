@@ -34,19 +34,26 @@
         </div>
     </div>
 
+    <div class="row my-2">
+        <div class="col-md">
+            <div class="btn-group">
+                <a
+                    href="/dashboard/stock/sparepart/categoryPart/create"
+                    class="btn btn-primary btn-sm"
+                    ><i class="bi bi-file-plus"></i
+                ></a>
+                <a
+                    href="/dashboard/stock/sparepart/categoryPart/create-excl"
+                    class="btn btn-primary btn-sm"
+                    ><i class="bi bi-file-earmark-spreadsheet"></i
+                ></a>
+            </div>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-md">
             <x-card header="Category Sparepart Data">
-                <div class="row my-2">
-                    <div class="col-md">
-                        <a
-                            href="/dashboard/stock/sparepart/categoryPart/create"
-                            class="btn btn-primary btn-sm"
-                            >Add Sparepart</a
-                        >
-                    </div>
-                </div>
-
                 <table class="table table-striped">
                     <thead>
                         <tr>

@@ -85,7 +85,7 @@
                             <input
                                 id="description"
                                 type="hidden"
-                                name="description"
+                                name="descriptions"
                             />
                             <trix-editor input="description">
                                 {!! $data->descriptions !!}
