@@ -35,7 +35,13 @@
     <div class="row mb-5">
         <div class="col-md-10">
             <a href="/dashboard/unit/letter/create" class="btn btn-primary">
-                Add Letter Data
+                <i class="bi bi-file-earmark-plus-fill"></i>
+            </a>
+            <a
+                href="/dashboard/unit/letter/create-excl"
+                class="btn btn-primary"
+            >
+                <i class="bi bi-file-earmark-spreadsheet"></i>
             </a>
         </div>
     </div>

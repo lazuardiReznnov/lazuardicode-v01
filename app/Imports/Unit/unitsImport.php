@@ -17,7 +17,7 @@ class unitsImport implements ToModel, WithHeadingRow
     {
         return new unit([
             'type_id' => $row['type'],
-            'carosery_id' => $row['carosery'],
+            'carosery_id' => $row['caro'],
             'flag_id' => $row['flag'],
             'group_id' => $row['group'],
             'name' => $row['name'],
