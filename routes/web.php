@@ -31,7 +31,6 @@ use App\Http\Controllers\Dashboard\stock\DashboardSparepartController;
 use App\Http\Controllers\Dashboard\Unit\DashboardCaroseriesController;
 use App\Http\Controllers\Dashboard\Unit\DashboardCategoriesController;
 use App\Http\Controllers\Dashboard\Unit\Letter\DashboardLetterController;
-use App\Http\Controllers\Dashboard\Maintenance\DashboardMaintenanceController;
 
 /*
 |--------------------------------------------------------------------------

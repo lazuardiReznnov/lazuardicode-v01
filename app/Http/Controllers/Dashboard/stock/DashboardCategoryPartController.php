@@ -158,7 +158,7 @@ class DashboardCategoryPartController extends Controller
 
         if ($request->file('excl')) {
             Excel::import(new categoryPartImport(), $validatedData['excl']);
-            return redirect('/dashboard/stock/sparepart')->with(
+            return redirect('/dashboard/stock/sparepart/categoryPart')->with(
                 'success',
                 'New Data Has Been Aded.!'
             );

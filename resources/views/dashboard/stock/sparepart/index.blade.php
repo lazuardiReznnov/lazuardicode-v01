@@ -46,7 +46,7 @@
     </div>
     <div class="row">
         <div class="col-md">
-            <x-card header="Category Sparepart Data">
+            <x-card header="Sparepart Data">
                 <div class="row">
                     @foreach($datas as $data)
                     <div class="col-xl-3 col-md-6">

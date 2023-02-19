@@ -40,10 +40,10 @@ class DatabaseSeeder extends Seeder
             CategoryLetterSeeder::class,
             // LetterSeeder::class,
             SupplierSeeder::class,
-            CategoryPartSeeder::class,
-            SparepartSeeder::class,
-            InvStockSeeder::class,
-            StockSeeder::class,
+            // CategoryPartSeeder::class,
+            // SparepartSeeder::class,
+            // InvStockSeeder::class,
+            // StockSeeder::class,
             // MaintenanceSeeder::class,
         ]);
     }
