@@ -23,10 +23,11 @@
                     >
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled">Disabled</a>
+                    <a
+                        class="nav-link"
+                        href="/dashboard/stock/sparepart/categoryPart"
+                        >Category Sparepart</a
+                    >
                 </li>
             </ul>
         </div>

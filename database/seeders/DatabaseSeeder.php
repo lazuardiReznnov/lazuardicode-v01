@@ -36,15 +36,15 @@ class DatabaseSeeder extends Seeder
             GroupSeeder::class,
             FlagSeeder::class,
             TypeSeeder::class,
-            UnitSeeder::class,
+            // UnitSeeder::class,
             CategoryLetterSeeder::class,
-            LetterSeeder::class,
+            // LetterSeeder::class,
             SupplierSeeder::class,
             CategoryPartSeeder::class,
             SparepartSeeder::class,
             InvStockSeeder::class,
             StockSeeder::class,
-            MaintenanceSeeder::class,
+            // MaintenanceSeeder::class,
         ]);
     }
 }

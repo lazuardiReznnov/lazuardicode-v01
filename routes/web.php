@@ -19,6 +19,8 @@ use App\Http\Controllers\Dashboard\Unit\DashboardFlagController;
 use App\Http\Controllers\Dashboard\Unit\DashboardTypeController;
 use App\Http\Controllers\Dashboard\Unit\DashboardUnitController;
 use App\Http\Controllers\Dashboard\DashboardPortofolioController;
+use App\Http\Controllers\Dashboard\Maintenance\DashboardMaintenanceController;
+use App\Http\Controllers\Dashboard\stock\DashboardCategoryPartController;
 use App\Http\Controllers\Dashboard\Unit\DashboardBrandController;
 use App\Http\Controllers\Dashboard\Unit\DashboardGroupController;
 use App\Http\Controllers\RolePermission\AuthenticationController;
@@ -200,12 +202,37 @@ Route::middleware('auth')->group(function () {
         DashboardSupplierController::class
     );
     // Sparepart
+
+    Route::controller(DashboardCategoryPartController::class)->group(
+        function () {
+            Route::get(
+                'dashboard/stock/sparepart/categoryPart/checkSlug',
+                'checkSlug'
+            );
+            Route::get(
+                'dashboard/stock/sparepart/categoryPart/create-excl',
+                'createexcl'
+            );
+            Route::post(
+                'dashboard/stock/sparepart/categoryPart/store-excl',
+                'storeexcl'
+            );
+        }
+    );
+
+    Route::resource(
+        '/dashboard/stock/sparepart/categoryPart',
+        DashboardCategoryPartController::class
+    );
+
     Route::controller(DashboardSparepartController::class)->group(function () {
         Route::get('dashboard/stock/sparepart/checkSlug', 'checkSlug');
         route::get('dashboard/stock/sparepart/getType', 'getType');
         Route::get('dashboard/stock/sparepart/detail/{type}', 'detail');
         Route::get('dashboard/stock/sparepart/add/{type}', 'addsparepart');
         Route::post('dashboard/stock/sparepart/storepart', 'storepart');
+        Route::get('dashboard/stock/sparepart/create-excl', 'createexcl');
+        Route::post('dashboard/stock/sparepart/store-excl', 'storeexcl');
     });
 
     Route::resource(
