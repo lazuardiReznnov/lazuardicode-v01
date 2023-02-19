@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\unit;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Contracts\Role;
@@ -13,22 +14,22 @@ use App\Http\Controllers\Dashboard\DashboardHeroController;
 use App\Http\Controllers\Dashboard\DashboardPageController;
 use App\Http\Controllers\Landingpage\LandingpageController;
 use App\Http\Controllers\Dashboard\DashboardAboutController;
-use App\Http\Controllers\Dashboard\DashboardPortofolioController;
-use App\Http\Controllers\Dashboard\Maintenance\DashboardMaintenanceController;
-use App\Http\Controllers\Dashboard\stock\DashboardInvstockController;
-use App\Http\Controllers\Dashboard\stock\DashboardSparepartController;
-use App\Http\Controllers\Dashboard\stock\DashboardStockController;
-use App\Http\Controllers\Dashboard\stock\DashboardSupplierController;
-use App\Http\Controllers\Dashboard\Unit\DashboardBrandController;
-use App\Http\Controllers\Dashboard\Unit\DashboardCaroseriesController;
-use App\Http\Controllers\Dashboard\Unit\DashboardCategoriesController;
+use App\Http\Controllers\RolePermission\PermissionController;
 use App\Http\Controllers\Dashboard\Unit\DashboardFlagController;
-use App\Http\Controllers\Dashboard\Unit\DashboardGroupController;
 use App\Http\Controllers\Dashboard\Unit\DashboardTypeController;
 use App\Http\Controllers\Dashboard\Unit\DashboardUnitController;
-use App\Http\Controllers\Dashboard\Unit\Letter\DashboardLetterController;
-use App\Http\Controllers\RolePermission\PermissionController;
+use App\Http\Controllers\Dashboard\DashboardPortofolioController;
+use App\Http\Controllers\Dashboard\Unit\DashboardBrandController;
+use App\Http\Controllers\Dashboard\Unit\DashboardGroupController;
 use App\Http\Controllers\RolePermission\AuthenticationController;
+use App\Http\Controllers\Dashboard\stock\DashboardStockController;
+use App\Http\Controllers\Dashboard\stock\DashboardInvstockController;
+use App\Http\Controllers\Dashboard\stock\DashboardSupplierController;
+use App\Http\Controllers\Dashboard\stock\DashboardSparepartController;
+use App\Http\Controllers\Dashboard\Unit\DashboardCaroseriesController;
+use App\Http\Controllers\Dashboard\Unit\DashboardCategoriesController;
+use App\Http\Controllers\Dashboard\Unit\Letter\DashboardLetterController;
+use App\Http\Controllers\Dashboard\Maintenance\DashboardMaintenanceController;
 
 /*
 |--------------------------------------------------------------------------
