@@ -77,5 +77,17 @@ class CategoryPartSeeder extends Seeder
             'descriptions' =>
                 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod, numquam?',
         ]);
+        categoryPart::create([
+            'name' => 'Steering System',
+            'slug' => 'steering-system',
+            'descriptions' =>
+                'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod, numquam?',
+        ]);
+        categoryPart::create([
+            'name' => 'Wheel',
+            'slug' => 'wheel',
+            'descriptions' =>
+                'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quod, numquam?',
+        ]);
     }
 }

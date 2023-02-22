@@ -42,6 +42,7 @@
             </x-collapselink>
 
             <!-- uNIT -->
+            @can('view unit')
             <x-headsidenav title="Unit-Management"> </x-headsidenav>
             <x-collapselink titlecols="Unit-Data">
                 <x-navlink link="/dashboard/unit/brand">Brand Unit</x-navlink>
@@ -60,21 +61,23 @@
                 <x-navlink link="/dashboard/unit/letter">Letter Unit</x-navlink>
                 <x-navlink link="#">Category Unit</x-navlink>
             </x-collapselink>
-
+            @endcan
             <!-- ENDUNIT -->
 
+            @can('view stock')
             <x-headsidenav title="Stock-Management"> </x-headsidenav>
             <x-collapselink titlecols="Stock-Data">
                 <x-navlink link="/dashboard/stock">Stock item</x-navlink>
                 <x-navlink link="/dashboard/stock/supplier">Supplier</x-navlink>
             </x-collapselink>
-
+            @endcan @can('view maintenance')
             <x-headsidenav title="Maintenance-Management"> </x-headsidenav>
             <x-collapselink titlecols="Maintenance-Data">
                 <x-navlink link="/dashboard/maintenance"
                     >maintenance item</x-navlink
                 >
             </x-collapselink>
+            @endcan
         </div>
     </div>
     <div class="sb-sidenav-footer">

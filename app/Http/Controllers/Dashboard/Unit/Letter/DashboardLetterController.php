@@ -20,6 +20,24 @@ class DashboardLetterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('permission:view unit', [
+            'only' => ['index', 'show'],
+        ]);
+        $this->middleware('permission:create unit', [
+            'only' => ['create', 'store', 'createexl', 'storeexcel'],
+        ]);
+        $this->middleware('permission:edit unit', [
+            'only' => ['edit', 'update'],
+        ]);
+        $this->middleware('permission:show unit', [
+            'only' => ['show'],
+        ]);
+        $this->middleware('permission:delete unit', ['only' => ['destroy']]);
+    }
+
     public function index()
     {
         return view('dashboard.unit.letter.index', [
@@ -244,5 +262,13 @@ class DashboardLetterController extends Controller
                 'New Data Has Been Aded.!'
             );
         }
+    }
+
+    public function print(Letter $letter)
+    {
+        return view('dashboard.Unit.letter.print', [
+            'title' => 'power of attorney',
+            'data' => $letter,
+        ]);
     }
 }

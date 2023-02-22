@@ -177,6 +177,7 @@ Route::middleware('auth')->group(function () {
             '/dashboard/unit/letter/expirestore/{letter}',
             'expirestore'
         );
+        Route::get('/dashboard/unit/letter/print/{letter}', 'print');
         Route::get('dashboard/unit/letter/create-excl', 'createexcl');
         Route::post('dashboard/unit/letter/store-excl', 'storeexcl');
     });
