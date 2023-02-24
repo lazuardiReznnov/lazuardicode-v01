@@ -78,6 +78,11 @@
                 >
             </x-collapselink>
             @endcan
+
+            <x-headsidenav title="Employee-Management"> </x-headsidenav>
+            <x-collapselink titlecols="employee-Data">
+                <x-navlink link="/dashboard/employee">Employee</x-navlink>
+            </x-collapselink>
         </div>
     </div>
     <div class="sb-sidenav-footer">
