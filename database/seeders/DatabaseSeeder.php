@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\categoryPart;
+use App\Models\department;
 use App\Models\Heropage;
 use App\Models\invStock;
 use App\Models\Letter;
@@ -45,6 +46,7 @@ class DatabaseSeeder extends Seeder
             // InvStockSeeder::class,
             // StockSeeder::class,
             // MaintenanceSeeder::class,
+            DepartmentSeeder::class,
         ]);
     }
 }

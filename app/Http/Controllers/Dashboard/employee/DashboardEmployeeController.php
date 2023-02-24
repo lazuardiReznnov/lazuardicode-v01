@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard\employee;
 
 use App\Http\Controllers\Controller;
 use App\Models\employee;
+use App\Models\department;
 use Illuminate\Http\Request;
 
 class DashboardEmployeeController extends Controller
@@ -15,7 +16,12 @@ class DashboardEmployeeController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.employee.index', [
+            'title' => 'Employee',
+            'datas' => department::latest()
+                ->paginate(10)
+                ->withQueryString(),
+        ]);
     }
 
     /**

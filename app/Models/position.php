@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 
-class department extends Model
+class position extends Model
 {
     use HasFactory, Sluggable;
 
@@ -26,8 +26,8 @@ class department extends Model
         return 'slug';
     }
 
-    public function position()
+    public function department()
     {
-        return $this->hasMany(position::class);
+        return $this->belongsTo(position::class);
     }
 }

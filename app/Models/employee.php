@@ -11,7 +11,6 @@ class employee extends Model
     use HasFactory, Sluggable;
 
     protected $guarded = ['id'];
-    protected $with = ['department'];
 
     public function sluggable(): array
     {
@@ -27,8 +26,8 @@ class employee extends Model
         return 'slug';
     }
 
-    public function department()
+    public function position()
     {
-        return $this->belongsTo(department::class);
+        return $this->belongsTo(position::class);
     }
 }
