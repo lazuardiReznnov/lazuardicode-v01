@@ -16,6 +16,24 @@ class DashboardInvstockController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('permission:view stock', [
+            'only' => ['index', 'show'],
+        ]);
+        $this->middleware('permission:create stock', [
+            'only' => ['create', 'store', 'createexl', 'storeexcel'],
+        ]);
+        $this->middleware('permission:edit stock', [
+            'only' => ['edit', 'update'],
+        ]);
+        $this->middleware('permission:show stock', [
+            'only' => ['show'],
+        ]);
+        $this->middleware('permission:delete stock', ['only' => ['destroy']]);
+    }
+
     public function index(Supplier $supplier)
     {
         $month = '';

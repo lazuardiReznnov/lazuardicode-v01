@@ -19,6 +19,8 @@ use App\Http\Controllers\Dashboard\Unit\DashboardFlagController;
 use App\Http\Controllers\Dashboard\Unit\DashboardTypeController;
 use App\Http\Controllers\Dashboard\Unit\DashboardUnitController;
 use App\Http\Controllers\Dashboard\DashboardPortofolioController;
+use App\Http\Controllers\Dashboard\employee\DashboardDepartmentController;
+use App\Http\Controllers\Dashboard\employee\DashboardEmployeeController;
 use App\Http\Controllers\Dashboard\Maintenance\DashboardMaintenanceController;
 use App\Http\Controllers\Dashboard\stock\DashboardCategoryPartController;
 use App\Http\Controllers\Dashboard\Unit\DashboardBrandController;
@@ -177,6 +179,7 @@ Route::middleware('auth')->group(function () {
             '/dashboard/unit/letter/expirestore/{letter}',
             'expirestore'
         );
+        Route::get('/dashboard/unit/letter/print/{letter}', 'print');
         Route::get('dashboard/unit/letter/create-excl', 'createexcl');
         Route::post('dashboard/unit/letter/store-excl', 'storeexcl');
     });
@@ -307,6 +310,23 @@ Route::middleware('auth')->group(function () {
         DashboardMaintenanceController::class
     );
     // Endmaintenance
+
+    Route::controller(DashboardDepartmentController::class)->group(function () {
+        Route::get('/dashboard/employee/department/checkSlug', 'checkSlug');
+        Route::get('dashboard/employee/department/create-excl', 'createexcl');
+        Route::post('dashboard/employee/department/store-excl', 'storeexcl');
+    });
+    Route::resource(
+        '/dashboard/employee/department',
+        DashboardDepartmentController::class
+    );
+
+    Route::controller(DashboardEmployeeController::class)->group(function () {
+        Route::get('/dashboard/employee/checkSlug', 'checkSlug');
+        Route::get('dashboard/employee/create-excl', 'createexcl');
+        Route::post('dashboard/employee/store-excl', 'storeexcl');
+    });
+    Route::resource('/dashboard/employee', DashboardEmployeeController::class);
 
     // End ekspedisi Program
 });

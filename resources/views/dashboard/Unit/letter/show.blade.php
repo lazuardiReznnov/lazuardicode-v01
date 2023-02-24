@@ -10,6 +10,20 @@
         <x-breadcrumb-link-active>{{ $title }} </x-breadcrumb-link-active>
     </x-breadcrumb>
     @php $date_now = date("Y/m/d"); @endphp
+    <div class="row mb-3">
+        <div class="col">
+            <div class="btn-group">
+                <a
+                    href="/dashboard/unit/letter/print/{{ $data->slug }}"
+                    class="btn btn-primary active"
+                    aria-current="page"
+                    >Print Surat Kuasa</a
+                >
+                <a href="#" class="btn btn-primary">Link</a>
+                <a href="#" class="btn btn-primary">Link</a>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md">
             <div class="card col-md">

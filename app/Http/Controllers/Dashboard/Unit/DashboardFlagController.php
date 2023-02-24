@@ -45,6 +45,24 @@ class DashboardFlagController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('permission:view unit', [
+            'only' => ['index', 'show'],
+        ]);
+        $this->middleware('permission:create unit', [
+            'only' => ['create', 'store', 'createexl', 'storeexcel'],
+        ]);
+        $this->middleware('permission:edit unit', [
+            'only' => ['edit', 'update'],
+        ]);
+        $this->middleware('permission:show unit', [
+            'only' => ['show'],
+        ]);
+        $this->middleware('permission:delete unit', ['only' => ['destroy']]);
+    }
+
     public function store(Request $request)
     {
         $validatedData = $request->validate([
