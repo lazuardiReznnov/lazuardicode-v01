@@ -38,15 +38,27 @@
     <div class="row">
         <div class="col-md-6 my-3">
             <a
-                href="/dashboard/maintenance/create"
+                href="/dashboard/employee/department"
                 class="btn btn-sm btn-primary"
-                ><i class="bi bi-file-earmark-plus"></i
-            ></a>
+                ><i class="bi bi-file-earmark-plus"></i> Department Data</a
+            >
         </div>
     </div>
     <!-- EndTombol -->
 
     <div class="row">
-        <div class="col-md-10"></div>
+        <div class="col-md-10">
+            <div class="card" style="width: 18rem">
+                <ul class="list-group list-group-flush">
+                    @foreach($datas as $data)
+                    <li class="list-group-item">
+                        <a href="/dashboard/employee/detail/{{ $data->slug }}"
+                            >{{ $data->name }}
+                        </a>
+                    </li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
     </div>
 </x-admin-layout>

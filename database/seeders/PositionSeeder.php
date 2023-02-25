@@ -17,15 +17,15 @@ class PositionSeeder extends Seeder
     {
         position::create([
             'department_id' => 1,
-            'name' => 'Head Finance Manager',
-            'slug' => 'head-finance-manager',
+            'name' => 'Head Finance Officer',
+            'slug' => '01-head-finance-officer',
             'descriptions' =>
                 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, iste.',
         ]);
         position::create([
             'department_id' => 1,
             'name' => 'Acounting',
-            'slug' => 'acounting',
+            'slug' => '02-acounting',
             'descriptions' =>
                 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, iste.',
         ]);
@@ -33,7 +33,15 @@ class PositionSeeder extends Seeder
         position::create([
             'department_id' => 1,
             'name' => 'Administrator',
-            'slug' => 'administrator',
+            'slug' => '03-administrator',
+            'descriptions' =>
+                'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, iste.',
+        ]);
+
+        position::create([
+            'department_id' => 2,
+            'name' => 'Manager',
+            'slug' => '01-manager',
             'descriptions' =>
                 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Nisi, iste.',
         ]);
