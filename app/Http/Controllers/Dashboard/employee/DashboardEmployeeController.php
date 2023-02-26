@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Dashboard\employee;
 
-use App\Http\Controllers\Controller;
 use App\Models\employee;
+use App\Models\position;
 use App\Models\department;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class DashboardEmployeeController extends Controller
 {
@@ -88,5 +89,15 @@ class DashboardEmployeeController extends Controller
     public function destroy(employee $employee)
     {
         //
+    }
+
+    public function detail(department $department)
+    {
+        return view('dashboard.employee.detail', [
+            'title' => 'detail Employee List',
+            'datas' => position::where('department_id', $department->id)
+                ->paginate(10)
+                ->withQueryString(),
+        ]);
     }
 }

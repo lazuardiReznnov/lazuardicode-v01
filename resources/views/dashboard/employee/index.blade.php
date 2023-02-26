@@ -47,18 +47,22 @@
     <!-- EndTombol -->
 
     <div class="row">
-        <div class="col-md-10">
-            <div class="card" style="width: 18rem">
-                <ul class="list-group list-group-flush">
-                    @foreach($datas as $data)
-                    <li class="list-group-item">
-                        <a href="/dashboard/employee/detail/{{ $data->slug }}"
-                            >{{ $data->name }}
-                        </a>
-                    </li>
-                    @endforeach
-                </ul>
+        @foreach($datas as $data)
+        <div class="col-md">
+            <div class="card text-center" style="width: 18rem">
+                <div class="card-body">
+                    <h5 class="card-title">{{ $data->name }}</h5>
+                    <p class="card-text">
+                        {{$data->description}}
+                    </p>
+                    <a
+                        href="/dashboard/employee/detail/{{ $data->slug }}"
+                        class="btn btn-primary"
+                        >Enter</a
+                    >
+                </div>
             </div>
         </div>
+        @endforeach
     </div>
 </x-admin-layout>

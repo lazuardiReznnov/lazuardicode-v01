@@ -325,6 +325,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/dashboard/employee/checkSlug', 'checkSlug');
         Route::get('dashboard/employee/create-excl', 'createexcl');
         Route::post('dashboard/employee/store-excl', 'storeexcl');
+        Route::get('/dashboard/employee/detail/{department}', 'detail');
     });
     Route::resource('/dashboard/employee', DashboardEmployeeController::class);
 

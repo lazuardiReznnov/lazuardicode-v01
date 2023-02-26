@@ -47,6 +47,7 @@ class DatabaseSeeder extends Seeder
             // StockSeeder::class,
             // MaintenanceSeeder::class,
             DepartmentSeeder::class,
+            PositionSeeder::class,
         ]);
     }
 }
