@@ -21,11 +21,14 @@ return new class extends Migration {
                 ->cascadeOnUpdate();
             $table->string('name');
             $table->string('slug');
-            $table->string('fullname');
+
             $table->string('idCard');
+            $table->string('gender');
             $table->string('email')->unique();
             $table->string('address');
-            $table->string('pic');
+            $table->string('phone');
+            $table->string('pic')->nullable();
+            $table->date('tgl');
             $table->timestamps();
         });
     }

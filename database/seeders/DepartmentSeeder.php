@@ -33,5 +33,12 @@ class DepartmentSeeder extends Seeder
             'description' =>
                 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam, nemo.',
         ]);
+
+        department::create([
+            'name' => 'Center',
+            'slug' => 'center',
+            'description' =>
+                'Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam, nemo.',
+        ]);
     }
 }
