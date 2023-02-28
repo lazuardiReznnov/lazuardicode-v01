@@ -315,6 +315,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/dashboard/employee/department/checkSlug', 'checkSlug');
         Route::get('dashboard/employee/department/create-excl', 'createexcl');
         Route::post('dashboard/employee/department/store-excl', 'storeexcl');
+        Route::get('/dashboard/employee/create/{department}', 'create');
     });
     Route::resource(
         '/dashboard/employee/department',

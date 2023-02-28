@@ -15,6 +15,7 @@ class DashboardEmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         return view('dashboard.employee.index', [
@@ -30,9 +31,12 @@ class DashboardEmployeeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(department $department)
     {
-        //
+        return view('dashboard.employe.create', [
+            'title' => 'create New Employee',
+            'data' => $department,
+        ]);
     }
 
     /**
@@ -91,13 +95,18 @@ class DashboardEmployeeController extends Controller
      */
     public function destroy(employee $employee)
     {
-        //
+        employee::destroy($employee->id);
+
+        return redirect(
+            '/dashboard/employee/detail/' . $employee->department->slug
+        )->with('success', 'New Post Has Been Deleted.');
     }
 
     public function detail(department $department)
     {
         return view('dashboard.employee.detail', [
             'title' => 'detail Employee List',
+            'department' => $department,
             'datas' => employee::where('department_id', $department->id)
                 ->paginate(10)
                 ->withQueryString(),

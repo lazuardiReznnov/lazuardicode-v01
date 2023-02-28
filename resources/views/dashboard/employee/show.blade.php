@@ -95,6 +95,10 @@
                                                 <b>Address</b><br />
                                                 {{ $data->address}}
                                             </li>
+                                            <li class="list-group-item">
+                                                <b>Joint Date</b><br />
+                                                {{ \Carbon\Carbon::parse($data->tgl)->format('d F Y') }}
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>

@@ -38,6 +38,15 @@
     <!-- endPesan -->
 
     <!-- content -->
+    <div class="btn-group mb-3">
+        <a
+            href="/dashboard/employee/create/{{ $department->slug }}"
+            class="btn btn-primary"
+            ><i class="bi bi-file-earmark-plus"></i
+        ></a>
+        <a href="#" class="btn btn-primary">Link</a>
+        <a href="#" class="btn btn-primary">Link</a>
+    </div>
     <div class="row">
         <div class="col-md-10">
             <x-card header="List Employee">
