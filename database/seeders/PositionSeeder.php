@@ -17,7 +17,6 @@ class PositionSeeder extends Seeder
     {
         // 1
         position::create([
-            'department_id' => 4,
             'name' => 'Directur',
             'slug' => '04-direktur',
             'descriptions' =>
@@ -25,7 +24,6 @@ class PositionSeeder extends Seeder
         ]);
         // 2
         position::create([
-            'department_id' => 1,
             'name' => 'Head Finance Officer',
             'slug' => '01-head-finance-officer',
             'descriptions' =>
@@ -33,7 +31,6 @@ class PositionSeeder extends Seeder
         ]);
         // 3
         position::create([
-            'department_id' => 1,
             'name' => 'Acounting',
             'slug' => '02-acounting',
             'descriptions' =>
@@ -41,7 +38,6 @@ class PositionSeeder extends Seeder
         ]);
         // 4
         position::create([
-            'department_id' => 1,
             'name' => 'Administrator',
             'slug' => '03-administrator',
             'descriptions' =>
@@ -49,7 +45,6 @@ class PositionSeeder extends Seeder
         ]);
         // 5
         position::create([
-            'department_id' => 2,
             'name' => 'Manager',
             'slug' => '01-manager',
             'descriptions' =>
@@ -57,7 +52,6 @@ class PositionSeeder extends Seeder
         ]);
         // 6
         position::create([
-            'department_id' => 2,
             'name' => 'Suport Manager',
             'slug' => '03-suport-manager',
             'descriptions' =>
@@ -65,7 +59,6 @@ class PositionSeeder extends Seeder
         ]);
         // 7
         position::create([
-            'department_id' => 2,
             'name' => 'Field Manager',
             'slug' => '02-manager',
             'descriptions' =>
@@ -73,7 +66,6 @@ class PositionSeeder extends Seeder
         ]);
         // 8
         position::create([
-            'department_id' => 2,
             'name' => 'driver',
             'slug' => '02-driver',
             'descriptions' =>
@@ -81,7 +73,6 @@ class PositionSeeder extends Seeder
         ]);
         // 9
         position::create([
-            'department_id' => 3,
             'name' => 'Service Advisor',
             'slug' => '03-service-advisor',
             'descriptions' =>
@@ -89,7 +80,6 @@ class PositionSeeder extends Seeder
         ]);
         // 10
         position::create([
-            'department_id' => 3,
             'name' => 'Mechanic',
             'slug' => '03-mechanic',
             'descriptions' =>
@@ -97,7 +87,6 @@ class PositionSeeder extends Seeder
         ]);
         // 11
         position::create([
-            'department_id' => 3,
             'name' => 'Helper',
             'slug' => '03-helper',
             'descriptions' =>
@@ -105,7 +94,6 @@ class PositionSeeder extends Seeder
         ]);
         // 12
         position::create([
-            'department_id' => 3,
             'name' => 'Warehouse Manager',
             'slug' => '03-warehouse-manager',
             'descriptions' =>

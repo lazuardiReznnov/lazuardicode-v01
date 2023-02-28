@@ -54,7 +54,10 @@ class DashboardEmployeeController extends Controller
      */
     public function show(employee $employee)
     {
-        //
+        return view('dashboard.employee.show', [
+            'title' => 'Detail Employee Data',
+            'data' => $employee,
+        ]);
     }
 
     /**
@@ -95,7 +98,7 @@ class DashboardEmployeeController extends Controller
     {
         return view('dashboard.employee.detail', [
             'title' => 'detail Employee List',
-            'datas' => position::where('department_id', $department->id)
+            'datas' => employee::where('department_id', $department->id)
                 ->paginate(10)
                 ->withQueryString(),
         ]);

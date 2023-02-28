@@ -26,8 +26,8 @@ class department extends Model
         return 'slug';
     }
 
-    public function position()
+    public function employee()
     {
-        return $this->hasMany(position::class);
+        return $this->hasMany(employee::class);
     }
 }

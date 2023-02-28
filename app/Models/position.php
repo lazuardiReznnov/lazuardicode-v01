@@ -11,7 +11,6 @@ class position extends Model
     use HasFactory, Sluggable;
 
     protected $guarded = ['id'];
-    protected $with = ['employee'];
 
     public function sluggable(): array
     {
@@ -25,11 +24,6 @@ class position extends Model
     public function getRouteKeyName()
     {
         return 'slug';
-    }
-
-    public function department()
-    {
-        return $this->belongsTo(position::class);
     }
 
     public function employee()

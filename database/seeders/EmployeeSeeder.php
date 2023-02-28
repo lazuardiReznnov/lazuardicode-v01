@@ -16,6 +16,7 @@ class EmployeeSeeder extends Seeder
     public function run()
     {
         employee::create([
+            'department_id' => 4,
             'position_id' => '1',
             'name' => 'Hendra',
             'slug' => 'hendra',
@@ -28,6 +29,7 @@ class EmployeeSeeder extends Seeder
             'tgl' => '2011/01/01',
         ]);
         employee::create([
+            'department_id' => 2,
             'position_id' => '5',
             'name' => 'Iwan Gunawan',
             'slug' => 'iwan-gunawan',
@@ -41,6 +43,7 @@ class EmployeeSeeder extends Seeder
         ]);
 
         employee::create([
+            'department_id' => 1,
             'position_id' => '2',
             'name' => 'Hengky Setiawan',
             'slug' => 'hengky-setiawan',
@@ -54,6 +57,7 @@ class EmployeeSeeder extends Seeder
         ]);
 
         employee::create([
+            'department_id' => 1,
             'position_id' => '4',
             'name' => 'Mohamad Lazuardi Noor',
             'slug' => 'mohamad-lazuardi-noor',
@@ -67,6 +71,7 @@ class EmployeeSeeder extends Seeder
         ]);
 
         employee::create([
+            'department_id' => 3,
             'position_id' => '12',
             'name' => 'Irwan Erawan',
             'slug' => 'irwan-erawan',
@@ -80,6 +85,7 @@ class EmployeeSeeder extends Seeder
         ]);
 
         employee::create([
+            'department_id' => 3,
             'position_id' => '10',
             'name' => 'Tardi',
             'slug' => 'tardi',
@@ -93,6 +99,7 @@ class EmployeeSeeder extends Seeder
         ]);
 
         employee::create([
+            'department_id' => 3,
             'position_id' => '10',
             'name' => 'Ali Wijaya',
             'slug' => 'ali-wijaya',
@@ -106,6 +113,7 @@ class EmployeeSeeder extends Seeder
         ]);
 
         employee::create([
+            'department_id' => 2,
             'position_id' => '7',
             'name' => 'Bayu Prasetya',
             'slug' => 'bayu-prasetya',
@@ -119,6 +127,7 @@ class EmployeeSeeder extends Seeder
         ]);
 
         employee::create([
+            'department_id' => 2,
             'position_id' => '7',
             'name' => 'M. Topik Nuroni',
             'slug' => 'm-topik-nuroni',
@@ -132,6 +141,7 @@ class EmployeeSeeder extends Seeder
         ]);
 
         employee::create([
+            'department_id' => 2,
             'position_id' => '7',
             'name' => 'Sugito',
             'slug' => 'sugito',

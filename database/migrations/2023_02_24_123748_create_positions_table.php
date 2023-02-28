@@ -14,11 +14,6 @@ return new class extends Migration {
     {
         Schema::create('positions', function (Blueprint $table) {
             $table->id();
-            $table
-                ->foreignId('department_id')
-                ->constrained('departments')
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
             $table->string('name');
             $table->string('slug')->unique();
             $table->text('descriptions');
