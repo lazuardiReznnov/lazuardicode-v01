@@ -7,6 +7,8 @@ use App\Models\position;
 use App\Models\department;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Cviebrock\EloquentSluggable\Services\SlugService;
+use Illuminate\support\Facades\Storage;
 
 class DashboardEmployeeController extends Controller
 {
@@ -33,9 +35,10 @@ class DashboardEmployeeController extends Controller
      */
     public function create(department $department)
     {
-        return view('dashboard.employe.create', [
+        return view('dashboard.employee.create', [
             'title' => 'create New Employee',
             'data' => $department,
+            'positions' => position::all(),
         ]);
     }
 
@@ -47,7 +50,31 @@ class DashboardEmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'position_id' => 'required',
+            'name' => 'required',
+            'slug' => 'required|unique:employees',
+            'idCard' => 'required|numeric',
+            'gender' => 'required',
+            'email' => 'required|email|unique:employees',
+            'address' => 'required',
+            'phone' => 'required|numeric',
+            'tgl' => 'required',
+            'pic' => 'image|file|max:2048',
+        ]);
+
+        if ($request->file('pic')) {
+            $validatedData['pic'] = $request
+                ->file('pic')
+                ->store('employee-pic');
+        }
+        $validatedData['department_id'] = $request->department_id;
+
+        employee::create($validatedData);
+
+        return redirect(
+            '/dashboard/employee/detail/' . $request->department_slug
+        )->with('success', 'New Employee Has Been aded.');
     }
 
     /**
@@ -72,7 +99,11 @@ class DashboardEmployeeController extends Controller
      */
     public function edit(employee $employee)
     {
-        //
+        return view('dashboard.employee.edit', [
+            'title' => 'Edit Employee',
+            'data' => $employee,
+            'positions' => position::all(),
+        ]);
     }
 
     /**
@@ -84,7 +115,44 @@ class DashboardEmployeeController extends Controller
      */
     public function update(Request $request, employee $employee)
     {
-        //
+        $rules = [
+            'position_id' => 'required',
+            'name' => 'required',
+
+            'idCard' => 'required|numeric',
+            'gender' => 'required',
+
+            'address' => 'required',
+            'phone' => 'required|numeric',
+            'tgl' => 'required',
+            'pic' => 'image|file|max:2048',
+        ];
+
+        if ($request->slug != $employee->slug) {
+            $rules['slug'] = 'required|unique:employees';
+        }
+
+        if ($request->email != $employee->email) {
+            $rules['email'] = 'required|email|unique:employees';
+        }
+        $validatedData = $request->validate($rules);
+
+        if ($request->file('pic')) {
+            if ($request->old_pic) {
+                storage::delete($request->old_pic);
+            }
+            $validatedData['pic'] = $request
+                ->file('pic')
+                ->store('employee-pic');
+        }
+
+        $validatedData['department_id'] = $request->department_id;
+
+        employee::where('id', $employee->id)->update($validatedData);
+
+        return redirect(
+            '/dashboard/employee/detail/' . $request->department_slug
+        )->with('success', ' Employee Has Been Update.');
     }
 
     /**
@@ -111,5 +179,23 @@ class DashboardEmployeeController extends Controller
                 ->paginate(10)
                 ->withQueryString(),
         ]);
+    }
+
+    public function createadd(department $department)
+    {
+        return view('dashboard.employe.create', [
+            'title' => 'create New Employee',
+            'data' => $department,
+        ]);
+    }
+
+    public function checkSlug(Request $request)
+    {
+        $slug = SlugService::createSlug(
+            employee::class,
+            'slug',
+            $request->name
+        );
+        return response()->json(['slug' => $slug]);
     }
 }

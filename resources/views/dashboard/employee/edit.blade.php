@@ -16,21 +16,21 @@
         <div class="col-md-10">
             <x-card header="Form Unit">
                 <form
-                    action="/dashboard/employee"
+                    action="/dashboard/employee/{{ $data->slug }}"
                     method="post"
                     enctype="multipart/form-data"
                 >
-                    @csrf
+                    @csrf @method('put')
 
                     <input
                         type="hidden"
                         name="department_id"
-                        value="{{ $data->id }}"
+                        value="{{ $data->department_id }}"
                     />
                     <input
                         type="hidden"
                         name="department_slug"
-                        value="{{ $data->slug }}"
+                        value="{{ $data->department->slug }}"
                     />
                     <div class="row mb-3">
                         <label
@@ -40,11 +40,23 @@
                         >
 
                         <div class="col-md-6">
+                            @if($data->pic)
+                            <input
+                                type="hidden"
+                                name="old_pic"
+                                value="{{ $data->pic }}"
+                            />
+                            <img
+                                src="{{ asset('storage/'. $data->pic) }}"
+                                class="d-block img-fluid mb-2 col-sm-5"
+                            />
+                            @else
                             <img
                                 width="200"
                                 class="img-preview img-fluid mb-2"
                                 alt=""
                             />
+                            @endif
 
                             <input
                                 id="pic"
@@ -78,7 +90,7 @@
                                 type="text"
                                 class="form-control @error('name') is-invalid @enderror"
                                 name="name"
-                                value="{{ old('name') }}"
+                                value="{{ old('name', $data->name) }}"
                                 required
                                 autocomplete="name"
                                 autofocus
@@ -105,7 +117,7 @@
                                 type="text"
                                 class="form-control @error('slug') is-invalid @enderror"
                                 name="slug"
-                                value="{{ old('slug') }}"
+                                value="{{ old('slug', $data->slug) }}"
                                 required
                                 autocomplete="slug"
                                 autofocus
@@ -135,7 +147,7 @@
                             >
                                 <option selected>Select Positions</option>
                                 @foreach($positions as $position)
-                                @if(old('position_id')==$position->id)
+                                @if(old('position_id',$data->position_id)==$position->id)
                                 <option value="{{ $position->id }}" selected>
                                     {{ $position->name }}
                                 </option>
@@ -167,7 +179,7 @@
                                 type="text"
                                 class="form-control @error('idCard') is-invalid @enderror"
                                 name="idCard"
-                                value="{{ old('idCard') }}"
+                                value="{{ old('idCard',$data->idCard) }}"
                                 required
                                 autocomplete="idCard"
                                 autofocus
@@ -221,7 +233,7 @@
                                 type="email"
                                 class="form-control @error('email') is-invalid @enderror"
                                 name="email"
-                                value="{{ old('email') }}"
+                                value="{{ old('email', $data->email) }}"
                                 required
                                 autocomplete="email"
                                 autofocus
@@ -247,7 +259,7 @@
                                 type="text"
                                 class="form-control @error('phone') is-invalid @enderror"
                                 name="phone"
-                                value="{{ old('phone') }}"
+                                value="{{ old('phone', $data->phone) }}"
                                 required
                                 autocomplete="phone"
                                 autofocus
@@ -272,7 +284,7 @@
                                 id="address"
                                 name="address"
                                 rows="3"
-                                >{{ old("address") }}</textarea
+                                >{{ old("address", $data->address) }}</textarea
                             >
 
                             @error('address')
@@ -296,7 +308,7 @@
                                 type="date"
                                 class="form-control @error('tgl') is-invalid @enderror"
                                 name="tgl"
-                                value="{{ old('tgl') }}"
+                                value="{{ old('tgl', $data->tgl) }}"
                                 required
                                 autocomplete="tgl"
                                 autofocus
@@ -316,7 +328,7 @@
                                 type="submit"
                                 name="save"
                             >
-                                Save
+                                Update
                             </button>
                         </div>
                     </div>
