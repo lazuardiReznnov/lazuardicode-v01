@@ -48,7 +48,7 @@
 
     <div class="row">
         @foreach($datas as $data)
-        <div class="col-md">
+        <div class="col-md mb-4">
             <div class="card text-center" style="width: 18rem">
                 <div class="card-body">
                     <h5 class="card-title">{{ $data->name }}</h5>

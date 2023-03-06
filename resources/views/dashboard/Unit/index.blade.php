@@ -53,7 +53,7 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Pic</th>
+
                             <th>No Registration</th>
                             <th>Brand/Type</th>
                             <th>Category</th>
@@ -68,23 +68,7 @@
                             <th scope="row">
                                 {{ ($datas->currentpage()-1) * $datas->perpage() + $loop->index + 1 }}
                             </th>
-                            <td>
-                                @if($data->pic)
-                                <img
-                                    width="50"
-                                    src="{{ asset('storage/'. $data->pic) }}"
-                                    class="rounded-circle mx-auto d-block shadow my-3"
-                                    alt="Unit Image"
-                                />
-                                @else
-                                <img
-                                    class="rounded-circle mx-auto d-block shadow my-3"
-                                    src="http://source.unsplash.com/200x200?truck"
-                                    alt=""
-                                    width="50"
-                                />
-                                @endif
-                            </td>
+
                             <td>{{ $data->name }}</td>
                             <td>
                                 {{ $data->type->brand->name }}

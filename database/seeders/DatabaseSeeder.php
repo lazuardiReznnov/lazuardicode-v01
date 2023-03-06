@@ -4,17 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\categoryPart;
-use App\Models\department;
-use App\Models\Heropage;
-use App\Models\invStock;
-use App\Models\Letter;
-use App\Models\Maintenance;
-use App\Models\sparepart;
-use App\Models\Supplier;
 use Illuminate\Database\Seeder;
-use PHPUnit\TextUI\XmlConfiguration\Group;
-use Spatie\Permission\Contracts\Permission;
 
 class DatabaseSeeder extends Seeder
 {
@@ -37,7 +27,7 @@ class DatabaseSeeder extends Seeder
             GroupSeeder::class,
             FlagSeeder::class,
             TypeSeeder::class,
-            // UnitSeeder::class,
+            UnitSeeder::class,
             CategoryLetterSeeder::class,
             // LetterSeeder::class,
             SupplierSeeder::class,
@@ -49,6 +39,7 @@ class DatabaseSeeder extends Seeder
             DepartmentSeeder::class,
             PositionSeeder::class,
             EmployeeSeeder::class,
+            ImageSeeder::class,
         ]);
     }
 }

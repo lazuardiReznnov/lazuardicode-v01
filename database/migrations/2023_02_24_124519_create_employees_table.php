@@ -32,7 +32,7 @@ return new class extends Migration {
             $table->string('email')->unique();
             $table->string('address');
             $table->string('phone');
-            $table->string('pic')->nullable();
+
             $table->date('tgl');
             $table->timestamps();
         });

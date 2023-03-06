@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class unit extends Model
 {
@@ -65,5 +66,10 @@ class unit extends Model
     public function maintenance()
     {
         return $this->hasMany(Maintenance::class);
+    }
+
+    public function image(): MorphMany
+    {
+        return $this->morphMany(Image::class, 'imageable');
     }
 }

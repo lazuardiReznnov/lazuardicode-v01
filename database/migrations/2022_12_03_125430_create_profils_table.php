@@ -23,7 +23,7 @@ return new class extends Migration {
             $table->text('address')->nullable();
             $table->string('job')->nullable();
             $table->text('word')->nullable();
-            $table->string('pic')->nullable();
+
             $table->string('twitter')->nullable();
             $table->string('facebook')->nullable();
             $table->string('linkedin')->nullable();

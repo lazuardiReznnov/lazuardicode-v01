@@ -24,7 +24,7 @@ return new class extends Migration {
             $table->date('tgl');
             $table->string('payment');
             $table->string('state')->default('lunas');
-            $table->string('pic')->nullable();
+
             $table->timestamps();
         });
     }

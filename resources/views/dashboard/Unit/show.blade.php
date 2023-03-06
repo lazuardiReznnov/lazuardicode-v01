@@ -14,7 +14,7 @@
             <x-card>
                 <div class="row justify-content-between mb-5">
                     <div class="col-md-6">
-                        @if($data->pic)
+                        @if($data->image)
                         <img
                             width="200"
                             src="{{ asset('storage/'. $data->pic) }}"

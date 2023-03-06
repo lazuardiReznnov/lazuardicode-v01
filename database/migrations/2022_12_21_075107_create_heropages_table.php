@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->string('heading');
             $table->string('title');
             $table->text('descriptions');
-            $table->string('pic')->nullable();
+
             $table->timestamps();
         });
     }
