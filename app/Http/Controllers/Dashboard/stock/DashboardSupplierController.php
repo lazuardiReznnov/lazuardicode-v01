@@ -94,7 +94,10 @@ class DashboardSupplierController extends Controller
      */
     public function show(supplier $supplier)
     {
-        //
+        return view('dashboard.stock.supplier.show', [
+            'title' => $supplier->name,
+            'data' => $supplier->load('image'),
+        ]);
     }
 
     /**
@@ -178,5 +181,46 @@ class DashboardSupplierController extends Controller
             $request->name
         );
         return response()->json(['slug' => $slug]);
+    }
+
+    public function createimage(supplier $supplier)
+    {
+        return view('dashboard.stock.supplier.create-image', [
+            'title' => 'File Upload',
+            'data' => $supplier,
+        ]);
+    }
+
+    public function storeimage(Request $request)
+    {
+        $validatedData = $request->validate([
+            'pic' => 'image|file|max:2048',
+        ]);
+
+        $validatedData['pic'] = $request->file('pic')->store('supplier-pic');
+
+        $supplier = supplier::find($request->supplier_id);
+
+        $supplier->image()->create($validatedData);
+
+        return redirect(
+            '/dashboard/stock/supplier/' . $request->supplier_slug
+        )->with('success', 'New Data Has Been Aded.!');
+    }
+
+    public function destroyimage(supplier $supplier, Request $request)
+    {
+        $data = $supplier
+            ->image()
+            ->where('id', $request->id)
+            ->first();
+
+        storage::delete($data->pic);
+        $data->delete();
+
+        return redirect('/dashboard/stock/supplier/' . $supplier->slug)->with(
+            'success',
+            'Data Has Been Deleted.!'
+        );
     }
 }

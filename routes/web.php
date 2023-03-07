@@ -203,6 +203,12 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(DashboardSupplierController::class)->group(function () {
         Route::get('/dashboard/stock/supplier/checkSlug', 'checkSlug');
+        Route::get('/dashboard/stock/supplier/image/{supplier}', 'createimage');
+        Route::post('/dashboard/stock/supplier/image/', 'storeimage');
+        Route::delete(
+            '/dashboard/stock/supplier/image/{supplier}',
+            'destroyimage'
+        );
     });
 
     Route::resource(
