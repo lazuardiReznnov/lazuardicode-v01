@@ -26,7 +26,7 @@
                         <label
                             for="pic"
                             class="col-md-4 col-form-label text-md-end"
-                            >{{ __("pic") }}</label
+                            >{{ __("picture") }}</label
                         >
                         <input
                             type="hidden"
@@ -59,6 +59,57 @@
                             />
 
                             @error('pic')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label
+                            for="name"
+                            class="col-md-4 col-form-label text-md-end"
+                            >{{ __("Title") }}</label
+                        >
+
+                        <div class="col-md-6">
+                            <input
+                                id="name"
+                                type="text"
+                                class="form-control @error('name') is-invalid @enderror"
+                                name="name"
+                                value="{{ old('name') }}"
+                                required
+                                autocomplete="name"
+                                autofocus
+                            />
+
+                            @error('name')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <label
+                            for="description"
+                            class="col-md-4 col-form-label text-md-end"
+                            >{{ __("description") }}</label
+                        >
+
+                        <div class="col-md-6">
+                            <textarea
+                                class="form-control"
+                                id="description"
+                                name="description"
+                                rows="3"
+                                >{{ old("description") }}</textarea
+                            >
+
+                            @error('description')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>

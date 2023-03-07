@@ -241,6 +241,8 @@ class DashboardUnitController extends Controller
     {
         $validatedData = $request->validate([
             'pic' => 'image|file|max:2048',
+            'name' => 'required',
+            'description' => 'required',
         ]);
 
         $validatedData['pic'] = $request->file('pic')->store('unit-pic');

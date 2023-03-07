@@ -55,8 +55,11 @@
                                         width="200"
                                         src="{{ asset('storage/'. $pic->pic) }}"
                                         class="my-3 d-block mx-auto"
-                                        alt="about Image"
+                                        alt="{{ $pic->name }}"
                                     />
+                                    <p class="text-center fw-bold">
+                                        {{ $pic->name }}
+                                    </p>
                                     <form
                                         action="/dashboard/unit/image/{{ $data->slug }}"
                                         method="post"
