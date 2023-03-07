@@ -154,6 +154,9 @@ Route::middleware('auth')->group(function () {
         Route::get('dashboard/unit/flag/checkSlug', 'checkSlug');
         Route::get('dashboard/unit/flag/create-excl', 'createexcl');
         Route::post('dashboard/unit/flag/store-excl', 'storeexcl');
+        Route::get('/dashboard/unit/flag/image/{flag}', 'createimage');
+        Route::post('/dashboard/unit/flag/image/', 'storeimage');
+        Route::delete('/dashboard/unit/flag/image/{flag}', 'destroyimage');
     });
 
     Route::resource('dashboard/unit/flag', DashboardFlagController::class);

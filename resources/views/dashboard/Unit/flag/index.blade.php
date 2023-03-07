@@ -58,7 +58,6 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Pic</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Phone</th>
@@ -74,34 +73,26 @@
                             <th scope="row">
                                 {{ ($datas->currentpage()-1) * $datas->perpage() + $loop->index + 1 }}
                             </th>
-                            <td>
-                                @if($data->pic)
-                                <img
-                                    width="50"
-                                    src="{{ asset('storage/'. $data->pic) }}"
-                                    class="rounded-circle mx-auto d-block shadow my-3"
-                                    alt="Unit Image"
-                                />
-                                @else
-                                <img
-                                    class="rounded-circle mx-auto d-block shadow my-3"
-                                    src="http://source.unsplash.com/200x200?truck"
-                                    alt=""
-                                    width="50"
-                                />
-                                @endif
-                            </td>
+
                             <td class="col-md-2">{{ $data->name }}</td>
                             <td class="col-md-2">{{ $data->email }}</td>
                             <td class="col-md-2">{{ $data->phone }}</td>
 
                             <td>
                                 <a
+                                    href="/dashboard/unit/flag/{{ $data->slug }}"
+                                    class="badge bg-success"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-placement="top"
+                                    title="Detail Flag"
+                                    ><i class="bi bi-eye"></i
+                                ></a>
+                                <a
                                     href="/dashboard/unit/flag/{{ $data->slug }}/edit"
                                     class="badge bg-warning"
                                     data-bs-toggle="tooltip"
                                     data-bs-placement="top"
-                                    title="Edit Unit"
+                                    title="Edit Flag Data"
                                     ><i class="bi bi-pencil-square"></i
                                 ></a>
 

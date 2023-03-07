@@ -5,6 +5,9 @@
         <x-breadcrumb-link link="/dashboard/unit">
             Unit Mangement
         </x-breadcrumb-link>
+        <x-breadcrumb-link link="/dashboard/unit/flag">
+            Flag Mangement
+        </x-breadcrumb-link>
 
         <x-breadcrumb-link-active>{{ $title }} </x-breadcrumb-link-active>
     </x-breadcrumb>
@@ -42,30 +45,29 @@
                 <div class="row justify-content-between mb-5">
                     <div class="col-md-6">
                         <a
-                            href="/dashboard/unit/image/{{ $data->slug }}"
+                            href="/dashboard/unit/flag/image/{{ $data->slug }}"
                             class="btn btn-primary mb-3"
                             >Add Image</a
                         >
                         @if($data->image)
                         <div class="row">
-                            @foreach($data->image as $pic)
                             <div class="col-sm-6">
                                 <div class="card mb-3 shadow d-flex">
                                     <img
                                         width="200"
-                                        src="{{ asset('storage/'. $pic->pic) }}"
+                                        src="{{ asset('storage/'. $data->image->pic) }}"
                                         class="my-3 d-block mx-auto"
                                         alt="about Image"
                                     />
                                     <form
-                                        action="/dashboard/unit/image/{{ $data->slug }}"
+                                        action="/dashboard/unit/flag/image/{{ $data->slug }}"
                                         method="post"
                                         class="d-inline"
                                     >
                                         <input
                                             type="hidden"
                                             name="id"
-                                            value="{{ $pic->id }}"
+                                            value="{{ $data->image->id }}"
                                         />
                                         @method('delete') @csrf
                                         <button
@@ -80,7 +82,6 @@
                                     </form>
                                 </div>
                             </div>
-                            @endforeach
                         </div>
 
                         @else
@@ -110,7 +111,7 @@
                                         aria-expanded="false"
                                         aria-controls="flush-collapseOne"
                                     >
-                                        spesification
+                                        Detail Descriptions
                                     </button>
                                 </h2>
                                 <div
@@ -122,42 +123,20 @@
                                     <div class="accordion-body">
                                         <ul class="list-group">
                                             <li class="list-group-item">
-                                                <b>Registration number</b><br />
+                                                <b>Name</b><br />
                                                 {{ $data->name }}
                                             </li>
-
                                             <li class="list-group-item">
-                                                <b>Category</b><br />
-                                                {{ $data->type->category->name }}
+                                                <b>Address</b><br />
+                                                {{ $data->address }}
                                             </li>
                                             <li class="list-group-item">
-                                                <b>Brand/Model/Type</b><br />
-                                                {{ $data->type->brand->name }}
-                                                {{ $data->type->name }}
+                                                <b>Phone</b><br />
+                                                {{ $data->phone }}
                                             </li>
                                             <li class="list-group-item">
-                                                <b>Vin</b><br />
-                                                {{ $data->vin}}
-                                            </li>
-                                            <li class="list-group-item">
-                                                <b>Engine Number</b><br />
-                                                {{ $data->engine_numb}}
-                                            </li>
-                                            <li class="list-group-item">
-                                                <b>Color</b><br />
-                                                {{ $data->color}}
-                                            </li>
-                                            <li class="list-group-item">
-                                                <b>Year</b><br />
-                                                {{ $data->year}}
-                                            </li>
-                                            <li class="list-group-item">
-                                                <b>Flag</b><br />
-                                                {{ $data->flag->name }}
-                                            </li>
-                                            <li class="list-group-item">
-                                                <b>Group</b><br />
-                                                {{ $data->group->name }}
+                                                <b>Email</b><br />
+                                                {{ $data->email }}
                                             </li>
                                         </ul>
                                     </div>
@@ -185,60 +164,7 @@
                                     aria-labelledby="flush-headingTwo"
                                     data-bs-parent="#accordionFlushExample"
                                 >
-                                    <div class="accordion-body">
-                                        <div class="row">
-                                            @foreach($data->Letter as $let)
-                                            <div class="col-md">
-                                                <ul class="list-group">
-                                                    <li
-                                                        class="list-group-item active text-uppercase"
-                                                        aria-current="true"
-                                                    >
-                                                        {{ $let->categoryletter->name }}
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>Registration No.</b
-                                                        ><br />{{ $let->regNum }}
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>Owner</b
-                                                        ><br />{{ $let->owner }}
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>Registration Year</b
-                                                        ><br />
-                                                        {{ $let->reg_year }}
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>Location Code</b
-                                                        ><br />{{ $let->loc_code }}
-                                                    </li>
-                                                    @if($let->tax != 0)
-                                                    <li class="list-group-item">
-                                                        @php $date_now =
-                                                        date("Y/m/d"); @endphp
-
-                                                        <b>Tax</b><br /><span
-                                                            class="text-{{ \Lazuardicode::expire($let->tax,$date_now) }}"
-                                                        >
-                                                            {{ $let->tax }}</span
-                                                        >
-                                                    </li>
-                                                    @endif
-                                                    <li class="list-group-item">
-                                                        <b>expire date</b><br />
-                                                        <span
-                                                            class="text-{{ \Lazuardicode::expire($let->expire_date,$date_now) }}"
-                                                        >
-                                                            {{ $let->expire_date }}</span
-                                                        >
-                                                    </li>
-                                                </ul>
-                                            </div>
-
-                                            @endforeach
-                                        </div>
-                                    </div>
+                                    <div class="accordion-body"></div>
                                 </div>
                             </div>
                             <div class="accordion-item">

@@ -90,7 +90,6 @@ class DashboardUnitController extends Controller
             'engine_numb' => 'required',
             'fuel' => 'required',
             'year' => 'required',
-            'pic' => 'image|file|max:2048',
         ]);
 
         if ($request->file('pic')) {
@@ -114,7 +113,7 @@ class DashboardUnitController extends Controller
     public function show(Unit $unit)
     {
         return view('dashboard.unit.show', [
-            'title' => 'Detail Unit',
+            'title' => $unit->name,
             'data' => $unit->load('letter', 'image'),
         ]);
     }
@@ -159,7 +158,6 @@ class DashboardUnitController extends Controller
             'engine_numb' => 'required',
             'fuel' => 'required',
             'year' => 'required',
-            'pic' => 'image|file|max:2048',
         ];
 
         if ($request->name != $unit->name) {
@@ -169,13 +167,6 @@ class DashboardUnitController extends Controller
             $rules['slug'] = 'required|unique:units';
         }
         $validatedData = $request->validate($rules);
-
-        if ($request->file('pic')) {
-            if ($request->old_pic) {
-                storage::delete($request->old_pic);
-            }
-            $validatedData['pic'] = $request->file('pic')->store('unit-pic');
-        }
 
         Unit::where('id', $unit->id)->update($validatedData);
 
@@ -194,9 +185,7 @@ class DashboardUnitController extends Controller
     public function destroy(Unit $unit)
     {
         Unit::destroy($unit->id);
-        if ($unit->pic) {
-            storage::delete($unit->pic);
-        }
+
         return redirect('/dashboard/unit')->with(
             'success',
             'New Post Has Been Deleted.'

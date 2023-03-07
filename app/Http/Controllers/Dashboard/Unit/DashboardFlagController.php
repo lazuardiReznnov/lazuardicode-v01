@@ -94,7 +94,10 @@ class DashboardFlagController extends Controller
      */
     public function show(flag $flag)
     {
-        //
+        return view('dashboard.unit.flag.show', [
+            'title' => $flag->name,
+            'data' => $flag->load('image'),
+        ]);
     }
 
     /**
@@ -196,5 +199,47 @@ class DashboardFlagController extends Controller
     {
         $slug = SlugService::createSlug(flag::class, 'slug', $request->name);
         return response()->json(['slug' => $slug]);
+    }
+
+    public function createimage(flag $flag)
+    {
+        return view('dashboard.Unit.flag.create-image', [
+            'title' => 'File Upload',
+            'data' => $flag,
+        ]);
+    }
+
+    public function storeimage(Request $request)
+    {
+        $validatedData = $request->validate([
+            'pic' => 'image|file|max:2048',
+        ]);
+
+        $validatedData['pic'] = $request->file('pic')->store('unit-pic');
+
+        $flag = flag::find($request->flag_id);
+
+        $flag->image()->create($validatedData);
+
+        return redirect('/dashboard/unit/flag/' . $request->flag_slug)->with(
+            'success',
+            'New Data Has Been Aded.!'
+        );
+    }
+
+    public function destroyimage(flag $flag, Request $request)
+    {
+        $data = $flag
+            ->image()
+            ->where('id', $request->id)
+            ->first();
+
+        storage::delete($data->pic);
+        $data->delete();
+
+        return redirect('/dashboard/unit/flag/' . $flag->slug)->with(
+            'success',
+            'Data Has Been Deleted.!'
+        );
     }
 }

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Brand extends Model
 {
@@ -28,5 +29,10 @@ class Brand extends Model
     public function type()
     {
         return $this->hasMany(Type::class);
+    }
+
+    public function units(): HasManyThrough
+    {
+        return $this->hasManyThrough(type::class, Unit::class);
     }
 }
