@@ -192,6 +192,9 @@ Route::middleware('auth')->group(function () {
         Route::get('dashboard/unit/create-excl', 'createexcl');
         Route::post('dashboard/unit/store-excl', 'storeexcl');
         Route::get('dashboard/unit/checkSlug', 'checkSlug');
+        Route::get('/dashboard/unit/image/{unit}', 'createimage');
+        Route::post('/dashboard/unit/image/', 'storeimage');
+        Route::delete('/dashboard/unit/image/{unit}', 'destroyimage');
     });
     Route::resource('dashboard/unit', DashboardUnitController::class);
 

@@ -7,6 +7,7 @@ use App\Models\type;
 use App\Models\Unit;
 use App\Models\Brand;
 use App\Models\group;
+use App\Models\Image;
 use App\Models\Carosery;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -237,5 +238,47 @@ class DashboardUnitController extends Controller
                 'New Data Has Been Aded.!'
             );
         }
+    }
+
+    public function createimage(Unit $unit)
+    {
+        return view('dashboard.Unit.create-image', [
+            'title' => 'File Upload',
+            'data' => $unit,
+        ]);
+    }
+
+    public function storeimage(Request $request)
+    {
+        $validatedData = $request->validate([
+            'pic' => 'image|file|max:2048',
+        ]);
+
+        $validatedData['pic'] = $request->file('pic')->store('unit-pic');
+
+        $unit = Unit::find($request->unit_id);
+
+        $unit->image()->create($validatedData);
+
+        return redirect('/dashboard/unit/' . $request->unit_slug)->with(
+            'success',
+            'New Data Has Been Aded.!'
+        );
+    }
+
+    public function destroyimage(Unit $unit, Request $request)
+    {
+        $data = $unit
+            ->image()
+            ->where('id', $request->id)
+            ->first();
+
+        storage::delete($data->pic);
+        $data->delete();
+
+        return redirect('/dashboard/unit/' . $unit->slug)->with(
+            'success',
+            'Data Has Been Deleted.!'
+        );
     }
 }

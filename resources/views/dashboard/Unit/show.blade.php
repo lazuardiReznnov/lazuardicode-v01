@@ -9,18 +9,80 @@
         <x-breadcrumb-link-active>{{ $title }} </x-breadcrumb-link-active>
     </x-breadcrumb>
 
+    <!-- Pesan -->
+    <div class="row">
+        <div class="col-md-10">
+            @if(session()->has('success'))
+            <x-card>
+                <!-- pesan -->
+
+                <div
+                    class="alert alert-success alert-dismissible fade show"
+                    role="alert"
+                >
+                    {{ session("success") }}
+
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert"
+                        aria-label="close"
+                    ></button>
+                </div>
+
+                <!-- endpesan -->
+            </x-card>
+            @endif
+        </div>
+    </div>
+    <!-- endPesan -->
     <div class="row">
         <div class="col-md">
             <x-card>
                 <div class="row justify-content-between mb-5">
                     <div class="col-md-6">
+                        <a
+                            href="/dashboard/unit/image/{{ $data->slug }}"
+                            class="btn btn-primary mb-3"
+                            >Add Image</a
+                        >
                         @if($data->image)
-                        <img
-                            width="200"
-                            src="{{ asset('storage/'. $data->pic) }}"
-                            class="rounded-circle mx-auto d-block shadow my-3"
-                            alt="about Image"
-                        />
+                        <div class="row">
+                            @foreach($data->image as $pic)
+                            <div class="col-sm-6">
+                                <div class="card mb-3 shadow d-flex">
+                                    <img
+                                        width="200"
+                                        src="{{ asset('storage/'. $pic->pic) }}"
+                                        class="my-3 d-block mx-auto"
+                                        alt="about Image"
+                                    />
+                                    <form
+                                        action="/dashboard/unit/image/{{ $data->slug }}"
+                                        method="post"
+                                        class="d-inline"
+                                    >
+                                        <input
+                                            type="hidden"
+                                            name="id"
+                                            value="{{ $pic->id }}"
+                                        />
+                                        @method('delete') @csrf
+                                        <button
+                                            class="badge bg-danger"
+                                            data-bs-toggle="tooltip"
+                                            data-bs-placement="top"
+                                            title="Delete Image Unit"
+                                            onclick="return confirm('are You sure ??')"
+                                        >
+                                            <i class="bi bi-file-x-fill"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+
                         @else
                         <img
                             class="rounded-circle mx-auto d-block shadow my-3"
