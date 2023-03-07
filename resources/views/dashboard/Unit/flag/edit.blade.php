@@ -21,47 +21,6 @@
 
                     <div class="row mb-3">
                         <label
-                            for="pic"
-                            class="col-md-4 col-form-label text-md-end"
-                            >{{ __("pic") }}</label
-                        >
-
-                        <div class="col-md-6">
-                            @if($data->pic)
-                            <input
-                                type="hidden"
-                                name="old_pic"
-                                value="{{ $unit->pic }}"
-                            />
-                            <img
-                                src="{{ asset('storage/'. $data->pic) }}"
-                                class="d-block img-fluid mb-2 col-sm-5"
-                            />
-                            @else
-                            <img class="img-preview img-fluid mb-2 col-sm-5" />
-                            @endif
-
-                            <input
-                                id="pic"
-                                type="file"
-                                class="form-control @error('pic') is-invalid @enderror"
-                                name="pic"
-                                value="{{ old('pic') }}"
-                                onchange="previewImage()"
-                                autocomplete="pic"
-                                autofocus
-                            />
-
-                            @error('pic')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <label
                             for="name"
                             class="col-md-4 col-form-label text-md-end"
                             >{{ __("Name") }}</label

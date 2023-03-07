@@ -21,39 +21,6 @@
 
                     <div class="row mb-3">
                         <label
-                            for="pic"
-                            class="col-md-4 col-form-label text-md-end"
-                            >{{ __("pic") }}</label
-                        >
-
-                        <div class="col-md-6">
-                            <img
-                                width="200"
-                                class="img-preview img-fluid mb-2"
-                                alt=""
-                            />
-
-                            <input
-                                id="pic"
-                                type="file"
-                                class="form-control @error('pic') is-invalid @enderror"
-                                name="pic"
-                                value="{{ old('pic') }}"
-                                onchange="previewImage()"
-                                autocomplete="pic"
-                                autofocus
-                            />
-
-                            @error('pic')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <div class="row mb-3">
-                        <label
                             for="name"
                             class="col-md-4 col-form-label text-md-end"
                             >{{ __("Name") }}</label

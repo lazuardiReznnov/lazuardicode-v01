@@ -71,12 +71,7 @@ class DashboardFlagController extends Controller
             'email' => ['required', 'string', 'email', 'max:255'],
             'phone' => 'required|numeric|min:3',
             'address' => 'required',
-            'pic' => 'image|file|max:2048',
         ]);
-
-        if ($request->file('pic')) {
-            $validatedData['pic'] = $request->file('pic')->store('flag-pic');
-        }
 
         flag::create($validatedData);
 
@@ -127,7 +122,6 @@ class DashboardFlagController extends Controller
             'email' => ['required', 'string', 'email', 'max:255'],
             'phone' => 'required|numeric|min:3',
             'address' => 'required',
-            'pic' => 'image|file|max:2048',
         ];
 
         if ($request->name != $flag->name) {
@@ -138,13 +132,6 @@ class DashboardFlagController extends Controller
         }
 
         $validatedData = $request->validate($rules);
-
-        if ($request->file('pic')) {
-            if ($request->old_pic) {
-                storage::delete($request->old_pic);
-            }
-            $validatedData['pic'] = $request->file('pic')->store('flag-pic');
-        }
 
         flag::where('id', $flag->id)->update($validatedData);
 
@@ -213,6 +200,8 @@ class DashboardFlagController extends Controller
     {
         $validatedData = $request->validate([
             'pic' => 'image|file|max:2048',
+            'name' => 'required',
+            'description' => 'required',
         ]);
 
         $validatedData['pic'] = $request->file('pic')->store('unit-pic');
