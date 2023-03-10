@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Maintenance extends Model
 {
@@ -31,5 +32,10 @@ class Maintenance extends Model
     public function mspareparts()
     {
         return $this->hasMany(Msparepart::class);
+    }
+
+    public function image(): MorphMany
+    {
+        return $this->morphMany(Image::class, 'imageable');
     }
 }

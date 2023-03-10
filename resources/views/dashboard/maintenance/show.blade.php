@@ -26,6 +26,11 @@
             class="btn btn-primary"
             >Update</a
         >
+        <a
+            href="/dashboard/maintenance/image/{{ $data->slug }}"
+            class="btn btn-primary"
+            >Image</a
+        >
     </div>
     <!-- Pesan -->
     <div class="row">

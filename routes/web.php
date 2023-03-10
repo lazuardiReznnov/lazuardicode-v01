@@ -314,6 +314,17 @@ Route::middleware('auth')->group(function () {
                 '/dashboard/maintenance/state/{maintenance}',
                 'updatestate'
             );
+            Route::get('/dashboard/maintenance/image/{maintenance}', 'image');
+            Route::get(
+                '/dashboard/maintenance/image/create/{maintenance}',
+                'createimage'
+            );
+
+            Route::post('/dashboard/maintenance/image', 'storeimage');
+            Route::delete(
+                '/dashboard/maintenance/image/{maintenance}',
+                'destroyimage'
+            );
         }
     );
 

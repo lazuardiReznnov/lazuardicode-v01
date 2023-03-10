@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Msparepart;
 use App\Models\sparepart;
+use Illuminate\support\Facades\Storage;
 
 class DashboardMaintenanceController extends Controller
 {
@@ -239,5 +240,59 @@ class DashboardMaintenanceController extends Controller
             'success',
             'New Sparepart Has Been Update.'
         );
+    }
+
+    public function image(Maintenance $maintenance)
+    {
+        return view('dashboard.maintenance.image', [
+            'title' => 'Maintenance Image',
+            'images' => $maintenance
+                ->image()
+                ->paginate(10)
+                ->withQueryString(),
+            'data' => $maintenance,
+        ]);
+    }
+
+    public function createimage(Maintenance $maintenance)
+    {
+        return view('dashboard.maintenance.create-image', [
+            'title' => 'File Upload',
+            'data' => $maintenance,
+        ]);
+    }
+
+    public function storeimage(Request $request)
+    {
+        $validatedData = $request->validate([
+            'pic' => 'image|file|max:2048',
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+
+        $validatedData['pic'] = $request->file('pic')->store('maintenance-pic');
+
+        $maintenance = Maintenance::find($request->maintenance_id);
+
+        $maintenance->image()->create($validatedData);
+
+        return redirect(
+            '/dashboard/maintenance/image/' . $request->maintenance_slug
+        )->with('success', 'New Data Has Been Aded.!');
+    }
+
+    public function destroyimage(Maintenance $maintenance, Request $request)
+    {
+        $data = $maintenance
+            ->image()
+            ->where('id', $request->id)
+            ->first();
+
+        storage::delete($data->pic);
+        $data->delete();
+
+        return redirect(
+            '/dashboard/maintenance/image/' . $maintenance->slug
+        )->with('success', 'Data Has Been Deleted.!');
     }
 }
