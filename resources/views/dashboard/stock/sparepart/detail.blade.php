@@ -98,6 +98,15 @@
 
                             <td>
                                 <a
+                                    href="/dashboard/stock/sparepart/{{ $data->slug }}"
+                                    class="badge bg-success"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-placement="top"
+                                    title="show stock"
+                                    ><i class="bi bi-eye-fill"></i
+                                ></a>
+                                |
+                                <a
                                     href="/dashboard/stock/sparepart/{{ $data->slug }}/edit"
                                     class="badge bg-warning"
                                     data-bs-toggle="tooltip"

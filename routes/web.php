@@ -247,6 +247,16 @@ Route::middleware('auth')->group(function () {
         Route::post('dashboard/stock/sparepart/storepart', 'storepart');
         Route::get('dashboard/stock/sparepart/create-excl', 'createexcl');
         Route::post('dashboard/stock/sparepart/store-excl', 'storeexcl');
+        Route::get('dashboard/stock/sparepart/{sparepart}', 'show');
+        Route::get(
+            '/dashboard/stock/sparepart/image/{sparepart}',
+            'createimage'
+        );
+        Route::post('/dashboard/stock/sparepart/image/', 'storeimage');
+        Route::delete(
+            '/dashboard/stock/sparepart/image/{sparepart}',
+            'destroyimage'
+        );
     });
 
     Route::resource(

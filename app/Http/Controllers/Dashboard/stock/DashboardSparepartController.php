@@ -105,7 +105,10 @@ class DashboardSparepartController extends Controller
      */
     public function show(sparepart $sparepart)
     {
-        //
+        return view('dashboard.stock.sparepart.show', [
+            'title' => $sparepart->name,
+            'data' => $sparepart->load('image'),
+        ]);
     }
 
     /**
@@ -215,7 +218,7 @@ class DashboardSparepartController extends Controller
     public function addsparepart(Type $type)
     {
         return view('dashboard.stock.sparepart.add', [
-            'title' => 'Add sparepart Data' . $type->name,
+            'title' => $type->name,
             'type' => $type,
             'catparts' => categoryPart::all(),
         ]);
@@ -266,5 +269,46 @@ class DashboardSparepartController extends Controller
                 'New Data Has Been Aded.!'
             );
         }
+    }
+
+    public function createimage(sparepart $sparepart)
+    {
+        return view('dashboard.stock.sparepart.create-image', [
+            'title' => 'File Upload',
+            'data' => $sparepart,
+        ]);
+    }
+
+    public function storeimage(Request $request)
+    {
+        $validatedData = $request->validate([
+            'pic' => 'image|file|max:2048',
+        ]);
+
+        $validatedData['pic'] = $request->file('pic')->store('sparepart-pic');
+
+        $sparepart = sparepart::find($request->sparepart_id);
+
+        $sparepart->image()->create($validatedData);
+
+        return redirect(
+            '/dashboard/stock/sparepart/' . $request->sparepart_slug
+        )->with('success', 'New Data Has Been Aded.!');
+    }
+
+    public function destroyimage(sparepart $sparepart, Request $request)
+    {
+        $data = $sparepart
+            ->image()
+            ->where('id', $request->id)
+            ->first();
+
+        storage::delete($data->pic);
+        $data->delete();
+
+        return redirect('/dashboard/stock/sparepart/' . $sparepart->slug)->with(
+            'success',
+            'Data Has Been Deleted.!'
+        );
     }
 }
