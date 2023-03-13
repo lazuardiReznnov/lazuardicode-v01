@@ -288,6 +288,12 @@ Route::middleware('auth')->group(function () {
         Route::delete('/dashboard/stock/invStock/{invStock}', 'destroy');
         Route::get('/dashboard/stock/invStock/{invStock}/edit', 'edit');
         Route::put('/dashboard/stock/invStock/{invStock}', 'update');
+        Route::get('/dashboard/stock/invStock/image/{invStock}', 'createimage');
+        Route::post('/dashboard/stock/invStock/image/', 'storeimage');
+        Route::delete(
+            '/dashboard/stock/invStock/image/{invStock}',
+            'destroyimage'
+        );
     });
     // end Inv Stock
 

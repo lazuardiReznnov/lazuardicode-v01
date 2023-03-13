@@ -208,4 +208,47 @@ class DashboardInvstockController extends Controller
         );
         return response()->json(['slug' => $slug]);
     }
+
+    public function createimage(invStock $invStock)
+    {
+        return view('dashboard.stock.inv.create-image', [
+            'title' => 'File Upload',
+            'data' => $invStock,
+        ]);
+    }
+
+    public function storeimage(Request $request)
+    {
+        $validatedData = $request->validate([
+            'pic' => 'image|file|max:2048',
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+
+        $validatedData['pic'] = $request->file('pic')->store('invStock-pic');
+
+        $invStock = invStock::find($request->inv_stock_id);
+
+        $invStock->image()->create($validatedData);
+
+        return redirect(
+            '/dashboard/stock/detail/' . $request->inv_stock_slug
+        )->with('success', 'New Data Has Been Aded.!');
+    }
+
+    public function destroyimage(invStock $invStock, Request $request)
+    {
+        $data = $invStock
+            ->image()
+            ->where('id', $request->id)
+            ->first();
+
+        storage::delete($data->pic);
+        $data->delete();
+
+        return redirect('/dashboard/stock/detail/' . $invStock->slug)->with(
+            'success',
+            'Data Has Been Deleted.!'
+        );
+    }
 }
