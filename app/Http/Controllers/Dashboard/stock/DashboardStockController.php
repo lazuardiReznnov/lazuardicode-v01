@@ -85,7 +85,7 @@ class DashboardStockController extends Controller
             'datas' => stock::where('inv_stock_id', $invStock->id)
                 ->paginate(10)
                 ->withQueryString(),
-            'invStock' => $invStock,
+            'invStock' => $invStock->load('image'),
         ]);
     }
 

@@ -39,6 +39,48 @@
     </div>
 
     <div class="row">
+        <div class="col-md-4">
+            @if($invStock->image)
+
+            <div class="card mb-3 shadow d-flex">
+                <img
+                    width="200"
+                    src="{{ asset('storage/'. $data->image->pic) }}"
+                    class="my-3 d-block mx-auto"
+                    alt="about Image"
+                />
+                <form
+                    action="/dashboard/stock/supplier/image/{{ $data->slug }}"
+                    method="post"
+                    class="d-inline"
+                >
+                    <input
+                        type="hidden"
+                        name="id"
+                        value="{{ $data->image->id }}"
+                    />
+                    @method('delete') @csrf
+                    <button
+                        class="badge bg-danger"
+                        data-bs-toggle="tooltip"
+                        data-bs-placement="top"
+                        title="Delete Image Unit"
+                        onclick="return confirm('are You sure ??')"
+                    >
+                        <i class="bi bi-file-x-fill"></i>
+                    </button>
+                </form>
+            </div>
+
+            @else
+            <img
+                class="rounded-circle mx-auto d-block shadow my-3"
+                src="http://source.unsplash.com/200x200?truck"
+                alt=""
+                width="250"
+            />
+            @endif
+        </div>
         <div class="col-md-8">
             <x-card header="{{ $invStock->name }}">
                 <div class="row my-2">
@@ -46,8 +88,19 @@
                         <a
                             href="/dashboard/stock/create/{{ $invStock->slug }}"
                             class="btn btn-primary btn-sm"
-                            >Add Item</a
-                        >
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="top"
+                            title="Add Item"
+                            ><i class="bi bi-plus-circle"></i
+                        ></a>
+                        <a
+                            href="/dashboard/stock/invStock/image/{{ $invStock->slug }}"
+                            class="btn btn-primary btn-sm"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="top"
+                            title="Image"
+                            ><i class="bi bi-files"></i
+                        ></a>
                     </div>
                 </div>
 
