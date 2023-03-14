@@ -9,9 +9,9 @@
             Sparepart
         </x-breadcrumb-link>
         <x-breadcrumb-link
-            link="/dashboard/stock/sparepart/detail/{{ $data->CategoryPart->name }}"
+            link="/dashboard/stock/sparepart/detail/{{ $data->type->slug }}"
         >
-            {{ $data->CategoryPart->name }}
+            {{ $data->type->name }}
         </x-breadcrumb-link>
 
         <x-breadcrumb-link-active>{{ $title }} </x-breadcrumb-link-active>
