@@ -184,7 +184,10 @@ Route::middleware('auth')->group(function () {
         );
         Route::get('/dashboard/unit/letter/print/{letter}', 'print');
         Route::get('dashboard/unit/letter/create-excl', 'createexcl');
-        Route::post('dashboard/unit/letter/store-excl', 'storeexcl');
+        Route::post('/dashboard/unit/letter/store-excl', 'storeexcl');
+        Route::get('/dashboard/unit/letter/file/add/{letter}', 'addfile');
+        Route::post('/dashboard/unit/letter/file/', 'storefile');
+        Route::delete('/dashboard/unit/letter/file/', 'destroyfile');
     });
 
     Route::resource('dashboard/unit/letter', DashboardLetterController::class);

@@ -80,7 +80,6 @@ class DashboardLetterController extends Controller
             'lpc' => 'required',
             'vodn' => 'required',
             'expire_date' => 'required',
-            'pic' => 'image|file|max:2048',
         ];
 
         if ($request->category_letter_id == 1) {
@@ -93,10 +92,6 @@ class DashboardLetterController extends Controller
         $validatedData['slug'] = Str::of(
             $str_rand . ' ' . $request->regNum
         )->slug('-');
-
-        if ($request->file('pic')) {
-            $validatedData['pic'] = $request->file('pic')->store('Letter-pic');
-        }
 
         Letter::create($validatedData);
 
@@ -115,8 +110,9 @@ class DashboardLetterController extends Controller
     public function show(Letter $letter)
     {
         return view('dashboard.unit.letter.show', [
-            'title' => 'Detail Letter',
-            'data' => $letter,
+            'title' =>
+                $letter->unit->name . '-' . $letter->categoryLetter->name,
+            'data' => $letter->load('file'),
         ]);
     }
 
@@ -156,7 +152,6 @@ class DashboardLetterController extends Controller
             'lpc' => 'required',
             'vodn' => 'required',
             'expire_date' => 'required',
-            'pic' => 'image|file|max:2048',
         ];
 
         if ($request->category_letter_id == 1) {
@@ -164,13 +159,6 @@ class DashboardLetterController extends Controller
         }
 
         $validatedData = $request->validate($rules);
-
-        if ($request->file('pic')) {
-            if ($request->old_pic) {
-                storage::delete($request->old_pic);
-            }
-            $validatedData['pic'] = $request->file('pic')->store('unit-pic');
-        }
 
         Letter::where('id', $letter->id)->update($validatedData);
 
@@ -270,5 +258,32 @@ class DashboardLetterController extends Controller
             'title' => 'power of attorney',
             'data' => $letter,
         ]);
+    }
+
+    public function addfile(Letter $letter)
+    {
+        return view('dashboard.Unit.letter.add-file', [
+            'title' => $letter->unit->name . ' Upload File',
+            'data' => $letter,
+        ]);
+    }
+
+    public function storefile(Request $request)
+    {
+        $validatedData = $request->validate([
+            'pic' => 'mimes:pdf,jpeg,png|file|max:2048',
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+
+        $validatedData['pic'] = $request->file('pic')->store('letter-pic');
+
+        $letter = Letter::find($request->letter_id);
+
+        $letter->file()->create($validatedData);
+
+        return redirect(
+            '/dashboard/unit/letter/' . $request->letter_slug
+        )->with('success', 'New Data Has Been Aded.!');
     }
 }

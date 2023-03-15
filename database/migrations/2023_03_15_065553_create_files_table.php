@@ -12,17 +12,13 @@ return new class extends Migration {
      */
     public function up()
     {
-        Schema::create('file_units', function (Blueprint $table) {
+        Schema::create('files', function (Blueprint $table) {
             $table->id();
-            $table
-                ->foreignId('unit_id')
-                ->constrained('units')
-                ->cascadeOnDelete()
-                ->cascadeOnUpdate();
-            $table->string('name');
-            $table->string('slug');
-            $table->text('description');
-
+            $table->string('pic');
+            $table->string('name')->nullable();
+            $table->text('description')->nullable();
+            $table->integer('fileable_id');
+            $table->string('fileable_type');
             $table->timestamps();
         });
     }
@@ -34,6 +30,6 @@ return new class extends Migration {
      */
     public function down()
     {
-        Schema::dropIfExists('file_units');
+        Schema::dropIfExists('files');
     }
 };

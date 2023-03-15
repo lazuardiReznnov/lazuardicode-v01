@@ -35,7 +35,7 @@ return new class extends Migration {
             $table->string('vodn')->nullable();
             $table->date('tax')->nullable();
             $table->date('expire_date');
-            $table->string('pic')->nullable();
+
             $table->timestamps();
         });
     }

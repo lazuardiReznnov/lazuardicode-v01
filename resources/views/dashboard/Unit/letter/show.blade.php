@@ -11,16 +11,26 @@
     </x-breadcrumb>
     @php $date_now = date("Y/m/d"); @endphp
     <div class="row mb-3">
-        <div class="col">
+        <div class="col-md-6 ms-auto">
             <div class="btn-group">
                 <a
                     href="/dashboard/unit/letter/print/{{ $data->slug }}"
                     class="btn btn-primary active"
                     aria-current="page"
-                    >Print Surat Kuasa</a
-                >
-                <a href="#" class="btn btn-primary">Link</a>
-                <a href="#" class="btn btn-primary">Link</a>
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    title="Print Surat Kuasa"
+                    ><i class="bi bi-printer"></i
+                ></a>
+                <a
+                    href="/dashboard/unit/letter/file/add/{{ $data->slug }}"
+                    class="btn btn-primary"
+                    aria-current="page"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    title="Upload File"
+                    ><i class="bi bi-upload"></i
+                ></a>
             </div>
         </div>
     </div>
@@ -168,37 +178,26 @@
                             <tr>
                                 <th scope="col">#</th>
                                 <th scope="col">Name</th>
-                                <th scope="col">view</th>
+
                                 <th scope="col">desct</th>
                                 <th scope="col">Last Update</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                @if($data->unit->fileUnit->count())
-                                @foreach($data->unit->fileUnit as $data)
-                                <th scope="row">
-                                    {{ $loop->iteration }}
-                                </th>
+                                @if($data->file()->count())
+                                <th scope="row">1</th>
 
                                 <td>
-                                    {{ $data->name}}
+                                    {{ $data->file->name}}
                                 </td>
-                                <td>
-                                    @if($data->pic)
-                                    <a
-                                        href="{{ asset('storage/'. $data->pic) }}"
-                                        >view</a
-                                    >
 
-                                    @else - @endif
-                                </td>
-                                <td>{{ $data->description }}</td>
+                                <td>{{ $data->file->description }}</td>
                                 <td>
-                                    {{ $data->updated_at->diffForHumans() }}
+                                    {{ $data->file->updated_at->diffForHumans() }}
                                 </td>
                             </tr>
-                            @endforeach @else
+                            @else
                             <tr>
                                 <td colspan="6" class="text-center">
                                     Data Not Found
