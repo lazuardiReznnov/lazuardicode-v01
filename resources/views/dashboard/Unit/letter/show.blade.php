@@ -180,6 +180,7 @@
                                 <th scope="col">Name</th>
 
                                 <th scope="col">desct</th>
+                                <th scope="col">Action</th>
                                 <th scope="col">Last Update</th>
                             </tr>
                         </thead>
@@ -193,6 +194,16 @@
                                 </td>
 
                                 <td>{{ $data->file->description }}</td>
+                                <td>
+                                    <a
+                                        href="{{ asset('storage/'. $data->file->pic) }}"
+                                        class="badge bg-success"
+                                        data-bs-toggle="tooltip"
+                                        data-bs-placement="top"
+                                        title="Show File"
+                                        ><i class="bi bi-eye"></i
+                                    ></a>
+                                </td>
                                 <td>
                                     {{ $data->file->updated_at->diffForHumans() }}
                                 </td>
