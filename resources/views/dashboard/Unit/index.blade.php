@@ -43,6 +43,30 @@
                 ><i class="bi bi-file-earmark-spreadsheet-fill"></i
             ></a>
         </div>
+        <div class="col-md-6 my-3">
+            <form action="/dashboard/unit" method="get">
+                <div class="col-md-6 col-md-end">
+                    <div class="input-group">
+                        <select
+                            class="form-select"
+                            id="flag_id"
+                            aria-label="flag"
+                            name="flag"
+                        >
+                            <option selected>Choose Flag...</option>
+                            @foreach($flags as $flag)
+                            <option value="{{ $flag->id }}">
+                                {{ $flag->name }}
+                            </option>
+                            @endforeach
+                        </select>
+                        <button class="btn btn-outline-secondary" type="submit">
+                            Button
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
     <!-- EndTombol -->
     <!-- content -->

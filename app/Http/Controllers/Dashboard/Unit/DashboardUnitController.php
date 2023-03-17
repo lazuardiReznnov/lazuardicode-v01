@@ -42,13 +42,18 @@ class DashboardUnitController extends Controller
         $this->middleware('permission:delete unit', ['only' => ['destroy']]);
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        $data = Unit::query();
+
+        $data->when($request->flag, function ($query) use ($request) {
+            return $query->where('flag_id', '=', $request->flag);
+        });
+
         return view('dashboard.Unit.index', [
             'title' => 'Unit Management',
-            'datas' => Unit::latest()
-                ->paginate(10)
-                ->withQueryString(),
+            'flags' => flag::all(),
+            'datas' => $data->paginate(10)->withQueryString(),
         ]);
     }
 
