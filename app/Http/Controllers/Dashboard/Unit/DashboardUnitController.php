@@ -50,6 +50,10 @@ class DashboardUnitController extends Controller
             return $query->where('flag_id', '=', $request->flag);
         });
 
+        $data->when($request->name, function ($query) use ($request) {
+            return $query->where('name', 'like', '%' . $request->name . '%');
+        });
+
         return view('dashboard.Unit.index', [
             'title' => 'Unit Management',
             'flags' => flag::all(),

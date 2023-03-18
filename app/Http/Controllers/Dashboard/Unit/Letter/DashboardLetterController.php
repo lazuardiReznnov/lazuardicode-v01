@@ -13,6 +13,7 @@ use App\Imports\Unit\lettersImport;
 use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\support\Facades\Storage;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx\Rels;
 
 class DashboardLetterController extends Controller
 {
@@ -187,30 +188,28 @@ class DashboardLetterController extends Controller
         );
     }
 
-    public function data(CategoryLetter $categoryletter)
+    public function data(CategoryLetter $categoryletter, Request $request)
     {
+        $data = Letter::query();
+
         if (request('month')) {
             $month = request('month');
             $pisah = explode('-', $month);
             if ($categoryletter->id === 1) {
-                $data = Letter::whereMonth('tax', '=', $pisah[1])->whereYear(
-                    'tax',
-                    '=',
-                    $pisah[0]
-                );
+                $data
+                    ->whereMonth('tax', '=', $pisah[1])
+                    ->whereYear('tax', '=', $pisah[0]);
             } elseif ($categoryletter->id === 2) {
-                $data = Letter::whereMonth(
-                    'expire_date',
-                    '=',
-                    $pisah[1]
-                )->whereYear('expire_date', '=', $pisah[0]);
+                $data
+                    ->whereMonth('expire_date', '=', $pisah[1])
+                    ->whereYear('expire_date', '=', $pisah[0]);
             }
             $head = request('month');
         } else {
             if ($categoryletter->id === 1) {
-                $data = Letter::whereMonth('tax', '=', date('m'));
+                $data->whereMonth('tax', '=', date('m'));
             } elseif ($categoryletter->id === 2) {
-                $data = Letter::whereMonth('expire_date', '=', date('m'));
+                $data->whereMonth('expire_date', '=', date('m'));
             }
             $head = date('F');
         }

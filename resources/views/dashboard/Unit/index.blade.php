@@ -35,7 +35,7 @@
     <!-- endPesan -->
     <!-- Tombol -->
     <div class="row">
-        <div class="col-md-6 my-3">
+        <div class="col-md-4 my-3">
             <a href="/dashboard/unit/create" class="btn btn-sm btn-primary"
                 ><i class="bi bi-file-earmark-plus"></i
             ></a>
@@ -45,23 +45,29 @@
         </div>
         <div class="col-md-6 my-3">
             <form action="/dashboard/unit" method="get">
-                <div class="col-md-6 col-md-end">
+                <div class="col-md col-md-end">
                     <div class="input-group">
+                        <input
+                            type="text"
+                            aria-label="name"
+                            class="form-control"
+                            name="name"
+                        />
                         <select
                             class="form-select"
                             id="flag_id"
                             aria-label="flag"
                             name="flag"
                         >
-                            <option selected>Choose Flag...</option>
+                            <option value="" selected>Choose Flag...</option>
                             @foreach($flags as $flag)
                             <option value="{{ $flag->id }}">
                                 {{ $flag->name }}
                             </option>
                             @endforeach
                         </select>
-                        <button class="btn btn-outline-secondary" type="submit">
-                            Button
+                        <button class="btn btn-outline-primary" type="submit">
+                            <i class="bi bi-search"></i>
                         </button>
                     </div>
                 </div>
