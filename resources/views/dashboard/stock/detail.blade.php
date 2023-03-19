@@ -45,14 +45,14 @@
                     class="btn btn-primary btn-sm"
                     data-bs-toggle="tooltip"
                     data-bs-placement="top"
-                    title="Image"
-                    ><i class="bi bi-files"></i
+                    title="Upload Image"
+                    ><i class="bi bi-upload"></i
                 ></a>
                 @if($invStock->image)
 
                 <div class="card mb-3 shadow d-flex mt-3">
                     <img
-                        width="200"
+                        width="150"
                         src="{{ asset('storage/'. $invStock->image->pic) }}"
                         class="my-3 d-block mx-auto"
                         alt="about Image"
@@ -85,7 +85,7 @@
                     class="rounded-circle mx-auto d-block shadow my-3"
                     src="http://source.unsplash.com/200x200?truck"
                     alt=""
-                    width="250"
+                    width="150"
                 />
                 @endif
             </div>

@@ -33,7 +33,30 @@
         </div>
     </div>
     <!-- endPesan -->
-
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h5>Pilih Bulan</h5>
+            <form action="/dashboard/maintenance">
+                <div class="input-group mb-3">
+                    <input
+                        type="month"
+                        class="form-control"
+                        placeholder="Month"
+                        aria-label="Month"
+                        aria-describedby="save"
+                        name="month"
+                    />
+                    <button
+                        class="btn btn-outline-secondary"
+                        type="submit"
+                        id="save"
+                    >
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
     <!-- Tombol -->
     <div class="row">
         <div class="col-md-6 my-3">

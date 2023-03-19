@@ -150,8 +150,9 @@ class DashboardFlagController extends Controller
     public function destroy(flag $flag)
     {
         flag::destroy($flag->id);
-        if ($flag->pic) {
-            storage::delete($flag->pic);
+        if ($flag->image) {
+            storage::delete($flag->image->pic);
+            $flag->image->delete();
         }
 
         return redirect('/dashboard/unit/flag')->with(

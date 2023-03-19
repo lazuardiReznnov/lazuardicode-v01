@@ -179,8 +179,9 @@ class DashboardLetterController extends Controller
     public function destroy(Letter $letter)
     {
         Letter::destroy($letter->id);
-        if ($letter->pic) {
-            storage::delete($letter->pic);
+        if ($letter->image) {
+            storage::delete($letter->image->pic);
+            $letter->image->delete();
         }
         return redirect('/dashboard/unit/letter')->with(
             'success',

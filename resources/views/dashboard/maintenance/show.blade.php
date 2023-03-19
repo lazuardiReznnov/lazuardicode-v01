@@ -14,23 +14,35 @@
             href="/dashboard/maintenance/part/{{ $data->slug }}"
             class="btn btn-primary"
             aria-current="page"
-            >Add Sparepart</a
-        >
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            title="Add Sparepart"
+            ><i class="bi bi-file-earmark-plus"></i
+        ></a>
         <a
             href="/dashboard/maintenance/print-spk/{{ $data->slug }}"
             class="btn btn-primary"
-            >Print SPK</a
-        >
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            title="Print SPK"
+            ><i class="bi bi-printer"></i
+        ></a>
         <a
             href="/dashboard/maintenance/state/{{ $data->slug }}"
             class="btn btn-primary"
-            >Update</a
-        >
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            title="Update progress"
+            ><i class="bi bi-pencil-square"></i
+        ></a>
         <a
             href="/dashboard/maintenance/image/{{ $data->slug }}"
             class="btn btn-primary"
-            >Image</a
-        >
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            title="Upload Image"
+            ><i class="bi bi-upload"></i
+        ></a>
     </div>
     <!-- Pesan -->
     <div class="row">

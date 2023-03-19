@@ -164,8 +164,9 @@ class DashboardSupplierController extends Controller
     public function destroy(supplier $supplier)
     {
         supplier::destroy($supplier->id);
-        if ($supplier->pic) {
-            storage::delete($supplier->pic);
+        if ($supplier->image) {
+            storage::delete($supplier->image->pic);
+            $supplier->image->delete();
         }
         return redirect('/dashboard/stock/supplier')->with(
             'success',

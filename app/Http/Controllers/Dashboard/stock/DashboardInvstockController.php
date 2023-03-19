@@ -191,8 +191,9 @@ class DashboardInvstockController extends Controller
     public function destroy(invStock $invStock)
     {
         invStock::destroy($invStock->id);
-        if ($invStock->pic) {
-            storage::delete($invStock->pic);
+        if ($invStock->image) {
+            storage::delete($invStock->image->pic);
+            $invStock->image->delete();
         }
         return redirect(
             '/dashboard/stock/invStock/' . $invStock->supplier->slug

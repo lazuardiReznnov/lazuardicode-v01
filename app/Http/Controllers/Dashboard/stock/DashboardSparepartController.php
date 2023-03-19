@@ -176,8 +176,9 @@ class DashboardSparepartController extends Controller
     public function destroy(sparepart $sparepart)
     {
         sparepart::destroy($sparepart->id);
-        if ($sparepart->pic) {
-            storage::delete($sparepart->pic);
+        if ($sparepart->image) {
+            storage::delete($sparepart->image->pic);
+            $sparepart->image->delete();
         }
         return redirect(
             '/dashboard/stock/sparepart/detail/' . $sparepart->type->slug

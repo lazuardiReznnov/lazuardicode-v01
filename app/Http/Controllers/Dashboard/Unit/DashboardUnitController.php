@@ -101,10 +101,6 @@ class DashboardUnitController extends Controller
             'year' => 'required',
         ]);
 
-        if ($request->file('pic')) {
-            $validatedData['pic'] = $request->file('pic')->store('unit-pic');
-        }
-
         Unit::create($validatedData);
 
         return redirect('/dashboard/unit')->with(
@@ -194,6 +190,12 @@ class DashboardUnitController extends Controller
     public function destroy(Unit $unit)
     {
         Unit::destroy($unit->id);
+        if ($unit->image) {
+            foreach ($unit->image as $image) {
+                storage::delete($image->pic);
+                $image->delete();
+            }
+        }
 
         return redirect('/dashboard/unit')->with(
             'success',

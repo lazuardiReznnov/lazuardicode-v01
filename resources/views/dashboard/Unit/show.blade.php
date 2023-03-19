@@ -43,10 +43,13 @@
                     <div class="col-md-6">
                         <a
                             href="/dashboard/unit/image/{{ $data->slug }}"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="top"
+                            title="Upload Image"
                             class="btn btn-primary mb-3"
-                            >Add Image</a
-                        >
-                        @if($data->image)
+                            ><i class="bi bi-upload"></i
+                        ></a>
+                        @if($data->image->count())
                         <div class="row">
                             @foreach($data->image as $pic)
                             <div class="col-sm-6">

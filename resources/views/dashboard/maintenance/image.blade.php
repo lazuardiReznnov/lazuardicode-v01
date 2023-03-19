@@ -45,8 +45,11 @@
             <a
                 href="/dashboard/maintenance/image/create/{{ $data->slug }}"
                 class="btn btn-primary mb-3"
-                >Add Image</a
-            >
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                title="Upload Image"
+                ><i class="bi bi-upload"></i
+            ></a>
         </div>
         <h4>Maintenance Picture</h4>
         <hr />

@@ -20,11 +20,21 @@ class DashboardMaintenanceController extends Controller
      */
     public function index()
     {
+        $data = Maintenance::query();
+        $month = '';
+        if (request('month')) {
+            $month = request('month');
+            $pisah = explode('-', $month);
+            $data = $data
+                ->whereMonth('tgl', '=', $pisah[1])
+                ->whereYear('tgl', '=', $pisah[0]);
+        } else {
+            $data = $data->whereMonth('tgl', '=', date('m'));
+        }
+
         return view('dashboard.maintenance.index', [
             'title' => 'Maintenance Management',
-            'datas' => Maintenance::whereMonth('tgl', '=', date('m'))
-                ->paginate(10)
-                ->withQueryString(),
+            'datas' => $data->paginate(10)->withQueryString(),
         ]);
     }
 
@@ -137,6 +147,12 @@ class DashboardMaintenanceController extends Controller
     public function destroy(Maintenance $maintenance)
     {
         Maintenance::destroy($maintenance->id);
+        if ($maintenance->image) {
+            foreach ($maintenance->image as $image) {
+                storage::delete($image->pic);
+                $image->delete();
+            }
+        }
 
         return redirect('/dashboard/maintenance')->with(
             'success',
