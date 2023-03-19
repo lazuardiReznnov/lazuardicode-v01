@@ -87,12 +87,7 @@ class DashboardInvstockController extends Controller
             'name' => 'required|max:20|unique:inv_stocks',
             'slug' => 'required|unique:inv_stocks',
             'payment' => 'required',
-            'pic' => 'image|file|max:2048',
         ]);
-
-        if ($request->file('pic')) {
-            $validatedData['pic'] = $request->file('pic')->store('inv-pic');
-        }
 
         if ($request->payment == 'credit') {
             $validatedData['state'] = 'belum';
