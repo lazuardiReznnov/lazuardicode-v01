@@ -9,23 +9,7 @@
 
     <div class="row">
         <div class="col-md-8">
-            @if(session()->has('loginError'))
-            <x-card>
-                <div
-                    class="alert alert-danger alert-dismissible fade show"
-                    role="alert"
-                >
-                    {{ session("loginError") }}
-
-                    <button
-                        type="button"
-                        class="btn-close"
-                        data-bs-dismiss="alert"
-                        aria-label="close"
-                    ></button>
-                </div>
-            </x-card>
-            @endif @if(session()->has('success'))
+            @if(session()->has('success'))
             <x-card>
                 <!-- pesan -->
 
@@ -49,9 +33,51 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-10">
-            <x-card header="profil">
+    <x-card header="profil">
+        <div class="row justify-content-between">
+            <div class="col-md-4">
+                <div class="card">
+                    @if($data->image)
+                    <img
+                        width="50"
+                        src="{{ asset('storage/'. $data->image->pic) }}"
+                        class="rounded-circle mx-auto d-block shadow my-3"
+                        alt="about Image"
+                    />
+                    <form
+                        action="/dashboard/employee/image/{{ $data->slug }}"
+                        method="post"
+                        class="d-inline"
+                    >
+                        <input
+                            type="hidden"
+                            name="id"
+                            value="{{ $data->image->id }}"
+                        />
+                        @method('delete') @csrf
+                        <button
+                            class="badge bg-danger"
+                            data-bs-toggle="tooltip"
+                            data-bs-placement="top"
+                            title="Delete Image Employee"
+                            onclick="return confirm('are You sure ??')"
+                        >
+                            <i class="bi bi-file-x-fill"></i>
+                        </button>
+                    </form>
+                    @else
+                    <img
+                        class="rounded-circle mx-auto d-block shadow my-3"
+                        src="http://source.unsplash.com/200x200?truck"
+                        alt=""
+                        width="50"
+                    />
+                    @endif
+
+                    <!-- <p class="text-center">{{ $data->user->name }}</p> -->
+                </div>
+            </div>
+            <div class="col-md-8">
                 <form
                     action="/dashboard/user/profil/{{ $data->user->username }}"
                     method="post"
@@ -306,9 +332,9 @@
                         </div>
                     </div>
                 </form>
-            </x-card>
+            </div>
         </div>
-    </div>
+    </x-card>
     @push('script')
     <script>
         function previewImage() {
