@@ -369,6 +369,9 @@ Route::middleware('auth')->group(function () {
         Route::post('dashboard/employee/store-excl', 'storeexcl');
         Route::get('/dashboard/employee/detail/{department}', 'detail');
         Route::get('/dashboard/employee/create/{department}', 'create');
+        Route::get('/dashboard/employee/image/{employee}', 'createimage');
+        Route::post('/dashboard/employee/image/', 'storeimage');
+        Route::delete('/dashboard/employee/image/{employee}', 'destroyimage');
     });
     Route::resource('/dashboard/employee', DashboardEmployeeController::class);
 

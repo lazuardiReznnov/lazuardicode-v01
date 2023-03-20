@@ -60,14 +60,8 @@ class DashboardEmployeeController extends Controller
             'address' => 'required',
             'phone' => 'required|numeric',
             'tgl' => 'required',
-            'pic' => 'image|file|max:2048',
         ]);
 
-        if ($request->file('pic')) {
-            $validatedData['pic'] = $request
-                ->file('pic')
-                ->store('employee-pic');
-        }
         $validatedData['department_id'] = $request->department_id;
 
         employee::create($validatedData);
@@ -137,15 +131,6 @@ class DashboardEmployeeController extends Controller
         }
         $validatedData = $request->validate($rules);
 
-        if ($request->file('pic')) {
-            if ($request->old_pic) {
-                storage::delete($request->old_pic);
-            }
-            $validatedData['pic'] = $request
-                ->file('pic')
-                ->store('employee-pic');
-        }
-
         $validatedData['department_id'] = $request->department_id;
 
         employee::where('id', $employee->id)->update($validatedData);
@@ -164,6 +149,11 @@ class DashboardEmployeeController extends Controller
     public function destroy(employee $employee)
     {
         employee::destroy($employee->id);
+
+        if ($employee->image) {
+            storage::delete($employee->image->pic);
+            $employee->image->delete();
+        }
 
         return redirect(
             '/dashboard/employee/detail/' . $employee->department->slug
@@ -197,5 +187,49 @@ class DashboardEmployeeController extends Controller
             $request->name
         );
         return response()->json(['slug' => $slug]);
+    }
+
+    public function createimage(employee $employee)
+    {
+        return view('dashboard.employee.create-image', [
+            'title' => 'File Upload',
+            'data' => $employee->load('image'),
+        ]);
+    }
+
+    public function storeimage(Request $request)
+    {
+        $validatedData = $request->validate([
+            'pic' => 'image|file|max:2048',
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+
+        $validatedData['pic'] = $request->file('pic')->store('employee-pic');
+
+        $employee = employee::find($request->employee_id);
+
+        $employee->image()->create($validatedData);
+
+        return redirect('/dashboard/employee/' . $request->employee_slug)->with(
+            'success',
+            'New Data Has Been Aded.!'
+        );
+    }
+
+    public function destroyimage(employee $employee, Request $request)
+    {
+        $data = $employee
+            ->image()
+            ->where('id', $request->id)
+            ->first();
+
+        storage::delete($data->pic);
+        $data->delete();
+
+        return redirect('/dashboard/employee/' . $employee->slug)->with(
+            'success',
+            'Data Has Been Deleted.!'
+        );
     }
 }

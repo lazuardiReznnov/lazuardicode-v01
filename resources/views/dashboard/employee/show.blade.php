@@ -15,18 +15,98 @@
     </x-breadcrumb>
 
     <div class="row">
+        <div class="col-md-10">
+            @if(session()->has('success'))
+            <x-card>
+                <!-- pesan -->
+
+                <div
+                    class="alert alert-success alert-dismissible fade show"
+                    role="alert"
+                >
+                    {{ session("success") }}
+
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="alert"
+                        aria-label="close"
+                    ></button>
+                </div>
+
+                <!-- endpesan -->
+            </x-card>
+            @endif
+        </div>
+    </div>
+
+    <div class="btn-group mb-3">
+        <a
+            href="/dashboard/employee/image/{{ $data->slug }}"
+            class="btn btn-primary"
+            ><i class="bi bi-upload"></i
+        ></a>
+        <a
+            href="/dashboard/employee/{{ $data->slug }}/edit"
+            class="btn btn-warning"
+            data-bs-toggle="tooltip"
+            data-bs-placement="top"
+            title="Edit employee"
+            ><i class="bi bi-pencil-square"></i
+        ></a>
+
+        <form
+            action="/dashboard/employee/{{ $data->slug }}"
+            method="post"
+            class="d-inline"
+        >
+            @method('delete') @csrf
+            <button
+                class="btn btn-danger"
+                data-bs-toggle="tooltip"
+                data-bs-placement="top"
+                title="Delete employee"
+                onclick="return confirm('are You sure ??')"
+            >
+                <i class="bi bi-file-x-fill"></i>
+            </button>
+        </form>
+    </div>
+
+    <div class="row">
         <div class="col-md">
             <x-card>
                 <div class="row justify-content-between mb-5">
                     <div class="col-md-4">
                         <div class="card">
-                            @if($data->pic)
+                            @if($data->image)
                             <img
                                 width="200"
-                                src="{{ asset('storage/'. $data->pic) }}"
+                                src="{{ asset('storage/'. $data->image->pic) }}"
                                 class="rounded-circle mx-auto d-block shadow my-3"
                                 alt="about Image"
                             />
+                            <form
+                                action="/dashboard/employee/image/{{ $data->slug }}"
+                                method="post"
+                                class="d-inline"
+                            >
+                                <input
+                                    type="hidden"
+                                    name="id"
+                                    value="{{ $data->image->id }}"
+                                />
+                                @method('delete') @csrf
+                                <button
+                                    class="badge bg-danger"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-placement="top"
+                                    title="Delete Image Employee"
+                                    onclick="return confirm('are You sure ??')"
+                                >
+                                    <i class="bi bi-file-x-fill"></i>
+                                </button>
+                            </form>
                             @else
                             <img
                                 class="rounded-circle mx-auto d-block shadow my-3"
@@ -38,133 +118,111 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <div
-                            class="accordion accordion-flush"
-                            id="accordionFlushExample"
-                        >
-                            <div class="accordion-item">
-                                <h2
-                                    class="accordion-header"
-                                    id="flush-headingOne"
+                        <nav>
+                            <div
+                                class="nav nav-tabs"
+                                id="nav-tab"
+                                role="tablist"
+                            >
+                                <button
+                                    class="nav-link active"
+                                    id="nav-profile-tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#nav-profile"
+                                    type="button"
+                                    role="tab"
+                                    aria-controls="nav-profile"
+                                    aria-selected="false"
                                 >
-                                    <button
-                                        class="accordion-button collapsed"
-                                        type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#flush-collapseOne"
-                                        aria-expanded="false"
-                                        aria-controls="flush-collapseOne"
-                                    >
-                                        Detail
-                                    </button>
-                                </h2>
-                                <div
-                                    id="flush-collapseOne"
-                                    class="accordion-collapse collapse show"
-                                    aria-labelledby="flush-headingOne"
-                                    data-bs-parent="#accordionFlushExample"
+                                    Profile
+                                </button>
+                                <button
+                                    class="nav-link"
+                                    id="nav-file-tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#nav-file"
+                                    type="button"
+                                    role="tab"
+                                    aria-controls="nav-file"
+                                    aria-selected="false"
                                 >
-                                    <div class="accordion-body">
-                                        <ul class="list-group">
-                                            <li class="list-group-item">
-                                                <b>Full Name</b><br />
-                                                {{ $data->name }}
-                                            </li>
+                                    File
+                                </button>
+                                <button
+                                    class="nav-link"
+                                    id="nav-sallary-tab"
+                                    data-bs-toggle="tab"
+                                    data-bs-target="#nav-sallary"
+                                    type="button"
+                                    role="tab"
+                                    aria-controls="nav-sallary"
+                                    aria-selected="false"
+                                >
+                                    Sallary
+                                </button>
+                            </div>
+                        </nav>
+                        <div class="tab-content" id="nav-tabContent">
+                            <div
+                                class="tab-pane show active"
+                                id="nav-profile"
+                                role="tabpanel"
+                                aria-labelledby="nav-profile-tab"
+                                tabindex="0"
+                            >
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <b>Full Name</b><br />
+                                        {{ $data->name }}
+                                    </li>
 
-                                            <li class="list-group-item">
-                                                <b>Department</b><br />
-                                                {{ $data->department->name }}
-                                            </li>
-                                            <li class="list-group-item">
-                                                <b>Position</b><br />
-                                                {{ $data->position->name }}
-                                            </li>
-                                            <li class="list-group-item">
-                                                <b>Id Card</b><br />
-                                                {{ $data->idCard}}
-                                            </li>
-                                            <li class="list-group-item">
-                                                <b>E-Mail</b><br />
-                                                {{ $data->email}}
-                                            </li>
-                                            <li class="list-group-item">
-                                                <b>Phone</b><br />
-                                                {{ $data->phone}}
-                                            </li>
-                                            <li class="list-group-item">
-                                                <b>Address</b><br />
-                                                {{ $data->address}}
-                                            </li>
-                                            <li class="list-group-item">
-                                                <b>Joint Date</b><br />
-                                                {{ \Carbon\Carbon::parse($data->tgl)->format('d F Y') }}
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
+                                    <li class="list-group-item">
+                                        <b>Department</b><br />
+                                        {{ $data->department->name }}
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Position</b><br />
+                                        {{ $data->position->name }}
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Id Card</b><br />
+                                        {{ $data->idCard}}
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>E-Mail</b><br />
+                                        {{ $data->email}}
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Phone</b><br />
+                                        {{ $data->phone}}
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Address</b><br />
+                                        {{ $data->address}}
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b>Joint Date</b><br />
+                                        {{ \Carbon\Carbon::parse($data->tgl)->format('d F Y') }}
+                                    </li>
+                                </ul>
                             </div>
-                            <div class="accordion-item">
-                                <h2
-                                    class="accordion-header"
-                                    id="flush-headingTwo"
-                                >
-                                    <button
-                                        class="accordion-button collapsed"
-                                        type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#flush-collapseTwo"
-                                        aria-expanded="false"
-                                        aria-controls="flush-collapseTwo"
-                                    >
-                                        Letter
-                                    </button>
-                                </h2>
-                                <div
-                                    id="flush-collapseTwo"
-                                    class="accordion-collapse collapse"
-                                    aria-labelledby="flush-headingTwo"
-                                    data-bs-parent="#accordionFlushExample"
-                                >
-                                    <div class="accordion-body">
-                                        <div class="row"></div>
-                                    </div>
-                                </div>
+                            <div
+                                class="tab-pane fade"
+                                id="nav-file"
+                                role="tabpanel"
+                                aria-labelledby="nav-file-tab"
+                                tabindex="0"
+                            >
+                                ...
                             </div>
-                            <div class="accordion-item">
-                                <h2
-                                    class="accordion-header"
-                                    id="flush-headingThree"
-                                >
-                                    <button
-                                        class="accordion-button collapsed"
-                                        type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#flush-collapseThree"
-                                        aria-expanded="false"
-                                        aria-controls="flush-collapseThree"
-                                    >
-                                        File
-                                    </button>
-                                </h2>
-                                <div
-                                    id="flush-collapseThree"
-                                    class="accordion-collapse collapse"
-                                    aria-labelledby="flush-headingThree"
-                                    data-bs-parent="#accordionFlushExample"
-                                >
-                                    <div class="accordion-body">
-                                        Placeholder content for this accordion,
-                                        which is intended to demonstrate the
-                                        <code>.accordion-flush</code> class.
-                                        This is the third item's accordion body.
-                                        Nothing more exciting happening here in
-                                        terms of content, but just filling up
-                                        the space to make it look, at least at
-                                        first glance, a bit more representative
-                                        of how this would look in a real-world
-                                        application.
-                                    </div>
-                                </div>
+                            <div
+                                class="tab-pane fade"
+                                id="nav-sallary"
+                                role="tabpanel"
+                                aria-labelledby="nav-sallary-tab"
+                                tabindex="0"
+                            >
+                                ...
                             </div>
                         </div>
                     </div>
