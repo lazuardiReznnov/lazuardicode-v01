@@ -75,49 +75,50 @@
 
     <div class="row">
         <div class="col-md">
-            <x-card>
-                <div class="row justify-content-between mb-5">
-                    <div class="col-md-4">
-                        <div class="card">
-                            @if($data->image)
-                            <img
-                                width="200"
-                                src="{{ asset('storage/'. $data->image->pic) }}"
-                                class="rounded-circle mx-auto d-block shadow my-3"
-                                alt="about Image"
+            <div class="row justify-content-between mb-5">
+                <div class="col-md-4">
+                    <div class="card">
+                        @if($data->image)
+                        <img
+                            width="200"
+                            src="{{ asset('storage/'. $data->image->pic) }}"
+                            class="rounded-circle mx-auto d-block shadow my-3"
+                            alt="about Image"
+                        />
+                        <form
+                            action="/dashboard/employee/image/{{ $data->slug }}"
+                            method="post"
+                            class="d-inline"
+                        >
+                            <input
+                                type="hidden"
+                                name="id"
+                                value="{{ $data->image->id }}"
                             />
-                            <form
-                                action="/dashboard/employee/image/{{ $data->slug }}"
-                                method="post"
-                                class="d-inline"
+                            @method('delete') @csrf
+                            <button
+                                class="badge bg-danger"
+                                data-bs-toggle="tooltip"
+                                data-bs-placement="top"
+                                title="Delete Image Employee"
+                                onclick="return confirm('are You sure ??')"
                             >
-                                <input
-                                    type="hidden"
-                                    name="id"
-                                    value="{{ $data->image->id }}"
-                                />
-                                @method('delete') @csrf
-                                <button
-                                    class="badge bg-danger"
-                                    data-bs-toggle="tooltip"
-                                    data-bs-placement="top"
-                                    title="Delete Image Employee"
-                                    onclick="return confirm('are You sure ??')"
-                                >
-                                    <i class="bi bi-file-x-fill"></i>
-                                </button>
-                            </form>
-                            @else
-                            <img
-                                class="rounded-circle mx-auto d-block shadow my-3"
-                                src="http://source.unsplash.com/200x200?truck"
-                                alt=""
-                                width="250"
-                            />
-                            @endif
-                        </div>
+                                <i class="bi bi-file-x-fill"></i>
+                            </button>
+                        </form>
+                        @else
+                        <img
+                            class="rounded-circle mx-auto d-block shadow my-3"
+                            src="http://source.unsplash.com/200x200?truck"
+                            alt=""
+                            width="250"
+                        />
+                        @endif
                     </div>
-                    <div class="col-md-6">
+                </div>
+
+                <div class="col-md-8">
+                    <x-card>
                         <nav>
                             <div
                                 class="nav nav-tabs"
@@ -225,9 +226,9 @@
                                 ...
                             </div>
                         </div>
-                    </div>
+                    </x-card>
                 </div>
-            </x-card>
+            </div>
         </div>
     </div>
 </x-admin-layout>

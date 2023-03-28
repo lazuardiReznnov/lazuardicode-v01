@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
             TypeSeeder::class,
             UnitSeeder::class,
             CategoryLetterSeeder::class,
-            // LetterSeeder::class,
+            LetterSeeder::class,
             SupplierSeeder::class,
             CategoryPartSeeder::class,
             SparepartSeeder::class,

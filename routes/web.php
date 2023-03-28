@@ -70,6 +70,9 @@ Route::middleware('auth')->group(function () {
     Route::controller(ProfilUserController::class)->group(function () {
         Route::get('dashboard/user/profil', 'index');
         Route::put('dashboard/user/profil/{user}', 'update');
+        Route::get('/dashboard/user/profil/image/{user}', 'createimage');
+        Route::post('/dashboard/user/profil/image/', 'storeimage');
+        Route::delete('/dashboard/user/profil/image/{user}', 'destroyimage');
     });
     Route::controller(UserController::class)->group(function () {
         route::get('dashboard/user/addrole/{user}', 'addrole');

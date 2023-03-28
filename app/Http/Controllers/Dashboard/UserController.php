@@ -189,7 +189,7 @@ class UserController extends Controller
             user::where('id', $user->id)->update([
                 'password' => Hash::make($request->password),
             ]);
-            return redirect('/dashboard/user')->with(
+            return redirect('/dashboard/user/profil')->with(
                 'success',
                 'Your Password Has Been Updated'
             );

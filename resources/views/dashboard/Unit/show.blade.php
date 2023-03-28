@@ -36,254 +36,251 @@
         </div>
     </div>
     <!-- endPesan -->
-    <div class="row">
-        <div class="col-md">
+
+    <div class="row justify-content-between mb-5">
+        <div class="col-md-4">
             <x-card>
-                <div class="row justify-content-between mb-5">
-                    <div class="col-md-6">
-                        <a
-                            href="/dashboard/unit/image/{{ $data->slug }}"
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="top"
-                            title="Upload Image"
-                            class="btn btn-primary mb-3"
-                            ><i class="bi bi-upload"></i
-                        ></a>
-                        @if($data->image->count())
-                        <div class="row">
-                            @foreach($data->image as $pic)
-                            <div class="col-sm-6">
-                                <div class="card mb-3 shadow d-flex">
-                                    <img
-                                        width="200"
-                                        src="{{ asset('storage/'. $pic->pic) }}"
-                                        class="my-3 d-block mx-auto"
-                                        alt="{{ $pic->name }}"
-                                    />
-                                    <p class="text-center fw-bold">
-                                        {{ $pic->name }}
-                                    </p>
-                                    <form
-                                        action="/dashboard/unit/image/{{ $data->slug }}"
-                                        method="post"
-                                        class="d-inline"
-                                    >
-                                        <input
-                                            type="hidden"
-                                            name="id"
-                                            value="{{ $pic->id }}"
-                                        />
-                                        @method('delete') @csrf
-                                        <button
-                                            class="badge bg-danger"
-                                            data-bs-toggle="tooltip"
-                                            data-bs-placement="top"
-                                            title="Delete Image Unit"
-                                            onclick="return confirm('are You sure ??')"
-                                        >
-                                            <i class="bi bi-file-x-fill"></i>
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
-                            @endforeach
+                <a
+                    href="/dashboard/unit/image/{{ $data->slug }}"
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="top"
+                    title="Upload Image"
+                    class="btn btn-primary mb-3"
+                    ><i class="bi bi-upload"></i
+                ></a>
+                @if($data->image->count())
+                <div class="row">
+                    @foreach($data->image as $pic)
+                    <div class="col-sm-6">
+                        <div class="card mb-3 shadow d-flex">
+                            <img
+                                width="200"
+                                src="{{ asset('storage/'. $pic->pic) }}"
+                                class="my-3 d-block mx-auto"
+                                alt="{{ $pic->name }}"
+                            />
+                            <p class="text-center fw-bold">
+                                {{ $pic->name }}
+                            </p>
+                            <form
+                                action="/dashboard/unit/image/{{ $data->slug }}"
+                                method="post"
+                                class="d-inline"
+                            >
+                                <input
+                                    type="hidden"
+                                    name="id"
+                                    value="{{ $pic->id }}"
+                                />
+                                @method('delete') @csrf
+                                <button
+                                    class="badge bg-danger"
+                                    data-bs-toggle="tooltip"
+                                    data-bs-placement="top"
+                                    title="Delete Image Unit"
+                                    onclick="return confirm('are You sure ??')"
+                                >
+                                    <i class="bi bi-file-x-fill"></i>
+                                </button>
+                            </form>
                         </div>
-
-                        @else
-                        <img
-                            class="rounded-circle mx-auto d-block shadow my-3"
-                            src="http://source.unsplash.com/200x200?truck"
-                            alt=""
-                            width="250"
-                        />
-                        @endif
                     </div>
-                    <div class="col-md-6">
-                        <div
-                            class="accordion accordion-flush"
-                            id="accordionFlushExample"
+                    @endforeach
+                </div>
+
+                @else
+                <img
+                    class="rounded-circle mx-auto d-block shadow my-3"
+                    src="http://source.unsplash.com/200x200?truck"
+                    alt=""
+                    width="250"
+                />
+                @endif
+            </x-card>
+        </div>
+        <div class="col-md-8">
+            <x-card>
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <button
+                            class="nav-link active"
+                            id="nav-spesification-tab"
+                            data-bs-toggle="tab"
+                            data-bs-target="#nav-spesification"
+                            type="button"
+                            role="tab"
+                            aria-controls="nav-spesification"
+                            aria-selected="true"
                         >
-                            <div class="accordion-item">
-                                <h2
-                                    class="accordion-header"
-                                    id="flush-headingOne"
-                                >
-                                    <button
-                                        class="accordion-button collapsed"
-                                        type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#flush-collapseOne"
-                                        aria-expanded="false"
-                                        aria-controls="flush-collapseOne"
-                                    >
-                                        spesification
-                                    </button>
-                                </h2>
-                                <div
-                                    id="flush-collapseOne"
-                                    class="accordion-collapse collapse show"
-                                    aria-labelledby="flush-headingOne"
-                                    data-bs-parent="#accordionFlushExample"
-                                >
-                                    <div class="accordion-body">
-                                        <ul class="list-group">
-                                            <li class="list-group-item">
-                                                <b>Registration number</b><br />
-                                                {{ $data->name }}
-                                            </li>
+                            Spesification
+                        </button>
+                        <button
+                            class="nav-link"
+                            id="nav-letter-tab"
+                            data-bs-toggle="tab"
+                            data-bs-target="#nav-letter"
+                            type="button"
+                            role="tab"
+                            aria-controls="nav-letter"
+                            aria-selected="false"
+                        >
+                            Letter
+                        </button>
+                        <button
+                            class="nav-link"
+                            id="nav-contact-tab"
+                            data-bs-toggle="tab"
+                            data-bs-target="#nav-contact"
+                            type="button"
+                            role="tab"
+                            aria-controls="nav-contact"
+                            aria-selected="false"
+                        >
+                            Contact
+                        </button>
+                        <button
+                            class="nav-link"
+                            id="nav-disabled-tab"
+                            data-bs-toggle="tab"
+                            data-bs-target="#nav-disabled"
+                            type="button"
+                            role="tab"
+                            aria-controls="nav-disabled"
+                            aria-selected="false"
+                            disabled
+                        >
+                            Disabled
+                        </button>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div
+                        class="tab-pane fade show active"
+                        id="nav-spesification"
+                        role="tabpanel"
+                        aria-labelledby="nav-spesification-tab"
+                        tabindex="0"
+                    >
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <b>Registration number</b><br />
+                                {{ $data->name }}
+                            </li>
 
-                                            <li class="list-group-item">
-                                                <b>Category</b><br />
-                                                {{ $data->type->category->name }}
-                                            </li>
-                                            <li class="list-group-item">
-                                                <b>Brand/Model/Type</b><br />
-                                                {{ $data->type->brand->name }}
-                                                {{ $data->type->name }}
-                                            </li>
-                                            <li class="list-group-item">
-                                                <b>Vin</b><br />
-                                                {{ $data->vin}}
-                                            </li>
-                                            <li class="list-group-item">
-                                                <b>Engine Number</b><br />
-                                                {{ $data->engine_numb}}
-                                            </li>
-                                            <li class="list-group-item">
-                                                <b>Color</b><br />
-                                                {{ $data->color}}
-                                            </li>
-                                            <li class="list-group-item">
-                                                <b>Year</b><br />
-                                                {{ $data->year}}
-                                            </li>
-                                            <li class="list-group-item">
-                                                <b>Flag</b><br />
-                                                {{ $data->flag->name }}
-                                            </li>
-                                            <li class="list-group-item">
-                                                <b>Group</b><br />
-                                                {{ $data->group->name }}
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion-item">
-                                <h2
-                                    class="accordion-header"
-                                    id="flush-headingTwo"
+                            <li class="list-group-item">
+                                <b>Category</b><br />
+                                {{ $data->type->category->name }}
+                            </li>
+                            <li class="list-group-item">
+                                <b>Brand/Model/Type</b><br />
+                                {{ $data->type->brand->name }}
+                                {{ $data->type->name }}
+                            </li>
+                            <li class="list-group-item">
+                                <b>Vin</b><br />
+                                {{ $data->vin}}
+                            </li>
+                            <li class="list-group-item">
+                                <b>Engine Number</b><br />
+                                {{ $data->engine_numb}}
+                            </li>
+                            <li class="list-group-item">
+                                <b>Color</b><br />
+                                {{ $data->color}}
+                            </li>
+                            <li class="list-group-item">
+                                <b>Year</b><br />
+                                {{ $data->year}}
+                            </li>
+                            <li class="list-group-item">
+                                <b>Flag</b><br />
+                                {{ $data->flag->name }}
+                            </li>
+                            <li class="list-group-item">
+                                <b>Group</b><br />
+                                {{ $data->group->name }}
+                            </li>
+                        </ul>
+                    </div>
+                    <div
+                        class="tab-pane fade"
+                        id="nav-letter"
+                        role="tabpanel"
+                        aria-labelledby="nav-letter-tab"
+                        tabindex="0"
+                    >
+                        @php $date_now = date("Y/m/d"); @endphp
+                        @foreach($data->letter as $letter)
+                        <ul class="list-group my-3">
+                            <li
+                                class="list-group-item active"
+                                aria-current="true"
+                            >
+                                {{ $letter->categoryLetter->name }}
+                            </li>
+                            <li class="list-group-item">
+                                <b>ID</b><br />{{ $letter->regNum }}
+                            </li>
+                            <li class="list-group-item">
+                                <b>Owner</b><br />{{ $letter->owner }}
+                            </li>
+                            <li class="list-group-item">
+                                <b>Address</b><br />{{ $letter->owner_add }}
+                            </li>
+                            <li class="list-group-item">
+                                <b>Year</b><br />{{ $letter->reg_year }}
+                            </li>
+                            <li class="list-group-item">
+                                <b>Location Code</b
+                                ><br />{{ $letter->loc_code }}
+                            </li>
+                            @if($letter->lpc)
+                            <li class="list-group-item">
+                                <b>Licence Plate Color</b
+                                ><br />{{ $letter->lpc }}
+                            </li>
+                            @endif @if($letter->vodn)
+                            <li class="list-group-item">
+                                <b>Vehicle Ownwership Document</b
+                                ><br />{{ $letter->vodn }}
+                            </li>
+                            @endif @if($letter->tax)
+                            <li class="list-group-item">
+                                <b>Tax</b><br /><span
+                                    class="text-{{ \Lazuardicode::expire($data->tax,$date_now) }}"
                                 >
-                                    <button
-                                        class="accordion-button collapsed"
-                                        type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#flush-collapseTwo"
-                                        aria-expanded="false"
-                                        aria-controls="flush-collapseTwo"
-                                    >
-                                        Letter
-                                    </button>
-                                </h2>
-                                <div
-                                    id="flush-collapseTwo"
-                                    class="accordion-collapse collapse"
-                                    aria-labelledby="flush-headingTwo"
-                                    data-bs-parent="#accordionFlushExample"
+                                    {{ \Carbon\Carbon::parse($data->tax)->format('d/m/Y') }}
+                                </span>
+                            </li>
+                            @endif
+                            <li class="list-group-item">
+                                <b>Expire Date</b><br />
+                                <span
+                                    class="text-{{ \Lazuardicode::expire($data->expire_date,$date_now) }}"
                                 >
-                                    <div class="accordion-body">
-                                        <div class="row">
-                                            @foreach($data->Letter as $let)
-                                            <div class="col-md">
-                                                <ul class="list-group">
-                                                    <li
-                                                        class="list-group-item active text-uppercase"
-                                                        aria-current="true"
-                                                    >
-                                                        {{ $let->categoryletter->name }}
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>Registration No.</b
-                                                        ><br />{{ $let->regNum }}
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>Owner</b
-                                                        ><br />{{ $let->owner }}
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>Registration Year</b
-                                                        ><br />
-                                                        {{ $let->reg_year }}
-                                                    </li>
-                                                    <li class="list-group-item">
-                                                        <b>Location Code</b
-                                                        ><br />{{ $let->loc_code }}
-                                                    </li>
-                                                    @if($let->tax != 0)
-                                                    <li class="list-group-item">
-                                                        @php $date_now =
-                                                        date("Y/m/d"); @endphp
-
-                                                        <b>Tax</b><br /><span
-                                                            class="text-{{ \Lazuardicode::expire($let->tax,$date_now) }}"
-                                                        >
-                                                            {{ $let->tax }}</span
-                                                        >
-                                                    </li>
-                                                    @endif
-                                                    <li class="list-group-item">
-                                                        <b>expire date</b><br />
-                                                        <span
-                                                            class="text-{{ \Lazuardicode::expire($let->expire_date,$date_now) }}"
-                                                        >
-                                                            {{ $let->expire_date }}</span
-                                                        >
-                                                    </li>
-                                                </ul>
-                                            </div>
-
-                                            @endforeach
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion-item">
-                                <h2
-                                    class="accordion-header"
-                                    id="flush-headingThree"
-                                >
-                                    <button
-                                        class="accordion-button collapsed"
-                                        type="button"
-                                        data-bs-toggle="collapse"
-                                        data-bs-target="#flush-collapseThree"
-                                        aria-expanded="false"
-                                        aria-controls="flush-collapseThree"
-                                    >
-                                        File
-                                    </button>
-                                </h2>
-                                <div
-                                    id="flush-collapseThree"
-                                    class="accordion-collapse collapse"
-                                    aria-labelledby="flush-headingThree"
-                                    data-bs-parent="#accordionFlushExample"
-                                >
-                                    <div class="accordion-body">
-                                        Placeholder content for this accordion,
-                                        which is intended to demonstrate the
-                                        <code>.accordion-flush</code> class.
-                                        This is the third item's accordion body.
-                                        Nothing more exciting happening here in
-                                        terms of content, but just filling up
-                                        the space to make it look, at least at
-                                        first glance, a bit more representative
-                                        of how this would look in a real-world
-                                        application.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                                    {{ \Carbon\Carbon::parse($data->expire_date)->format('d/m/Y') }}
+                                </span>
+                            </li>
+                        </ul>
+                        @endforeach
+                    </div>
+                    <div
+                        class="tab-pane fade"
+                        id="nav-contact"
+                        role="tabpanel"
+                        aria-labelledby="nav-contact-tab"
+                        tabindex="0"
+                    >
+                        ...
+                    </div>
+                    <div
+                        class="tab-pane fade"
+                        id="nav-disabled"
+                        role="tabpanel"
+                        aria-labelledby="nav-disabled-tab"
+                        tabindex="0"
+                    >
+                        ...
                     </div>
                 </div>
             </x-card>
