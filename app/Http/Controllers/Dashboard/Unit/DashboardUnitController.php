@@ -7,7 +7,7 @@ use App\Models\type;
 use App\Models\Unit;
 use App\Models\Brand;
 use App\Models\group;
-use App\Models\Image;
+
 use App\Models\Carosery;
 use App\Models\Category;
 use Illuminate\Http\Request;

@@ -32,13 +32,14 @@ class DatabaseSeeder extends Seeder
             LetterSeeder::class,
             SupplierSeeder::class,
             CategoryPartSeeder::class,
-            SparepartSeeder::class,
-            InvStockSeeder::class,
-            StockSeeder::class,
-            MaintenanceSeeder::class,
+            // SparepartSeeder::class,
+            // InvStockSeeder::class,
+            // StockSeeder::class,
+            // MaintenanceSeeder::class,
             DepartmentSeeder::class,
             PositionSeeder::class,
             EmployeeSeeder::class,
+            CustomerSeeder::class,
             // ImageSeeder::class,
         ]);
     }

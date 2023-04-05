@@ -30,6 +30,8 @@ use App\Http\Controllers\Dashboard\stock\DashboardStockController;
 use App\Http\Controllers\Dashboard\stock\DashboardInvstockController;
 use App\Http\Controllers\Dashboard\stock\DashboardSupplierController;
 use App\Http\Controllers\Dashboard\stock\DashboardSparepartController;
+use App\Http\Controllers\Dashboard\Track\DashboardCustomerController;
+use App\Http\Controllers\Dashboard\Track\DashboardTrackController;
 use App\Http\Controllers\Dashboard\Unit\DashboardCaroseriesController;
 use App\Http\Controllers\Dashboard\Unit\DashboardCategoriesController;
 use App\Http\Controllers\Dashboard\Unit\Letter\DashboardLetterController;
@@ -378,5 +380,14 @@ Route::middleware('auth')->group(function () {
     });
     Route::resource('/dashboard/employee', DashboardEmployeeController::class);
 
+    Route::controller(DashboardCustomerController::class)->group(function () {
+        Route::get('/dashboard/track/customer/checkSlug', 'checkSlug');
+    });
+    Route::resource(
+        'dashboard/track/customer',
+        DashboardCustomerController::class
+    );
+
+    Route::get('/dashboard/track', [DashboardTrackController::class, 'index']);
     // End ekspedisi Program
 });

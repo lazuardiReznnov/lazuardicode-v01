@@ -83,6 +83,10 @@
             <x-collapselink titlecols="employee-Data">
                 <x-navlink link="/dashboard/employee">Employee</x-navlink>
             </x-collapselink>
+            <x-headsidenav title="Track-Transaction"> </x-headsidenav>
+            <x-collapselink titlecols="Track-Data">
+                <x-navlink link="/dashboard/track">Track</x-navlink>
+            </x-collapselink>
         </div>
     </div>
     <div class="sb-sidenav-footer">
