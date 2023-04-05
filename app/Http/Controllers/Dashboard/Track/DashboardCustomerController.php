@@ -82,7 +82,10 @@ class DashboardCustomerController extends Controller
      */
     public function show(customer $customer)
     {
-        //
+        return view('dashboard.track.customer.show', [
+            'title' => 'Detail Customer Data',
+            'data' => $customer,
+        ]);
     }
 
     /**
