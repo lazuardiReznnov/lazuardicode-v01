@@ -93,7 +93,10 @@ class DashboardCustomerController extends Controller
      */
     public function edit(customer $customer)
     {
-        //
+        return view('dashboard.track.customer.edit', [
+            'title' => 'Edit Customer',
+            'data' => $customer->load('image'),
+        ]);
     }
 
     /**
@@ -105,7 +108,40 @@ class DashboardCustomerController extends Controller
      */
     public function update(Request $request, customer $customer)
     {
-        //
+        $rules = [
+            'phone' => 'required',
+            'address' => 'required',
+        ];
+
+        if ($request->name != $customer->name) {
+            $rules['name'] = 'required|unique:customers|max:25';
+        }
+        if ($request->slug != $customer->slug) {
+            $rules['slug'] = 'required|unique:customers';
+        }
+        if ($request->email != $customer->email) {
+            $rules['email'] = 'required|unique:customers';
+        }
+
+        $validatedData = $request->validate($rules);
+
+        customer::where('id', $customer->id)->update($validatedData);
+
+        if ($request->file('pic')) {
+            if ($request->old_pic) {
+                storage::delete($request->old_pic);
+                $customer->image->delete();
+            }
+            $valid = $request->validate(['pic' => 'image|file|max:2048']);
+            $valid['pic'] = $request->file('pic')->store('customer-pic');
+
+            $customer->image()->create($valid);
+        }
+
+        return redirect('dashboard/track/customer')->with(
+            'success',
+            'Data Has Been Updated'
+        );
     }
 
     /**

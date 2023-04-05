@@ -3,6 +3,9 @@
     <x-breadcrumb>
         <x-breadcrumb-link link="/dashboard"> Dashboard </x-breadcrumb-link>
         <x-breadcrumb-link link="/dashboard/track"> Track </x-breadcrumb-link>
+        <x-breadcrumb-link link="/dashboard/track/customer">
+            Customer
+        </x-breadcrumb-link>
 
         <x-breadcrumb-link-active>{{ $title }} </x-breadcrumb-link-active>
     </x-breadcrumb>
@@ -11,11 +14,11 @@
         <div class="col-md-10">
             <x-card>
                 <form
-                    action="/dashboard/track/customer"
+                    action="/dashboard/track/customer/{{ $data->slug }}"
                     method="post"
                     enctype="multipart/form-data"
                 >
-                    @csrf
+                    @csrf @method('put')
 
                     <div class="row mb-3">
                         <label
@@ -25,12 +28,27 @@
                         >
 
                         <div class="col-md-6">
+                            @if($data->image)
+                            <img
+                                width="200"
+                                class="img-fluid mb-2"
+                                alt=""
+                                src="{{ asset('storage/'. $data->image->pic) }}"
+                            />
+                            <input
+                                type="hidden"
+                                name="old_pic"
+                                value="{{ $data->image->pic }}"
+                            />
+
+                            @else
                             <img
                                 width="200"
                                 class="img-preview img-fluid mb-2"
                                 alt=""
                             />
 
+                            @endif
                             <input
                                 id="pic"
                                 type="file"
@@ -41,7 +59,6 @@
                                 autocomplete="pic"
                                 autofocus
                             />
-
                             @error('pic')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -63,7 +80,7 @@
                                 type="text"
                                 class="form-control @error('name') is-invalid @enderror"
                                 name="name"
-                                value="{{ old('name') }}"
+                                value="{{ old('name', $data->name) }}"
                                 required
                                 autocomplete="name"
                                 autofocus
@@ -90,7 +107,7 @@
                                 type="text"
                                 class="form-control @error('slug') is-invalid @enderror"
                                 name="slug"
-                                value="{{ old('slug') }}"
+                                value="{{ old('slug', $data->slug) }}"
                                 required
                                 autocomplete="slug"
                                 autofocus
@@ -117,7 +134,7 @@
                                 type="email"
                                 class="form-control @error('email') is-invalid @enderror"
                                 name="email"
-                                value="{{ old('email') }}"
+                                value="{{ old('email', $data->email) }}"
                                 required
                                 autocomplete="email"
                                 autofocus
@@ -143,7 +160,7 @@
                                 type="text"
                                 class="form-control @error('phone') is-invalid @enderror"
                                 name="phone"
-                                value="{{ old('phone') }}"
+                                value="{{ old('phone', $data->phone) }}"
                                 required
                                 autocomplete="phone"
                                 autofocus
@@ -165,7 +182,10 @@
 
                         <div class="col-md-6">
                             <input id="address" type="hidden" name="address" />
-                            <trix-editor input="address"></trix-editor>
+                            <trix-editor
+                                input="address"
+                                >{{ old('address', $data->address) }}</trix-editor
+                            >
 
                             @error('address')
                             <span class="invalid-feedback" role="alert">
@@ -182,7 +202,7 @@
                                 type="submit"
                                 name="save"
                             >
-                                Save
+                                Update
                             </button>
                         </div>
                     </div>
