@@ -16,12 +16,12 @@ class sparepartImport implements ToModel, WithHeadingRow
     public function model(array $row)
     {
         return new sparepart([
-            'category_part_id' => $row['category'],
             'type_id' => $row['type'],
+            'category_part_id' => $row['category'],
             'name' => $row['name'],
             'brand' => $row['brand'],
             'slug' => $row['slug'],
-            'codePart' => $row['kode'],
+            'codepart' => $row['kode'],
         ]);
     }
 }
