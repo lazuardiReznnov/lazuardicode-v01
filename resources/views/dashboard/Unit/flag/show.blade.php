@@ -41,14 +41,14 @@
     <!-- endPesan -->
     <div class="row">
         <div class="col-md">
-            <x-card>
-                <div class="row justify-content-between mb-5">
-                    <div class="col-md-6">
+            <div class="row justify-content-between mb-5">
+                <div class="col-md-4">
+                    <x-card>
                         <a
                             href="/dashboard/unit/flag/image/{{ $data->slug }}"
                             class="btn btn-primary mb-3"
-                            >Add Image</a
-                        >
+                            ><i class="bi bi-plus-circle-fill"></i
+                        ></a>
                         @if($data->image)
                         <div class="row">
                             <div class="col-sm-6">
@@ -92,8 +92,11 @@
                             width="250"
                         />
                         @endif
-                    </div>
-                    <div class="col-md-6">
+                    </x-card>
+                </div>
+
+                <div class="col-md-8">
+                    <x-card>
                         <div
                             class="accordion accordion-flush"
                             id="accordionFlushExample"
@@ -204,9 +207,9 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </x-card>
                 </div>
-            </x-card>
+            </div>
         </div>
     </div>
 </x-admin-layout>

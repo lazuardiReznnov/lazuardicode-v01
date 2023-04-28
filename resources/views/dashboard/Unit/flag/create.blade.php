@@ -11,7 +11,7 @@
 
     <div class="row">
         <div class="col-md-10">
-            <x-card header="Form Unit">
+            <x-card header="Form Flag">
                 <form
                     action="/dashboard/unit/flag"
                     method="post"
