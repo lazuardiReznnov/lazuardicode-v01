@@ -79,7 +79,7 @@
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Pic</th>
+
                             <th scope="col">Date</th>
                             <th scope="col">Invoice</th>
                             <th scope="col">Payment</th>
@@ -95,23 +95,6 @@
                             <th scope="row">
                                 {{ ($datas->currentpage()-1) * $datas->perpage() + $loop->index + 1 }}
                             </th>
-                            <td>
-                                @if($data->pic)
-                                <img
-                                    width="50"
-                                    src="{{ asset('storage/'. $data->pic) }}"
-                                    class="rounded-circle mx-auto d-block shadow my-3"
-                                    alt="Unit Image"
-                                />
-                                @else
-                                <img
-                                    class="rounded-circle mx-auto d-block shadow my-3"
-                                    src="http://source.unsplash.com/200x200?truck"
-                                    alt=""
-                                    width="50"
-                                />
-                                @endif
-                            </td>
                             <td>
                                 {{ \Carbon\Carbon::parse($data->tgl)->format('d/m/Y') }}
                             </td>
@@ -130,9 +113,16 @@
                             <?php 
                                         $ttl = $stock->qty * $stock->price;
                             $gttl = $gttl+$ttl; ?> @endforeach
-                            <td class="text-md-end">@currency($gttl)</td>
+                            <td class="text-md-center">@currency($gttl)</td>
                             @php $grt = $grt+$gttl; @endphp
                             <td>
+                                <a
+                                    href="#"
+                                    class="badge bg-success"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#image"
+                                    ><i class="bi bi-pencil-square"></i
+                                ></a>
                                 <a
                                     href="/dashboard/stock/invStock/{{ $data->slug }}/edit"
                                     class="badge bg-warning"
@@ -160,16 +150,78 @@
                                 </form>
                             </td>
                         </tr>
+                        <!-- Modal -->
+                        <div
+                            class="modal fade"
+                            id="image"
+                            tabindex="-1"
+                            aria-labelledby="imageLabel"
+                            aria-hidden="true"
+                        >
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1
+                                            class="modal-title fs-5"
+                                            id="imageLabel"
+                                        >
+                                            {{ $data->Name }}
+                                        </h1>
+                                        <button
+                                            type="button"
+                                            class="btn-close"
+                                            data-bs-dismiss="modal"
+                                            aria-label="Close"
+                                        ></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="card">
+                                            @if($data->image)
+                                            <img
+                                                width="200"
+                                                src="{{ asset('storage/'. $data->image->pic) }}"
+                                                class="rounded mx-auto d-block shadow my-3"
+                                                alt="about Image"
+                                            />
 
+                                            @else
+                                            <img
+                                                class="rounded mx-auto d-block shadow my-3"
+                                                src="http://source.unsplash.com/200x200?truck"
+                                                alt=""
+                                                width="250"
+                                            />
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button
+                                            type="button"
+                                            class="btn btn-secondary"
+                                            data-bs-dismiss="modal"
+                                        >
+                                            Close
+                                        </button>
+                                        <button
+                                            type="button"
+                                            class="btn btn-primary"
+                                        >
+                                            Save changes
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- endmodal -->
                         @endforeach
                         <tr class="fw-bold">
-                            <td colspan="5">GrandTotal</td>
-                            <td class="text-md-end">@currency($grt)</td>
+                            <td colspan="4">GrandTotal</td>
+                            <td class="text-md-center">@currency($grt)</td>
                             <td></td>
                         </tr>
                         @else
                         <tr>
-                            <td colspan="7" class="text-center">
+                            <td colspan="6" class="text-center">
                                 Data Not Found
                             </td>
                         </tr>

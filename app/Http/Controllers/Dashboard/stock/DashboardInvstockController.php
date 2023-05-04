@@ -52,6 +52,7 @@ class DashboardInvstockController extends Controller
         return view('dashboard.stock.inv.index', [
             'title' => 'Inv Data',
             'datas' => $data
+                ->with('image')
                 ->Where('supplier_id', $supplier->id)
                 ->paginate(10)
                 ->withQueryString(),
@@ -98,7 +99,14 @@ class DashboardInvstockController extends Controller
         }
         $validatedData['supplier_id'] = $request->supplier_id;
 
-        invStock::create($validatedData);
+        $invstok = invStock::create($validatedData);
+
+        if ($request->file('pic')) {
+            $valid = $request->validate(['pic' => 'image|file|max:2048']);
+            $valid['pic'] = $request->file('pic')->store('stock-INV');
+
+            $invstok->image()->create($valid);
+        }
 
         return redirect(
             "/dashboard/stock/invStock/$request->supplier_slug"
@@ -130,7 +138,7 @@ class DashboardInvstockController extends Controller
 
         return view('dashboard.stock.inv.edit', [
             'title' => 'Edit Invoice',
-            'data' => $invStock,
+            'data' => $invStock->load('image'),
             'month' => $data1,
         ]);
     }
@@ -147,7 +155,6 @@ class DashboardInvstockController extends Controller
         $rules = [
             'tgl' => 'required',
             'payment' => 'required',
-            'pic' => 'image|file|max:2048',
         ];
 
         if ($request->name != $invStock->name) {
@@ -163,8 +170,12 @@ class DashboardInvstockController extends Controller
         if ($request->file('pic')) {
             if ($request->old_pic) {
                 storage::delete($request->old_pic);
+                $invStock->image()->delete();
             }
-            $validatedData['pic'] = $request->file('pic')->store('inv-pic');
+            $valid = $request->validate(['pic' => 'image|file|max:2048']);
+            $valid['pic'] = $request->file('pic')->store('stock-INV');
+
+            $invStock->image()->create($valid);
         }
 
         invStock::where('id', $invStock->id)->update($validatedData);

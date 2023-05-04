@@ -39,57 +39,7 @@
     </div>
     <x-card header="{{ $invStock->name }}">
         <div class="row">
-            <div class="col-md-4">
-                <a
-                    href="/dashboard/stock/invStock/image/{{ $invStock->slug }}"
-                    class="btn btn-primary btn-sm"
-                    data-bs-toggle="tooltip"
-                    data-bs-placement="top"
-                    title="Upload Image"
-                    ><i class="bi bi-upload"></i
-                ></a>
-                @if($invStock->image)
-
-                <div class="card mb-3 shadow d-flex mt-3">
-                    <img
-                        width="150"
-                        src="{{ asset('storage/'. $invStock->image->pic) }}"
-                        class="my-3 d-block mx-auto"
-                        alt="about Image"
-                    />
-                    <form
-                        action="/dashboard/stock/invStock/image/{{ $invStock->slug }}"
-                        method="post"
-                        class="d-inline"
-                    >
-                        <input
-                            type="hidden"
-                            name="id"
-                            value="{{ $invStock->image->id }}"
-                        />
-                        @method('delete') @csrf
-                        <button
-                            class="badge bg-danger"
-                            data-bs-toggle="tooltip"
-                            data-bs-placement="top"
-                            title="Delete Image Unit"
-                            onclick="return confirm('are You sure ??')"
-                        >
-                            <i class="bi bi-file-x-fill"></i>
-                        </button>
-                    </form>
-                </div>
-
-                @else
-                <img
-                    class="rounded-circle mx-auto d-block shadow my-3"
-                    src="http://source.unsplash.com/200x200?truck"
-                    alt=""
-                    width="150"
-                />
-                @endif
-            </div>
-            <div class="col-md-8">
+            <div class="col-md">
                 <div class="row my-2">
                     <div class="col-md">
                         <a

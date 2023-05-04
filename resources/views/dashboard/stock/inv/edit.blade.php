@@ -32,14 +32,14 @@
                         >
 
                         <div class="col-md-6">
-                            @if($data->pic)
+                            @if($data->image->pic)
                             <input
                                 type="hidden"
                                 name="old_pic"
-                                value="{{ $data->pic }}"
+                                value="{{ $data->image->pic }}"
                             />
                             <img
-                                src="{{ asset('storage/'. $data->pic) }}"
+                                src="{{ asset('storage/'. $data->image->pic) }}"
                                 class="d-block img-fluid mb-2 col-sm-5"
                             />
                             @else
